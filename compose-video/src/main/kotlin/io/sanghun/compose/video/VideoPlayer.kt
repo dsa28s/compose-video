@@ -63,8 +63,8 @@ import kotlinx.coroutines.delay
  * @param autoPlay Autoplay when media item prepared. Default is true.
  * @param usePlayerController Using player controller. Default is true.
  * @param controllerConfig Player controller config. You can customize the Video Player Controller UI.
- * @param seekBeforeMilliSeconds The seek back increment, in milliseconds.
- * @param seekAfterMilliSeconds The seek forward increment, in milliseconds.
+ * @param seekBeforeMilliSeconds The seek back increment, in milliseconds. Default is 10sec (10000ms)
+ * @param seekAfterMilliSeconds The seek forward increment, in milliseconds. Default is 10sec (10000ms)
  */
 @Composable
 fun VideoPlayer(
@@ -137,6 +137,8 @@ fun VideoPlayer(
             controllerConfig.showForwardIncrementButton
         controllerView.findViewById<View>(com.google.android.exoplayer2.R.id.exo_rew_with_amount).isVisible =
             controllerConfig.showBackwardIncrementButton
+        defaultPlayerView.setShowNextButton(controllerConfig.showNextTrackButton)
+        defaultPlayerView.setShowPreviousButton(controllerConfig.showBackTrackButton)
     }
 
     DisposableEffect(

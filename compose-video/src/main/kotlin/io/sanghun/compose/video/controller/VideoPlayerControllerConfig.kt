@@ -26,6 +26,8 @@ import androidx.compose.runtime.Immutable
  * @param showBufferingProgress Visible buffering progress.
  * @param showForwardIncrementButton Show forward increment button.
  * @param showBackwardIncrementButton Show backward increment button.
+ * @param showBackTrackButton Show back track button.
+ * @param showNextTrackButton Show next track button.
  */
 @Immutable
 data class VideoPlayerControllerConfig(
@@ -35,6 +37,8 @@ data class VideoPlayerControllerConfig(
     val showBufferingProgress: Boolean,
     val showForwardIncrementButton: Boolean,
     val showBackwardIncrementButton: Boolean,
+    val showBackTrackButton: Boolean,
+    val showNextTrackButton: Boolean,
 ) {
 
     companion object {
@@ -48,6 +52,8 @@ data class VideoPlayerControllerConfig(
             showBufferingProgress = false,
             showForwardIncrementButton = false,
             showBackwardIncrementButton = false,
+            showBackTrackButton = true,
+            showNextTrackButton = true,
         )
     }
 }
