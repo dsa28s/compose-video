@@ -16,6 +16,7 @@
 package io.sanghun.compose.video
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -73,6 +74,9 @@ class MainActivity : ComponentActivity() {
                                 showRepeatModeButton = true,
                             ),
                             repeatMode = repeatMode,
+                            onCurrentTimeChanged = {
+                                Log.e("CurrentTime", it.toString())
+                            },
                             playerInstance = {
                                 addAnalyticsListener(object : AnalyticsListener {
                                     override fun onRepeatModeChanged(
