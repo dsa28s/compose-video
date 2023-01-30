@@ -13,4 +13,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "compose-video"
-include ':sample'
+include(":sample")
