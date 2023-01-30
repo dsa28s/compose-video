@@ -25,6 +25,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -49,6 +53,8 @@ class MainActivity : ComponentActivity() {
                     ) {
                         val context = LocalContext.current
 
+                        var repeatMode by remember { mutableStateOf(RepeatMode.NONE) }
+
                         VideoPlayer(
                             mediaItems = listOf(
                                 VideoPlayerMediaItem.NetworkMediaItem(
@@ -66,13 +72,19 @@ class MainActivity : ComponentActivity() {
                                 showForwardIncrementButton = true,
                                 showRepeatModeButton = true,
                             ),
+                            repeatMode = repeatMode,
                             playerInstance = {
                                 addAnalyticsListener(object : AnalyticsListener {
                                     override fun onRepeatModeChanged(
                                         eventTime: AnalyticsListener.EventTime,
-                                        repeatMode: Int,
+                                        rMode: Int,
                                     ) {
-                                        Toast.makeText(context, "RepeatMode changed = $repeatMode", Toast.LENGTH_LONG)
+                                        repeatMode = rMode.toRepeatMode()
+                                        Toast.makeText(
+                                            context,
+                                            "RepeatMode changed = ${rMode.toRepeatMode()}",
+                                            Toast.LENGTH_LONG
+                                        )
                                             .show()
                                     }
                                 })
