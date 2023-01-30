@@ -17,6 +17,7 @@ package io.sanghun.compose.video
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Modifier
@@ -50,7 +51,8 @@ import io.sanghun.compose.video.uri.toUri
  * @param modifier Modifier to apply to this layout node.
  * @param mediaItem [VideoPlayerMediaItem] to be played by the video player
  * @param handleLifecycle Sets whether to automatically play/stop the player according to the activity lifecycle. Default is true.
- * @param autoPlay Auto play when media item prepared. Default is true.
+ * @param autoPlay Autoplay when media item prepared. Default is true.
+ * @param usePlayerController Using player controller. Default is true.
  */
 @Composable
 fun VideoPlayer(
@@ -58,6 +60,7 @@ fun VideoPlayer(
     mediaItem: VideoPlayerMediaItem,
     handleLifecycle: Boolean = true,
     autoPlay: Boolean = true,
+    usePlayerController: Boolean = true,
 ) {
     val context = LocalContext.current
 
@@ -81,11 +84,20 @@ fun VideoPlayer(
     }
     val lifecycleOwner = rememberUpdatedState(LocalLifecycleOwner.current)
 
+    val defaultPlayerView = remember {
+        StyledPlayerView(context)
+    }
+
+    LaunchedEffect(usePlayerController) {
+        defaultPlayerView.useController = usePlayerController
+    }
+
     DisposableEffect(
         AndroidView(
             modifier = modifier,
             factory = {
-                StyledPlayerView(context).apply {
+                defaultPlayerView.apply {
+                    useController = usePlayerController
                     player = exoPlayer
                 }
             },

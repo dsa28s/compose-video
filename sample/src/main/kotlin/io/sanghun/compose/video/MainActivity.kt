@@ -44,8 +44,9 @@ class MainActivity : ComponentActivity() {
                             mediaItem = VideoPlayerMediaItem.NetworkMediaItem(
                                 url = "https://storage.googleapis.com/wvmedia/clear/hevc/tears/tears_uhd.mpd",
                             ),
-                            handleLifecycle = false,
-                            autoPlay = false,
+                            handleLifecycle = true,
+                            autoPlay = true,
+                            usePlayerController = false,
                             modifier = Modifier
                                 .fillMaxSize()
                                 .align(Alignment.Center),
