@@ -42,12 +42,12 @@ class MainActivity : ComponentActivity() {
                     Box(modifier = Modifier.fillMaxSize()) {
                         VideoPlayer(
                             mediaItem = VideoPlayerMediaItem.NetworkMediaItem(
-                                url = "https://storage.googleapis.com/wvmedia/clear/hevc/tears/tears_uhd.mpd"
+                                url = "https://storage.googleapis.com/wvmedia/clear/hevc/tears/tears_uhd.mpd",
                             ),
                             handleLifecycle = false,
                             modifier = Modifier
                                 .fillMaxSize()
-                                .align(Alignment.Center)
+                                .align(Alignment.Center),
                         )
                     }
                 }
