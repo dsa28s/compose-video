@@ -95,7 +95,7 @@ class MainActivity : ComponentActivity() {
                                     override fun onPlayWhenReadyChanged(
                                         eventTime: AnalyticsListener.EventTime,
                                         playWhenReady: Boolean,
-                                        reason: Int
+                                        reason: Int,
                                     ) {
                                         Toast.makeText(
                                             context,
