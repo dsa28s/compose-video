@@ -48,8 +48,8 @@ class MainActivity : ComponentActivity() {
                             handleLifecycle = true,
                             autoPlay = true,
                             usePlayerController = true,
-                            controllerConfig = VideoPlayerControllerConfig(
-                                showSpeedAndPitchOverlay = false,
+                            controllerConfig = VideoPlayerControllerConfig.Default.copy(
+                                showCurrentTimeAndTotalTime = false,
                             ),
                             modifier = Modifier
                                 .fillMaxSize()

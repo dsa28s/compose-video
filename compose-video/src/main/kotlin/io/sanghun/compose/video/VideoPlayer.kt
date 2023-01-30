@@ -104,8 +104,12 @@ fun VideoPlayer(
     }
 
     LaunchedEffect(controllerConfig) {
-        defaultPlayerView.rootView.findViewById<View>(com.google.android.exoplayer2.R.id.exo_settings).isVisible =
+        val controllerView = defaultPlayerView.rootView
+        controllerView.findViewById<View>(com.google.android.exoplayer2.R.id.exo_settings).isVisible =
             controllerConfig.showSpeedAndPitchOverlay
+        defaultPlayerView.setShowSubtitleButton(controllerConfig.showSubtitleButton)
+        controllerView.findViewById<View>(com.google.android.exoplayer2.R.id.exo_time).isVisible =
+            controllerConfig.showCurrentTimeAndTotalTime
     }
 
     DisposableEffect(
