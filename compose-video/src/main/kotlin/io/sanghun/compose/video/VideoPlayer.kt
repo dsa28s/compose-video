@@ -50,12 +50,14 @@ import io.sanghun.compose.video.uri.toUri
  * @param modifier Modifier to apply to this layout node.
  * @param mediaItem [VideoPlayerMediaItem] to be played by the video player
  * @param handleLifecycle Sets whether to automatically play/stop the player according to the activity lifecycle. Default is true.
+ * @param autoPlay Auto play when media item prepared. Default is true.
  */
 @Composable
 fun VideoPlayer(
     modifier: Modifier = Modifier,
     mediaItem: VideoPlayerMediaItem,
     handleLifecycle: Boolean = true,
+    autoPlay: Boolean = true,
 ) {
     val context = LocalContext.current
 
@@ -71,6 +73,10 @@ fun VideoPlayer(
 
                 player.setMediaItem(exoPlayerMediaItem)
                 player.prepare()
+
+                if (autoPlay) {
+                    player.play()
+                }
             }
     }
     val lifecycleOwner = rememberUpdatedState(LocalLifecycleOwner.current)

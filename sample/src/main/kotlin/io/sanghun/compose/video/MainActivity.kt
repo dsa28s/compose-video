@@ -45,6 +45,7 @@ class MainActivity : ComponentActivity() {
                                 url = "https://storage.googleapis.com/wvmedia/clear/hevc/tears/tears_uhd.mpd",
                             ),
                             handleLifecycle = false,
+                            autoPlay = false,
                             modifier = Modifier
                                 .fillMaxSize()
                                 .align(Alignment.Center),
