@@ -14,10 +14,9 @@ After the official release, you can download it from the Maven repository.
 
 ### Features
 
-- [ ] Local video play (ex. assets, storage)
-- [ ] Network video play (ex. HLS, DASH)
+- [x] Local video play (ex. assets, storage)
+- [x] Network video play (ex. HLS, DASH)
 - [ ] Chromecast
-- [ ] Only audio play
 - [ ] Buffering config
 - [ ] Video Player Controller (Default)
 - [ ] Video Player Custom Controller (using Jetpack Compose)

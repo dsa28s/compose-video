@@ -4,6 +4,8 @@ import android.content.Context
 import android.net.Uri
 import com.google.android.exoplayer2.upstream.AssetDataSource
 import com.google.android.exoplayer2.upstream.DataSpec
+import com.google.android.exoplayer2.upstream.FileDataSource
+import com.google.android.exoplayer2.upstream.FileDataSource.FileDataSourceException
 import com.google.android.exoplayer2.upstream.RawResourceDataSource
 
 /**
@@ -33,5 +35,17 @@ internal fun VideoPlayerMediaItem.toUri(
 
     is VideoPlayerMediaItem.NetworkMediaItem -> {
         Uri.parse(url)
+    }
+
+    is VideoPlayerMediaItem.StorageMediaItem -> {
+        val dataSpec = DataSpec(storageUri)
+        val fileDataSource = FileDataSource()
+        try {
+            fileDataSource.open(dataSpec)
+        } catch (e: FileDataSourceException) {
+            e.printStackTrace()
+        }
+
+        fileDataSource.uri ?: Uri.EMPTY
     }
 }
