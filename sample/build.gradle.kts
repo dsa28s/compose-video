@@ -55,4 +55,6 @@ dependencies {
     implementation(libs.material3)
     testImplementation(libs.junit)
     debugImplementation(libs.bundles.compose.debugOnly)
+
+    androidTestImplementation(libs.bundles.androidTest)
 }
