@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "io.sanghun.compose.video"
-    compileSdk = 32
+    compileSdk = 33
 
     defaultConfig {
         minSdk = 21
@@ -38,9 +38,10 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.core)
     implementation(libs.bundles.compose)
+    implementation(libs.exoplayer)
+    implementation(libs.material2)
 
     debugImplementation(libs.bundles.compose.debugOnly)
 

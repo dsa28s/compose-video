@@ -49,6 +49,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":compose-video"))
 
     implementation(libs.bundles.androidx)
     implementation(libs.bundles.compose)
