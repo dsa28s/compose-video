@@ -16,6 +16,7 @@
 package io.sanghun.compose.video
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Box
@@ -26,7 +27,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import com.google.android.exoplayer2.analytics.AnalyticsListener
 import io.sanghun.compose.video.controller.VideoPlayerControllerConfig
 import io.sanghun.compose.video.ui.theme.ComposeVideoSampleTheme
 import io.sanghun.compose.video.uri.VideoPlayerMediaItem
@@ -44,6 +47,8 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier
                             .fillMaxSize(),
                     ) {
+                        val context = LocalContext.current
+
                         VideoPlayer(
                             mediaItems = listOf(
                                 VideoPlayerMediaItem.NetworkMediaItem(
@@ -61,6 +66,17 @@ class MainActivity : ComponentActivity() {
                                 showForwardIncrementButton = true,
                                 showRepeatModeButton = true,
                             ),
+                            playerInstance = {
+                                addAnalyticsListener(object : AnalyticsListener {
+                                    override fun onRepeatModeChanged(
+                                        eventTime: AnalyticsListener.EventTime,
+                                        repeatMode: Int,
+                                    ) {
+                                        Toast.makeText(context, "RepeatMode changed = $repeatMode", Toast.LENGTH_LONG)
+                                            .show()
+                                    }
+                                })
+                            },
                             modifier = Modifier
                                 .fillMaxSize()
                                 .align(Alignment.Center),

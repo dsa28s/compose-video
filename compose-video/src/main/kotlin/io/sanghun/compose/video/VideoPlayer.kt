@@ -69,6 +69,7 @@ import kotlinx.coroutines.delay
  * @param seekBeforeMilliSeconds The seek back increment, in milliseconds. Default is 10sec (10000ms)
  * @param seekAfterMilliSeconds The seek forward increment, in milliseconds. Default is 10sec (10000ms)
  * @param repeatMode Sets the content repeat mode.
+ * @param playerInstance Return exoplayer instance. This instance allows you to add [com.google.android.exoplayer2.analytics.AnalyticsListener] to receive various events from the player.
  */
 @Composable
 fun VideoPlayer(
@@ -81,6 +82,7 @@ fun VideoPlayer(
     seekBeforeMilliSeconds: Long = 10000L,
     seekAfterMilliSeconds: Long = 10000L,
     repeatMode: RepeatMode = RepeatMode.NONE,
+    playerInstance: ExoPlayer.() -> Unit = {},
 ) {
     val context = LocalContext.current
     var currentTime by remember { mutableStateOf(0L) }
@@ -90,6 +92,7 @@ fun VideoPlayer(
             .setSeekBackIncrementMs(seekBeforeMilliSeconds)
             .setSeekForwardIncrementMs(seekAfterMilliSeconds)
             .build()
+            .also(playerInstance)
     }
 
     val lifecycleOwner = rememberUpdatedState(LocalLifecycleOwner.current)
