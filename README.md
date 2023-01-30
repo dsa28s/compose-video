@@ -12,6 +12,58 @@ Based on Google [ExoPlayer](https://github.com/google/ExoPlayer).
 After the official release, you can download it from the Maven repository.
 
 
+### Usage
+
+```kotlin
+VideoPlayer(
+    mediaItems = listOf(
+        VideoPlayerMediaItem.RawResourceMediaItem(
+            resourceId = R.raw.movie1,
+        ),
+        VideoPlayerMediaItem.AssetFileMediaItem(
+            assetPath = "videos/test.mp4"
+        ),
+        VideoPlayerMediaItem.StorageMediaItem(
+            storageUri = "content://xxxxx"
+        ),
+        VideoPlayerMediaItem.NetworkMediaItem(
+            url = "https://storage.googleapis.com/exoplayer-test-media-1/gen-3/screens/dash-vod-single-segment/video-137.mp4",
+        ),
+    ),
+    handleLifecycle = true,
+    autoPlay = true,
+    usePlayerController = true,
+    controllerConfig = VideoPlayerControllerConfig(
+        showSpeedAndPitchOverlay = false,
+        showSubtitleButton = false,
+        showCurrentTimeAndTotalTime = true,
+        showBufferingProgress = false,
+        showForwardIncrementButton = true,
+        showBackwardIncrementButton = true,
+        showBackTrackButton = true,
+        showNextTrackButton = true,
+        showRepeatModeButton = true,
+        controllerShowTimeMilliSeconds = 5_000,
+        controllerAutoShow = true,
+    ),
+    repeatMode = RepeatMode.NONE,       // or RepeatMode.ALL, RepeatMode.ONE
+    onCurrentTimeChanged = { // long type, current player time (millisec)
+        Log.e("CurrentTime", it.toString())
+    },
+    playerInstance = { // ExoPlayer instance (Experimental)
+        addAnalyticsListener(
+            object : AnalyticsListener {
+                // player logger
+            }
+        )
+    },
+    modifier = Modifier
+        .fillMaxSize()
+        .align(Alignment.Center),
+)
+```
+
+
 ### Features
 
 - [x] Local video play (ex. assets, storage)
