@@ -15,6 +15,7 @@
  */
 package io.sanghun.compose.video
 
+import android.view.View
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
@@ -24,11 +25,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.viewinterop.AndroidView
+import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.ui.StyledPlayerView
+import io.sanghun.compose.video.controller.VideoPlayerControllerConfig
 import io.sanghun.compose.video.uri.VideoPlayerMediaItem
 import io.sanghun.compose.video.uri.toUri
 
@@ -53,6 +56,7 @@ import io.sanghun.compose.video.uri.toUri
  * @param handleLifecycle Sets whether to automatically play/stop the player according to the activity lifecycle. Default is true.
  * @param autoPlay Autoplay when media item prepared. Default is true.
  * @param usePlayerController Using player controller. Default is true.
+ * @param controllerConfig Player controller config. You can customize the Video Player Controller UI.
  */
 @Composable
 fun VideoPlayer(
@@ -61,27 +65,15 @@ fun VideoPlayer(
     handleLifecycle: Boolean = true,
     autoPlay: Boolean = true,
     usePlayerController: Boolean = true,
+    controllerConfig: VideoPlayerControllerConfig = VideoPlayerControllerConfig.Default,
 ) {
     val context = LocalContext.current
 
-    val exoPlayer = remember(mediaItem) {
+    val player = remember {
         ExoPlayer.Builder(context)
             .build()
-            .also { player ->
-                val exoPlayerMediaItem = MediaItem.Builder()
-                    .apply {
-                        val uri = mediaItem.toUri(context)
-                        setUri(uri)
-                    }.build()
-
-                player.setMediaItem(exoPlayerMediaItem)
-                player.prepare()
-
-                if (autoPlay) {
-                    player.play()
-                }
-            }
     }
+
     val lifecycleOwner = rememberUpdatedState(LocalLifecycleOwner.current)
 
     val defaultPlayerView = remember {
@@ -92,13 +84,36 @@ fun VideoPlayer(
         defaultPlayerView.useController = usePlayerController
     }
 
+    LaunchedEffect(player) {
+        defaultPlayerView.player = player
+    }
+
+    LaunchedEffect(mediaItem) {
+        val exoPlayerMediaItem = MediaItem.Builder()
+            .apply {
+                val uri = mediaItem.toUri(context)
+                setUri(uri)
+            }.build()
+
+        player.setMediaItem(exoPlayerMediaItem)
+        player.prepare()
+
+        if (autoPlay) {
+            player.play()
+        }
+    }
+
+    LaunchedEffect(controllerConfig) {
+        defaultPlayerView.rootView.findViewById<View>(com.google.android.exoplayer2.R.id.exo_settings).isVisible =
+            controllerConfig.showSpeedAndPitchOverlay
+    }
+
     DisposableEffect(
         AndroidView(
             modifier = modifier,
             factory = {
                 defaultPlayerView.apply {
                     useController = usePlayerController
-                    player = exoPlayer
                 }
             },
         ),
@@ -107,11 +122,11 @@ fun VideoPlayer(
             if (handleLifecycle) {
                 when (event) {
                     Lifecycle.Event.ON_PAUSE -> {
-                        exoPlayer.pause()
+                        player.pause()
                     }
 
                     Lifecycle.Event.ON_RESUME -> {
-                        exoPlayer.play()
+                        player.play()
                     }
 
                     else -> {}
@@ -122,7 +137,7 @@ fun VideoPlayer(
         lifecycle.addObserver(observer)
 
         onDispose {
-            exoPlayer.release()
+            player.release()
             lifecycle.removeObserver(observer)
         }
     }

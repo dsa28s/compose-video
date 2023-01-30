@@ -27,6 +27,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import io.sanghun.compose.video.controller.VideoPlayerControllerConfig
 import io.sanghun.compose.video.ui.theme.ComposeVideoSampleTheme
 import io.sanghun.compose.video.uri.VideoPlayerMediaItem
 
@@ -46,7 +47,10 @@ class MainActivity : ComponentActivity() {
                             ),
                             handleLifecycle = true,
                             autoPlay = true,
-                            usePlayerController = false,
+                            usePlayerController = true,
+                            controllerConfig = VideoPlayerControllerConfig(
+                                showSpeedAndPitchOverlay = false,
+                            ),
                             modifier = Modifier
                                 .fillMaxSize()
                                 .align(Alignment.Center),
