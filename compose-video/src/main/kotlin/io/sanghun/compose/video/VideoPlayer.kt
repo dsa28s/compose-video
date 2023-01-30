@@ -131,7 +131,7 @@ fun VideoPlayer(
         controllerView.findViewById<View>(com.google.android.exoplayer2.R.id.exo_time).isVisible =
             controllerConfig.showCurrentTimeAndTotalTime
         defaultPlayerView.setShowBuffering(
-            if (!controllerConfig.showBufferingProgress) SHOW_BUFFERING_NEVER else SHOW_BUFFERING_ALWAYS
+            if (!controllerConfig.showBufferingProgress) SHOW_BUFFERING_NEVER else SHOW_BUFFERING_ALWAYS,
         )
         controllerView.findViewById<View>(com.google.android.exoplayer2.R.id.exo_ffwd_with_amount).isVisible =
             controllerConfig.showForwardIncrementButton
