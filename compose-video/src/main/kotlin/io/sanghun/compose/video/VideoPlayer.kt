@@ -16,6 +16,7 @@
 package io.sanghun.compose.video
 
 import android.view.View
+import androidx.annotation.FloatRange
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
@@ -69,6 +70,7 @@ import kotlinx.coroutines.delay
  * @param seekBeforeMilliSeconds The seek back increment, in milliseconds. Default is 10sec (10000ms)
  * @param seekAfterMilliSeconds The seek forward increment, in milliseconds. Default is 10sec (10000ms)
  * @param repeatMode Sets the content repeat mode.
+ * @param volume Sets thie player volume. It's possible from 0.0 to 1.0.
  * @param onCurrentTimeChanged A callback that returned once every second for player current time when the player is playing.
  * @param playerInstance Return exoplayer instance. This instance allows you to add [com.google.android.exoplayer2.analytics.AnalyticsListener] to receive various events from the player.
  */
@@ -83,6 +85,7 @@ fun VideoPlayer(
     seekBeforeMilliSeconds: Long = 10000L,
     seekAfterMilliSeconds: Long = 10000L,
     repeatMode: RepeatMode = RepeatMode.NONE,
+    @FloatRange(from = 0.0, to = 1.0) volume: Float = 1f,
     onCurrentTimeChanged: (Long) -> Unit = {},
     playerInstance: ExoPlayer.() -> Unit = {},
 ) {
@@ -171,6 +174,10 @@ fun VideoPlayer(
             },
         )
         player.repeatMode = repeatMode.toExoPlayerRepeatMode()
+    }
+
+    LaunchedEffect(volume) {
+        player.volume = volume
     }
 
     DisposableEffect(

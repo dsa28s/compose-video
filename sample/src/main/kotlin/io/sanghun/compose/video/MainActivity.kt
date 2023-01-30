@@ -78,6 +78,7 @@ class MainActivity : ComponentActivity() {
                                 Log.e("CurrentTime", it.toString())
                             },
                             playerInstance = {
+                                Log.e("VOLUME", volume.toString())
                                 addAnalyticsListener(object : AnalyticsListener {
                                     override fun onRepeatModeChanged(
                                         eventTime: AnalyticsListener.EventTime,
@@ -100,6 +101,18 @@ class MainActivity : ComponentActivity() {
                                         Toast.makeText(
                                             context,
                                             "isPlaying = $playWhenReady",
+                                            Toast.LENGTH_LONG,
+                                        )
+                                            .show()
+                                    }
+
+                                    override fun onVolumeChanged(
+                                        eventTime: AnalyticsListener.EventTime,
+                                        volume: Float
+                                    ) {
+                                        Toast.makeText(
+                                            context,
+                                            "Player volume changed = $volume",
                                             Toast.LENGTH_LONG,
                                         )
                                             .show()
