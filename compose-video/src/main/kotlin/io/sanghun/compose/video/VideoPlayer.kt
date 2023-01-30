@@ -19,8 +19,11 @@ import android.view.View
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
@@ -31,9 +34,12 @@ import androidx.lifecycle.LifecycleEventObserver
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.ui.StyledPlayerView
+import com.google.android.exoplayer2.ui.StyledPlayerView.SHOW_BUFFERING_ALWAYS
+import com.google.android.exoplayer2.ui.StyledPlayerView.SHOW_BUFFERING_NEVER
 import io.sanghun.compose.video.controller.VideoPlayerControllerConfig
 import io.sanghun.compose.video.uri.VideoPlayerMediaItem
 import io.sanghun.compose.video.uri.toUri
+import kotlinx.coroutines.delay
 
 /**
  * [VideoPlayer] is UI component that can play video in Jetpack Compose. It works based on ExoPlayer.
@@ -57,6 +63,8 @@ import io.sanghun.compose.video.uri.toUri
  * @param autoPlay Autoplay when media item prepared. Default is true.
  * @param usePlayerController Using player controller. Default is true.
  * @param controllerConfig Player controller config. You can customize the Video Player Controller UI.
+ * @param seekBeforeMilliSeconds The seek back increment, in milliseconds.
+ * @param seekAfterMilliSeconds The seek forward increment, in milliseconds.
  */
 @Composable
 fun VideoPlayer(
@@ -66,11 +74,16 @@ fun VideoPlayer(
     autoPlay: Boolean = true,
     usePlayerController: Boolean = true,
     controllerConfig: VideoPlayerControllerConfig = VideoPlayerControllerConfig.Default,
+    seekBeforeMilliSeconds: Long = 10000L,
+    seekAfterMilliSeconds: Long = 10000L,
 ) {
     val context = LocalContext.current
+    var currentTime by remember { mutableStateOf(0L) }
 
-    val player = remember {
+    val player = remember(seekAfterMilliSeconds, seekBeforeMilliSeconds) {
         ExoPlayer.Builder(context)
+            .setSeekBackIncrementMs(seekBeforeMilliSeconds)
+            .setSeekForwardIncrementMs(seekAfterMilliSeconds)
             .build()
     }
 
@@ -78,6 +91,13 @@ fun VideoPlayer(
 
     val defaultPlayerView = remember {
         StyledPlayerView(context)
+    }
+
+    LaunchedEffect(Unit) {
+        while (true) {
+            delay(1000)
+            currentTime = player.currentPosition
+        }
     }
 
     LaunchedEffect(usePlayerController) {
@@ -88,7 +108,7 @@ fun VideoPlayer(
         defaultPlayerView.player = player
     }
 
-    LaunchedEffect(mediaItem) {
+    LaunchedEffect(mediaItem, player) {
         val exoPlayerMediaItem = MediaItem.Builder()
             .apply {
                 val uri = mediaItem.toUri(context)
@@ -110,6 +130,9 @@ fun VideoPlayer(
         defaultPlayerView.setShowSubtitleButton(controllerConfig.showSubtitleButton)
         controllerView.findViewById<View>(com.google.android.exoplayer2.R.id.exo_time).isVisible =
             controllerConfig.showCurrentTimeAndTotalTime
+        defaultPlayerView.setShowBuffering(
+            if (!controllerConfig.showBufferingProgress) SHOW_BUFFERING_NEVER else SHOW_BUFFERING_ALWAYS
+        )
     }
 
     DisposableEffect(

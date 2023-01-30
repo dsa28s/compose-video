@@ -18,11 +18,11 @@ After the official release, you can download it from the Maven repository.
 - [x] Network video play (ex. HLS, DASH)
 - [ ] Chromecast
 - [ ] Buffering config
-- [ ] Video Player Controller (Default)
+- [x] Video Player Controller (Default)
 - [ ] Video Player Custom Controller (using Jetpack Compose)
 - [ ] PIP (Picture In Picture)
 - [ ] DRM
-- [ ] Full Screen (Auth rotate)
+- [ ] Full Screen (With rotate)
 - [ ] Custom Headers
 - [ ] Background Play
 - [ ] Rate
