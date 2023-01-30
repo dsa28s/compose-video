@@ -151,6 +151,8 @@ fun VideoPlayer(
         defaultPlayerView.setShowPreviousButton(controllerConfig.showBackTrackButton)
         defaultPlayerView.setShowFastForwardButton(controllerConfig.showForwardIncrementButton)
         defaultPlayerView.setShowRewindButton(controllerConfig.showBackwardIncrementButton)
+        defaultPlayerView.controllerShowTimeoutMs = controllerConfig.controllerShowTimeMilliSeconds
+        defaultPlayerView.controllerAutoShow = controllerConfig.controllerAutoShow
     }
 
     LaunchedEffect(controllerConfig, repeatMode) {

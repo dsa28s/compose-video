@@ -29,6 +29,12 @@ import androidx.compose.runtime.Immutable
  * @param showBackTrackButton Show back track button.
  * @param showNextTrackButton Show next track button.
  * @param showRepeatModeButton Show repeat mode toggle button.
+ * @param controllerShowTimeMilliSeconds Sets the playback controls timeout.
+ *  The playback controls are automatically hidden after this duration of time has elapsed without user input and with playback or buffering in progress.
+ *  (The timeout in milliseconds. A non-positive value will cause the controller to remain visible indefinitely.)
+ * @param controllerAutoShow Sets whether the playback controls are automatically shown when playback starts, pauses, ends, or fails.
+ *  If set to false, the playback controls can be manually operated with {@link #showController()} and {@link #hideController()}.
+ *  (Whether the playback controls are allowed to show automatically.)
  */
 @Immutable
 data class VideoPlayerControllerConfig(
@@ -41,6 +47,9 @@ data class VideoPlayerControllerConfig(
     val showBackTrackButton: Boolean,
     val showNextTrackButton: Boolean,
     val showRepeatModeButton: Boolean,
+
+    val controllerShowTimeMilliSeconds: Int,
+    val controllerAutoShow: Boolean,
 ) {
 
     companion object {
@@ -57,6 +66,8 @@ data class VideoPlayerControllerConfig(
             showBackTrackButton = true,
             showNextTrackButton = true,
             showRepeatModeButton = false,
+            controllerShowTimeMilliSeconds = 5_000,
+            controllerAutoShow = true,
         )
     }
 }
