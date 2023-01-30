@@ -83,7 +83,20 @@ class MainActivity : ComponentActivity() {
                                         Toast.makeText(
                                             context,
                                             "RepeatMode changed = ${rMode.toRepeatMode()}",
-                                            Toast.LENGTH_LONG
+                                            Toast.LENGTH_LONG,
+                                        )
+                                            .show()
+                                    }
+
+                                    override fun onPlayWhenReadyChanged(
+                                        eventTime: AnalyticsListener.EventTime,
+                                        playWhenReady: Boolean,
+                                        reason: Int
+                                    ) {
+                                        Toast.makeText(
+                                            context,
+                                            "isPlaying = $playWhenReady",
+                                            Toast.LENGTH_LONG,
                                         )
                                             .show()
                                     }
