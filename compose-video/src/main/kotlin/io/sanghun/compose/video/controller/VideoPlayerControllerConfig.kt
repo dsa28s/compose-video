@@ -28,6 +28,7 @@ import androidx.compose.runtime.Immutable
  * @param showBackwardIncrementButton Show backward increment button.
  * @param showBackTrackButton Show back track button.
  * @param showNextTrackButton Show next track button.
+ * @param showRepeatModeButton Show repeat mode toggle button.
  */
 @Immutable
 data class VideoPlayerControllerConfig(
@@ -39,6 +40,7 @@ data class VideoPlayerControllerConfig(
     val showBackwardIncrementButton: Boolean,
     val showBackTrackButton: Boolean,
     val showNextTrackButton: Boolean,
+    val showRepeatModeButton: Boolean,
 ) {
 
     companion object {
@@ -54,6 +56,7 @@ data class VideoPlayerControllerConfig(
             showBackwardIncrementButton = false,
             showBackTrackButton = true,
             showNextTrackButton = true,
+            showRepeatModeButton = false,
         )
     }
 }

@@ -36,6 +36,9 @@ import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.ui.StyledPlayerView
 import com.google.android.exoplayer2.ui.StyledPlayerView.SHOW_BUFFERING_ALWAYS
 import com.google.android.exoplayer2.ui.StyledPlayerView.SHOW_BUFFERING_NEVER
+import com.google.android.exoplayer2.util.RepeatModeUtil.REPEAT_TOGGLE_MODE_ALL
+import com.google.android.exoplayer2.util.RepeatModeUtil.REPEAT_TOGGLE_MODE_NONE
+import com.google.android.exoplayer2.util.RepeatModeUtil.REPEAT_TOGGLE_MODE_ONE
 import io.sanghun.compose.video.controller.VideoPlayerControllerConfig
 import io.sanghun.compose.video.uri.VideoPlayerMediaItem
 import io.sanghun.compose.video.uri.toUri
@@ -58,24 +61,26 @@ import kotlinx.coroutines.delay
  * @see <a href="https://exoplayer.dev/supported-formats.html">Exoplayer Support Formats</a>
  *
  * @param modifier Modifier to apply to this layout node.
- * @param mediaItem [VideoPlayerMediaItem] to be played by the video player
+ * @param mediaItems [VideoPlayerMediaItem] to be played by the video player. The reason for receiving media items as an array is to configure multi-track. If it's a single track, provide a single list (e.g. listOf(mediaItem)).
  * @param handleLifecycle Sets whether to automatically play/stop the player according to the activity lifecycle. Default is true.
  * @param autoPlay Autoplay when media item prepared. Default is true.
  * @param usePlayerController Using player controller. Default is true.
  * @param controllerConfig Player controller config. You can customize the Video Player Controller UI.
  * @param seekBeforeMilliSeconds The seek back increment, in milliseconds. Default is 10sec (10000ms)
  * @param seekAfterMilliSeconds The seek forward increment, in milliseconds. Default is 10sec (10000ms)
+ * @param repeatMode Sets the content repeat mode.
  */
 @Composable
 fun VideoPlayer(
     modifier: Modifier = Modifier,
-    mediaItem: VideoPlayerMediaItem,
+    mediaItems: List<VideoPlayerMediaItem>,
     handleLifecycle: Boolean = true,
     autoPlay: Boolean = true,
     usePlayerController: Boolean = true,
     controllerConfig: VideoPlayerControllerConfig = VideoPlayerControllerConfig.Default,
     seekBeforeMilliSeconds: Long = 10000L,
     seekAfterMilliSeconds: Long = 10000L,
+    repeatMode: RepeatMode = RepeatMode.NONE,
 ) {
     val context = LocalContext.current
     var currentTime by remember { mutableStateOf(0L) }
@@ -108,14 +113,16 @@ fun VideoPlayer(
         defaultPlayerView.player = player
     }
 
-    LaunchedEffect(mediaItem, player) {
-        val exoPlayerMediaItem = MediaItem.Builder()
-            .apply {
-                val uri = mediaItem.toUri(context)
-                setUri(uri)
-            }.build()
+    LaunchedEffect(mediaItems, player) {
+        val exoPlayerMediaItems = mediaItems.map {
+            MediaItem.Builder()
+                .apply {
+                    val uri = it.toUri(context)
+                    setUri(uri)
+                }.build()
+        }
 
-        player.setMediaItem(exoPlayerMediaItem)
+        player.setMediaItems(exoPlayerMediaItems)
         player.prepare()
 
         if (autoPlay) {
@@ -139,6 +146,19 @@ fun VideoPlayer(
             controllerConfig.showBackwardIncrementButton
         defaultPlayerView.setShowNextButton(controllerConfig.showNextTrackButton)
         defaultPlayerView.setShowPreviousButton(controllerConfig.showBackTrackButton)
+        defaultPlayerView.setShowFastForwardButton(controllerConfig.showForwardIncrementButton)
+        defaultPlayerView.setShowRewindButton(controllerConfig.showBackwardIncrementButton)
+    }
+
+    LaunchedEffect(controllerConfig, repeatMode) {
+        defaultPlayerView.setRepeatToggleModes(
+            if (controllerConfig.showRepeatModeButton) {
+                REPEAT_TOGGLE_MODE_ALL or REPEAT_TOGGLE_MODE_ONE
+            } else {
+                REPEAT_TOGGLE_MODE_NONE
+            },
+        )
+        player.repeatMode = repeatMode.toExoPlayerRepeatMode()
     }
 
     DisposableEffect(

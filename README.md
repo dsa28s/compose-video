@@ -26,7 +26,7 @@ After the official release, you can download it from the Maven repository.
 - [ ] Custom Headers
 - [ ] Background Play
 - [ ] Rate
-- [ ] Repeat
+- [x] Repeat
 - [ ] Resize Mode
 - [ ] Select Audio Track
 - [ ] Select Video Track

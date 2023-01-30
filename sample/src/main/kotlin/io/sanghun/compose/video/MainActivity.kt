@@ -42,19 +42,24 @@ class MainActivity : ComponentActivity() {
                 ) {
                     Box(
                         modifier = Modifier
-                            .fillMaxSize()
+                            .fillMaxSize(),
                     ) {
                         VideoPlayer(
-                            mediaItem = VideoPlayerMediaItem.NetworkMediaItem(
-                                url = "https://storage.googleapis.com/exoplayer-test-media-1/gen-3/screens/dash-vod-single-segment/video-137.mp4",
+                            mediaItems = listOf(
+                                VideoPlayerMediaItem.NetworkMediaItem(
+                                    url = "https://storage.googleapis.com/exoplayer-test-media-1/gen-3/screens/dash-vod-single-segment/video-137.mp4",
+                                ),
                             ),
                             handleLifecycle = true,
                             autoPlay = true,
                             usePlayerController = true,
                             controllerConfig = VideoPlayerControllerConfig.Default.copy(
                                 showSubtitleButton = false,
-                                showNextTrackButton = false,
-                                showBackTrackButton = false,
+                                showNextTrackButton = true,
+                                showBackTrackButton = true,
+                                showBackwardIncrementButton = true,
+                                showForwardIncrementButton = true,
+                                showRepeatModeButton = true,
                             ),
                             modifier = Modifier
                                 .fillMaxSize()
