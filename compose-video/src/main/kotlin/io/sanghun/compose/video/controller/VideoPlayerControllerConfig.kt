@@ -9,6 +9,8 @@ import androidx.compose.runtime.Immutable
  * @param showSubtitleButton Visible subtitle (CC) button.
  * @param showCurrentTimeAndTotalTime Visible currentTime, totalTime text.
  * @param showBufferingProgress Visible buffering progress.
+ * @param showForwardIncrementButton Show forward increment button.
+ * @param showBackwardIncrementButton Show backward increment button.
  */
 @Immutable
 data class VideoPlayerControllerConfig(
@@ -16,6 +18,8 @@ data class VideoPlayerControllerConfig(
     val showSubtitleButton: Boolean,
     val showCurrentTimeAndTotalTime: Boolean,
     val showBufferingProgress: Boolean,
+    val showForwardIncrementButton: Boolean,
+    val showBackwardIncrementButton: Boolean,
 ) {
 
     companion object {
@@ -27,6 +31,8 @@ data class VideoPlayerControllerConfig(
             showSubtitleButton = true,
             showCurrentTimeAndTotalTime = true,
             showBufferingProgress = false,
+            showForwardIncrementButton = false,
+            showBackwardIncrementButton = false,
         )
     }
 }

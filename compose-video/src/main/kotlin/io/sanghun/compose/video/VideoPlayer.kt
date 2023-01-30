@@ -133,6 +133,10 @@ fun VideoPlayer(
         defaultPlayerView.setShowBuffering(
             if (!controllerConfig.showBufferingProgress) SHOW_BUFFERING_NEVER else SHOW_BUFFERING_ALWAYS
         )
+        controllerView.findViewById<View>(com.google.android.exoplayer2.R.id.exo_ffwd_with_amount).isVisible =
+            controllerConfig.showForwardIncrementButton
+        controllerView.findViewById<View>(com.google.android.exoplayer2.R.id.exo_rew_with_amount).isVisible =
+            controllerConfig.showBackwardIncrementButton
     }
 
     DisposableEffect(
