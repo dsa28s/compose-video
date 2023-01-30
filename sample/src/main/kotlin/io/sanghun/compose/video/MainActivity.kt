@@ -108,7 +108,7 @@ class MainActivity : ComponentActivity() {
 
                                     override fun onVolumeChanged(
                                         eventTime: AnalyticsListener.EventTime,
-                                        volume: Float
+                                        volume: Float,
                                     ) {
                                         Toast.makeText(
                                             context,

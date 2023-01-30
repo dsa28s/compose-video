@@ -31,7 +31,7 @@ After the official release, you can download it from the Maven repository.
 - [ ] Select Audio Track
 - [ ] Select Video Track
 - [ ] SubTitle (with customize style)
-- [ ] Volume Control
+- [x] Volume Control
 
 ### Contributing
 
