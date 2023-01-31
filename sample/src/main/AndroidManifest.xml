@@ -18,7 +18,8 @@
                 android:name=".MainActivity"
                 android:exported="true"
                 android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
-                android:theme="@style/Theme.Composevideo">
+                android:screenOrientation="portrait"
+                android:theme="@style/Theme.Composevideo" tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

@@ -72,6 +72,7 @@ class MainActivity : ComponentActivity() {
                                 showBackwardIncrementButton = true,
                                 showForwardIncrementButton = true,
                                 showRepeatModeButton = true,
+                                showFullScreenButton = true,
                             ),
                             repeatMode = repeatMode,
                             onCurrentTimeChanged = {

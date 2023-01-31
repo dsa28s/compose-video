@@ -68,22 +68,22 @@ VideoPlayer(
 
 - [x] Local video play (ex. assets, storage)
 - [x] Network video play (ex. HLS, DASH)
-- [ ] Chromecast
-- [ ] Buffering config
 - [x] Video Player Controller (Default)
 - [ ] Video Player Custom Controller (using Jetpack Compose)
+- [x] Full Screen (With rotate)
+- [x] Repeat
+- [x] Volume Control
+- [ ] Chromecast
+- [ ] Buffering config
 - [ ] PIP (Picture In Picture)
 - [ ] DRM
-- [ ] Full Screen (With rotate)
 - [ ] Custom Headers
 - [ ] Background Play
 - [ ] Rate
-- [x] Repeat
 - [ ] Resize Mode
 - [ ] Select Audio Track
 - [ ] Select Video Track
 - [ ] SubTitle (with customize style)
-- [x] Volume Control
 
 ### Contributing
 

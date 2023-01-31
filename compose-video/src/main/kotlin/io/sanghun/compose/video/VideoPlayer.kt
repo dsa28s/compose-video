@@ -15,7 +15,8 @@
  */
 package io.sanghun.compose.video
 
-import android.view.View
+import android.content.pm.ActivityInfo
+import android.widget.ImageButton
 import androidx.annotation.FloatRange
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -29,20 +30,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.viewinterop.AndroidView
-import androidx.core.view.isVisible
+import androidx.compose.ui.window.SecureFlagPolicy
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.ui.StyledPlayerView
-import com.google.android.exoplayer2.ui.StyledPlayerView.SHOW_BUFFERING_ALWAYS
-import com.google.android.exoplayer2.ui.StyledPlayerView.SHOW_BUFFERING_NEVER
 import com.google.android.exoplayer2.util.RepeatModeUtil.REPEAT_TOGGLE_MODE_ALL
 import com.google.android.exoplayer2.util.RepeatModeUtil.REPEAT_TOGGLE_MODE_NONE
 import com.google.android.exoplayer2.util.RepeatModeUtil.REPEAT_TOGGLE_MODE_ONE
 import io.sanghun.compose.video.controller.VideoPlayerControllerConfig
+import io.sanghun.compose.video.controller.applyToExoPlayerView
 import io.sanghun.compose.video.uri.VideoPlayerMediaItem
 import io.sanghun.compose.video.uri.toUri
+import io.sanghun.compose.video.util.findActivity
+import io.sanghun.compose.video.util.setFullScreen
 import kotlinx.coroutines.delay
 
 /**
@@ -72,6 +74,9 @@ import kotlinx.coroutines.delay
  * @param repeatMode Sets the content repeat mode.
  * @param volume Sets thie player volume. It's possible from 0.0 to 1.0.
  * @param onCurrentTimeChanged A callback that returned once every second for player current time when the player is playing.
+ * @param fullScreenSecurePolicy Windows security settings to apply when full screen. Default is off. (For example, avoid screenshots that are not DRM-applied.)
+ * @param onFullScreenEnter A callback that occurs when the player is full screen. (The [VideoPlayerControllerConfig.showFullScreenButton] must be true to trigger a callback.)
+ * @param onFullScreenExit A callback that occurs when the full screen is turned off. (The [VideoPlayerControllerConfig.showFullScreenButton] must be true to trigger a callback.)
  * @param playerInstance Return exoplayer instance. This instance allows you to add [com.google.android.exoplayer2.analytics.AnalyticsListener] to receive various events from the player.
  */
 @Composable
@@ -87,6 +92,9 @@ fun VideoPlayer(
     repeatMode: RepeatMode = RepeatMode.NONE,
     @FloatRange(from = 0.0, to = 1.0) volume: Float = 1f,
     onCurrentTimeChanged: (Long) -> Unit = {},
+    fullScreenSecurePolicy: SecureFlagPolicy = SecureFlagPolicy.Inherit,
+    onFullScreenEnter: () -> Unit = {},
+    onFullScreenExit: () -> Unit = {},
     playerInstance: ExoPlayer.() -> Unit = {},
 ) {
     val context = LocalContext.current
@@ -99,8 +107,6 @@ fun VideoPlayer(
             .build()
             .also(playerInstance)
     }
-
-    val lifecycleOwner = rememberUpdatedState(LocalLifecycleOwner.current)
 
     val defaultPlayerView = remember {
         StyledPlayerView(context)
@@ -143,26 +149,16 @@ fun VideoPlayer(
         }
     }
 
+    var isFullScreenModeEntered by remember { mutableStateOf(false) }
+
     LaunchedEffect(controllerConfig) {
-        val controllerView = defaultPlayerView.rootView
-        controllerView.findViewById<View>(com.google.android.exoplayer2.R.id.exo_settings).isVisible =
-            controllerConfig.showSpeedAndPitchOverlay
-        defaultPlayerView.setShowSubtitleButton(controllerConfig.showSubtitleButton)
-        controllerView.findViewById<View>(com.google.android.exoplayer2.R.id.exo_time).isVisible =
-            controllerConfig.showCurrentTimeAndTotalTime
-        defaultPlayerView.setShowBuffering(
-            if (!controllerConfig.showBufferingProgress) SHOW_BUFFERING_NEVER else SHOW_BUFFERING_ALWAYS,
-        )
-        controllerView.findViewById<View>(com.google.android.exoplayer2.R.id.exo_ffwd_with_amount).isVisible =
-            controllerConfig.showForwardIncrementButton
-        controllerView.findViewById<View>(com.google.android.exoplayer2.R.id.exo_rew_with_amount).isVisible =
-            controllerConfig.showBackwardIncrementButton
-        defaultPlayerView.setShowNextButton(controllerConfig.showNextTrackButton)
-        defaultPlayerView.setShowPreviousButton(controllerConfig.showBackTrackButton)
-        defaultPlayerView.setShowFastForwardButton(controllerConfig.showForwardIncrementButton)
-        defaultPlayerView.setShowRewindButton(controllerConfig.showBackwardIncrementButton)
-        defaultPlayerView.controllerShowTimeoutMs = controllerConfig.controllerShowTimeMilliSeconds
-        defaultPlayerView.controllerAutoShow = controllerConfig.controllerAutoShow
+        controllerConfig.applyToExoPlayerView(defaultPlayerView) {
+            isFullScreenModeEntered = it
+
+            if (it) {
+                onFullScreenEnter()
+            }
+        }
     }
 
     LaunchedEffect(controllerConfig, repeatMode) {
@@ -179,6 +175,54 @@ fun VideoPlayer(
     LaunchedEffect(volume) {
         player.volume = volume
     }
+
+    VideoPlayerSurface(
+        modifier = modifier,
+        defaultPlayerView = defaultPlayerView,
+        player = player,
+        usePlayerController = usePlayerController,
+        handleLifecycle = handleLifecycle,
+    )
+
+    if (isFullScreenModeEntered) {
+        var fullScreenPlayerView by remember { mutableStateOf<StyledPlayerView?>(null) }
+
+        VideoPlayerFullScreenDialog(
+            player = player,
+            currentPlayerView = defaultPlayerView,
+            controllerConfig = controllerConfig,
+            repeatMode = repeatMode,
+            onDismissRequest = {
+                fullScreenPlayerView?.let {
+                    StyledPlayerView.switchTargetView(player, it, defaultPlayerView)
+                    defaultPlayerView.findViewById<ImageButton>(com.google.android.exoplayer2.ui.R.id.exo_fullscreen)
+                        .performClick()
+                    val currentActivity = context.findActivity()
+                    currentActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+                    currentActivity.setFullScreen(false)
+                    onFullScreenExit()
+                }
+
+                isFullScreenModeEntered = false
+            },
+            securePolicy = fullScreenSecurePolicy,
+            fullScreenPlayerView = {
+                fullScreenPlayerView = this
+            },
+        )
+    }
+}
+
+@Composable
+internal fun VideoPlayerSurface(
+    modifier: Modifier = Modifier,
+    defaultPlayerView: StyledPlayerView,
+    player: ExoPlayer,
+    usePlayerController: Boolean,
+    handleLifecycle: Boolean,
+    autoDispose: Boolean = true,
+) {
+    val lifecycleOwner = rememberUpdatedState(LocalLifecycleOwner.current)
 
     DisposableEffect(
         AndroidView(
@@ -209,8 +253,10 @@ fun VideoPlayer(
         lifecycle.addObserver(observer)
 
         onDispose {
-            player.release()
-            lifecycle.removeObserver(observer)
+            if (autoDispose) {
+                player.release()
+                lifecycle.removeObserver(observer)
+            }
         }
     }
 }
