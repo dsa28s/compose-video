@@ -25,7 +25,7 @@ implementation("io.sanghun:compose-video:1.0.0")
 
 ### Preview 📸
 
-| <img src="https://github.com/dsa28s/compose-video/raw/main/artwork/compose-video-player.png" width="33%"> | <img src="https://github.com/dsa28s/compose-video/raw/main/artwork/fullscreen.gif" width="33%"> | <img src="https://github.com/dsa28s/compose-video/raw/main/artwork/pip.gif" width="33%"> |
+| <img src="https://github.com/dsa28s/compose-video/raw/main/artwork/compose-video-player.png" width="200px"> | <img src="https://github.com/dsa28s/compose-video/raw/main/artwork/fullscreen.gif" width="200px"> | <img src="https://github.com/dsa28s/compose-video/raw/main/artwork/pip.gif" width="200px"> |
 |:--:|:--:|:--:|
 | **VideoPlayer** | **Full Screen** | **PIP** |
 
