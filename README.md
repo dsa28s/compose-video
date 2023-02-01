@@ -107,6 +107,7 @@ VideoPlayer(
 - [x] Background Play
 - [ ] Rate
 - [ ] Resize Mode
+- [x] Video Caching
 
 ### Contributing
 

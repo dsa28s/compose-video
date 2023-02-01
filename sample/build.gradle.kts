@@ -8,7 +8,7 @@ android {
     compileSdk = 33
 
     defaultConfig {
-        applicationId = "io.sanghun.compose.video"
+        applicationId = "io.sanghun.compose.video.sample"
         minSdk = 21
         targetSdk = 32
         versionCode = 1

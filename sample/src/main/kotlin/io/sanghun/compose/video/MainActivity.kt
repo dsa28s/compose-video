@@ -35,6 +35,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import com.google.android.exoplayer2.analytics.AnalyticsListener
+import io.sanghun.compose.video.cache.VideoPlayerCacheConfig
 import io.sanghun.compose.video.controller.VideoPlayerControllerConfig
 import io.sanghun.compose.video.ui.theme.ComposeVideoSampleTheme
 
@@ -71,6 +72,7 @@ class MainActivity : ComponentActivity() {
                                 showFullScreenButton = true,
                             ),
                             repeatMode = repeatMode,
+                            cacheConfig = VideoPlayerCacheConfig(enableCache = true, maxCacheSize = 1024 * 1024 * 1024),
                             onCurrentTimeChanged = {
                                 Log.e("CurrentTime", it.toString())
                             },

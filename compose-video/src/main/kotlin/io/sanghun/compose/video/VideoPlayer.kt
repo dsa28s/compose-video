@@ -41,11 +41,17 @@ import androidx.lifecycle.LifecycleEventObserver
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector
+import com.google.android.exoplayer2.source.DefaultMediaSourceFactory
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout.RESIZE_MODE_FIT
 import com.google.android.exoplayer2.ui.StyledPlayerView
+import com.google.android.exoplayer2.upstream.DefaultDataSource
+import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
+import com.google.android.exoplayer2.upstream.cache.CacheDataSource
 import com.google.android.exoplayer2.util.RepeatModeUtil.REPEAT_TOGGLE_MODE_ALL
 import com.google.android.exoplayer2.util.RepeatModeUtil.REPEAT_TOGGLE_MODE_NONE
 import com.google.android.exoplayer2.util.RepeatModeUtil.REPEAT_TOGGLE_MODE_ONE
+import io.sanghun.compose.video.cache.VideoPlayerCacheConfig
+import io.sanghun.compose.video.cache.VideoPlayerCacheManager
 import io.sanghun.compose.video.controller.VideoPlayerControllerConfig
 import io.sanghun.compose.video.controller.applyToExoPlayerView
 import io.sanghun.compose.video.pip.enterPIPMode
@@ -77,8 +83,8 @@ import kotlinx.coroutines.delay
  * @param autoPlay Autoplay when media item prepared. Default is true.
  * @param usePlayerController Using player controller. Default is true.
  * @param controllerConfig Player controller config. You can customize the Video Player Controller UI.
- * @param seekBeforeMilliSeconds The seek back increment, in milliseconds. Default is 10sec (10000ms)
- * @param seekAfterMilliSeconds The seek forward increment, in milliseconds. Default is 10sec (10000ms)
+ * @param seekBeforeMilliSeconds The seek back increment, in milliseconds. Default is 10sec (10000ms). Read-only props (Changes in values do not take effect.)
+ * @param seekAfterMilliSeconds The seek forward increment, in milliseconds. Default is 10sec (10000ms). Read-only props (Changes in values do not take effect.)
  * @param repeatMode Sets the content repeat mode.
  * @param volume Sets thie player volume. It's possible from 0.0 to 1.0.
  * @param onCurrentTimeChanged A callback that returned once every second for player current time when the player is playing.
@@ -86,6 +92,7 @@ import kotlinx.coroutines.delay
  * @param onFullScreenEnter A callback that occurs when the player is full screen. (The [VideoPlayerControllerConfig.showFullScreenButton] must be true to trigger a callback.)
  * @param onFullScreenExit A callback that occurs when the full screen is turned off. (The [VideoPlayerControllerConfig.showFullScreenButton] must be true to trigger a callback.)
  * @param enablePip Enable PIP (Picture-in-Picture). [handleLifecycle] must be false.
+ * @param cacheConfig Config for video cache. Read-only props (Changes in values do not take effect.)
  * @param playerInstance Return exoplayer instance. This instance allows you to add [com.google.android.exoplayer2.analytics.AnalyticsListener] to receive various events from the player.
  */
 @Composable
@@ -105,15 +112,26 @@ fun VideoPlayer(
     onFullScreenEnter: () -> Unit = {},
     onFullScreenExit: () -> Unit = {},
     enablePip: Boolean = false,
+    cacheConfig: VideoPlayerCacheConfig = VideoPlayerCacheConfig.Default,
     playerInstance: ExoPlayer.() -> Unit = {},
 ) {
     val context = LocalContext.current
     var currentTime by remember { mutableStateOf(0L) }
 
-    val player = remember(seekAfterMilliSeconds, seekBeforeMilliSeconds) {
+    val player = remember {
+        val httpDataSourceFactory = DefaultHttpDataSource.Factory()
+
         ExoPlayer.Builder(context)
             .setSeekBackIncrementMs(seekBeforeMilliSeconds)
             .setSeekForwardIncrementMs(seekAfterMilliSeconds)
+            .apply {
+                if (cacheConfig.enableCache) {
+                    val cacheDataSourceFactory = CacheDataSource.Factory()
+                        .setCache(VideoPlayerCacheManager.initializeOrGetInstance(context, cacheConfig.maxCacheSize))
+                        .setUpstreamDataSourceFactory(DefaultDataSource.Factory(context, httpDataSourceFactory))
+                    setMediaSourceFactory(DefaultMediaSourceFactory(cacheDataSourceFactory))
+                }
+            }
             .build()
             .also(playerInstance)
     }

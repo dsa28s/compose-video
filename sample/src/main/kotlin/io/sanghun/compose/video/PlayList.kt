@@ -34,6 +34,9 @@ val samplePlayList = listOf(
         mediaMetadata = MediaMetadata.Builder().setTitle("Clear DASH: Tears").build(),
         mimeType = MIME_TYPE_DASH,
     ),
+    VideoPlayerMediaItem.RawResourceMediaItem(
+        resourceId = R.raw.test_video,
+    ),
     VideoPlayerMediaItem.NetworkMediaItem(
         url = "https://storage.googleapis.com/shaka-demo-assets/angel-one-hls/hls.m3u8",
         mediaMetadata = MediaMetadata.Builder().setTitle("Clear HLS: Angel one").build(),
