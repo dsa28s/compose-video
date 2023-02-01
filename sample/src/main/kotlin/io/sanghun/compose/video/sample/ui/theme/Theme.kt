@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.sanghun.compose.video.ui.theme
+package io.sanghun.compose.video.sample.ui.theme
 
 import android.app.Activity
 import android.os.Build

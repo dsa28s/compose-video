@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "io.sanghun.compose.video"
+    namespace = "io.sanghun.compose.video.sample"
     compileSdk = 33
 
     defaultConfig {

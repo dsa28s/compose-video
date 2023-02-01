@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.sanghun.compose.video
+package io.sanghun.compose.video.sample
 
 import android.os.Bundle
 import android.util.Log
@@ -35,9 +35,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import com.google.android.exoplayer2.analytics.AnalyticsListener
+import io.sanghun.compose.video.RepeatMode
+import io.sanghun.compose.video.VideoPlayer
 import io.sanghun.compose.video.cache.VideoPlayerCacheConfig
 import io.sanghun.compose.video.controller.VideoPlayerControllerConfig
-import io.sanghun.compose.video.ui.theme.ComposeVideoSampleTheme
+import io.sanghun.compose.video.toRepeatMode
+import io.sanghun.compose.video.sample.ui.theme.ComposeVideoSampleTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

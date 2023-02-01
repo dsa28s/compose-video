@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.sanghun.compose.video
+package io.sanghun.compose.video.sample
 
 import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.MediaItem
