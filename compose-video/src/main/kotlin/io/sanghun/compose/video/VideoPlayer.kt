@@ -36,7 +36,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
-import com.google.android.exoplayer2.ui.AspectRatioFrameLayout.*
+import com.google.android.exoplayer2.ui.AspectRatioFrameLayout.RESIZE_MODE_FIT
 import com.google.android.exoplayer2.ui.StyledPlayerView
 import com.google.android.exoplayer2.util.RepeatModeUtil.REPEAT_TOGGLE_MODE_ALL
 import com.google.android.exoplayer2.util.RepeatModeUtil.REPEAT_TOGGLE_MODE_NONE
@@ -136,11 +136,20 @@ fun VideoPlayer(
 
     LaunchedEffect(mediaItems, player) {
         val exoPlayerMediaItems = mediaItems.map {
-            MediaItem.Builder()
-                .apply {
-                    val uri = it.toUri(context)
-                    setUri(uri)
-                }.build()
+            val uri = it.toUri(context)
+
+            MediaItem.Builder().apply {
+                setUri(uri)
+                setMediaMetadata(it.mediaMetadata)
+                setMimeType(it.mimeType)
+                setDrmConfiguration(
+                    if (it is VideoPlayerMediaItem.NetworkMediaItem) {
+                        it.drmConfiguration
+                    } else {
+                        null
+                    },
+                )
+            }.build()
         }
 
         player.setMediaItems(exoPlayerMediaItems)

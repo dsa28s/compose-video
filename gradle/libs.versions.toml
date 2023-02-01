@@ -24,10 +24,12 @@ androidx-test-junit = "androidx.test.ext:junit:1.1.5"
 androidx-test-espresso = "androidx.test.espresso:espresso-core:3.5.1"
 
 exoplayer = { module = "com.google.android.exoplayer:exoplayer", version.ref = "exoplayer" }
+exoplayer-cast = { module = "com.google.android.exoplayer:extension-cast", version.ref = "exoplayer" }
 
 [bundles]
 
 androidx = ["androidx-core", "androidx-lifecycle", "androidx-activity"]
 compose = ["compose-ui", "compose-ui-tooling"]
 compose-debugOnly = ["compose-ui-tooling-preview", "compose-ui-test-manifest"]
+exoplayer = ["exoplayer", "exoplayer-cast"]
 androidTest = ["androidx-test-junit", "androidx-test-espresso"]

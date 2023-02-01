@@ -53,8 +53,8 @@ dependencies {
 
     implementation(libs.bundles.androidx)
     implementation(libs.bundles.compose)
+    implementation(libs.bundles.exoplayer)
     implementation(libs.material3)
-    implementation(libs.exoplayer)
     testImplementation(libs.junit)
     debugImplementation(libs.bundles.compose.debugOnly)
 

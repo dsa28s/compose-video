@@ -40,7 +40,7 @@ android {
 dependencies {
     implementation(libs.androidx.core)
     implementation(libs.bundles.compose)
-    implementation(libs.exoplayer)
+    implementation(libs.bundles.exoplayer)
     implementation(libs.material2)
 
     debugImplementation(libs.bundles.compose.debugOnly)
