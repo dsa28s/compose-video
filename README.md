@@ -5,6 +5,9 @@
 This library is a video player component available in Android Jetpack Compose. <br />
 Based on Google [ExoPlayer](https://github.com/google/ExoPlayer).
 
+In addition to the basic functions of Exoplayer, it supports full screen, PIP, ChromeCast, and more.
+All formats supported by ExoPlayer are playable, and DRM content is also supported.
+
 
 ### Installation
 
@@ -27,8 +30,13 @@ VideoPlayer(
             storageUri = "content://xxxxx"
         ),
         VideoPlayerMediaItem.NetworkMediaItem(
-            url = "https://storage.googleapis.com/exoplayer-test-media-1/gen-3/screens/dash-vod-single-segment/video-137.mp4",
-        ),
+            url = "https://storage.googleapis.com/wvmedia/cbcs/h264/tears/tears_aes_cbcs.mpd",
+            mediaMetadata = MediaMetadata.Builder().setTitle("Widevine DASH cbcs: Tears").build(),
+            mimeType = MimeTypes.APPLICATION_MPD,
+            drmConfiguration = MediaItem.DrmConfiguration.Builder(C.WIDEVINE_UUID)
+                .setLicenseUri("https://proxy.uat.widevine.com/proxy?provider=widevine_test")
+                .build(),
+        )
     ),
     handleLifecycle = true,
     autoPlay = true,
@@ -46,6 +54,7 @@ VideoPlayer(
         controllerShowTimeMilliSeconds = 5_000,
         controllerAutoShow = true,
     ),
+    volume = 0.5f,  // volume 0.0f to 1.0f
     repeatMode = RepeatMode.NONE,       // or RepeatMode.ALL, RepeatMode.ONE
     onCurrentTimeChanged = { // long type, current player time (millisec)
         Log.e("CurrentTime", it.toString())
@@ -73,17 +82,17 @@ VideoPlayer(
 - [x] Full Screen (With rotate)
 - [x] Repeat
 - [x] Volume Control
+- [x] Select Audio Track
+- [x] Select Video Track
+- [x] SubTitle
 - [ ] Chromecast
 - [ ] Buffering config
 - [ ] PIP (Picture In Picture)
-- [ ] DRM
+- [x] DRM
 - [ ] Custom Headers
 - [ ] Background Play
 - [ ] Rate
 - [ ] Resize Mode
-- [ ] Select Audio Track
-- [ ] Select Video Track
-- [ ] SubTitle (with customize style)
 
 ### Contributing
 
