@@ -37,7 +37,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.google.android.exoplayer2.analytics.AnalyticsListener
 import io.sanghun.compose.video.controller.VideoPlayerControllerConfig
 import io.sanghun.compose.video.ui.theme.ComposeVideoSampleTheme
-import io.sanghun.compose.video.uri.VideoPlayerMediaItem
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,16 +56,12 @@ class MainActivity : ComponentActivity() {
                         var repeatMode by remember { mutableStateOf(RepeatMode.NONE) }
 
                         VideoPlayer(
-                            mediaItems = listOf(
-                                VideoPlayerMediaItem.NetworkMediaItem(
-                                    url = "https://storage.googleapis.com/exoplayer-test-media-1/gen-3/screens/dash-vod-single-segment/video-137.mp4",
-                                ),
-                            ),
+                            mediaItems = samplePlayList,
                             handleLifecycle = true,
                             autoPlay = true,
                             usePlayerController = true,
                             controllerConfig = VideoPlayerControllerConfig.Default.copy(
-                                showSubtitleButton = false,
+                                showSubtitleButton = true,
                                 showNextTrackButton = true,
                                 showBackTrackButton = true,
                                 showBackwardIncrementButton = true,
