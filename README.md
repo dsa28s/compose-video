@@ -1,4 +1,4 @@
-# compose-video
+# compose-video <img src="https://img.shields.io/github/v/release/dsa28s/compose-video.svg?label=latest"/>
 
 ## `VideoPlayer` Component for Jetpack Compose
 
@@ -8,12 +8,20 @@ Based on Google [ExoPlayer](https://github.com/google/ExoPlayer).
 In addition to the basic functions of Exoplayer, it supports full screen, PIP, ChromeCast, and more.
 All formats supported by ExoPlayer are playable, and DRM content is also supported.
 
-
 ### Installation
 
-**The library is currently developing. Therefore, you must add it directly as a module in order to use that library.** <br />
-After the official release, you can download it from the Maven repository.
+The easiest way to get started using VideoPlayer component is to add it as a gradle dependency in the build.gradle file
+of your app module.
 
+```gradle
+implementation 'io.sanghun:compose-video:1.0.0'
+```
+
+or if your project using `build.gradle.kts`
+
+```kotlin
+implementation("io.sanghun:compose-video:1.0.0")
+```
 
 ### Usage
 
@@ -72,7 +80,6 @@ VideoPlayer(
         .align(Alignment.Center),
 )
 ```
-
 
 ### Features
 
