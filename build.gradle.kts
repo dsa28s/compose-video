@@ -4,6 +4,7 @@ plugins {
     id("org.jetbrains.kotlin.android") version "1.8.0" apply false
 
     id("com.diffplug.spotless") version "6.14.0"
+    id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
 }
 
 subprojects {

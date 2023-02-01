@@ -1,3 +1,7 @@
+apply(from = "${rootDir}/publish.gradle")
+apply(from = "${rootDir}/scripts/publish-root.gradle")
+apply(from = "${rootDir}/scripts/publish-module.gradle")
+
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
