@@ -39,6 +39,7 @@ android {
 
 dependencies {
     implementation(libs.androidx.core)
+    implementation(libs.androidx.activity)
     implementation(libs.bundles.compose)
     implementation(libs.bundles.exoplayer)
     implementation(libs.material2)

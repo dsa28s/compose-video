@@ -16,8 +16,12 @@
 package io.sanghun.compose.video
 
 import android.content.pm.ActivityInfo
+import android.content.pm.PackageManager
 import android.graphics.Color
+import android.os.Build
+import android.support.v4.media.session.MediaSessionCompat
 import android.widget.ImageButton
+import androidx.activity.compose.BackHandler
 import androidx.annotation.FloatRange
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -36,6 +40,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout.RESIZE_MODE_FIT
 import com.google.android.exoplayer2.ui.StyledPlayerView
 import com.google.android.exoplayer2.util.RepeatModeUtil.REPEAT_TOGGLE_MODE_ALL
@@ -43,6 +48,7 @@ import com.google.android.exoplayer2.util.RepeatModeUtil.REPEAT_TOGGLE_MODE_NONE
 import com.google.android.exoplayer2.util.RepeatModeUtil.REPEAT_TOGGLE_MODE_ONE
 import io.sanghun.compose.video.controller.VideoPlayerControllerConfig
 import io.sanghun.compose.video.controller.applyToExoPlayerView
+import io.sanghun.compose.video.pip.enterPIPMode
 import io.sanghun.compose.video.uri.VideoPlayerMediaItem
 import io.sanghun.compose.video.uri.toUri
 import io.sanghun.compose.video.util.findActivity
@@ -79,6 +85,7 @@ import kotlinx.coroutines.delay
  * @param fullScreenSecurePolicy Windows security settings to apply when full screen. Default is off. (For example, avoid screenshots that are not DRM-applied.)
  * @param onFullScreenEnter A callback that occurs when the player is full screen. (The [VideoPlayerControllerConfig.showFullScreenButton] must be true to trigger a callback.)
  * @param onFullScreenExit A callback that occurs when the full screen is turned off. (The [VideoPlayerControllerConfig.showFullScreenButton] must be true to trigger a callback.)
+ * @param enablePip Enable PIP (Picture-in-Picture). [handleLifecycle] must be false.
  * @param playerInstance Return exoplayer instance. This instance allows you to add [com.google.android.exoplayer2.analytics.AnalyticsListener] to receive various events from the player.
  */
 @Composable
@@ -97,6 +104,7 @@ fun VideoPlayer(
     fullScreenSecurePolicy: SecureFlagPolicy = SecureFlagPolicy.Inherit,
     onFullScreenEnter: () -> Unit = {},
     onFullScreenExit: () -> Unit = {},
+    enablePip: Boolean = false,
     playerInstance: ExoPlayer.() -> Unit = {},
 ) {
     val context = LocalContext.current
@@ -112,6 +120,11 @@ fun VideoPlayer(
 
     val defaultPlayerView = remember {
         StyledPlayerView(context)
+    }
+
+    BackHandler(enablePip) {
+        enterPIPMode(context, defaultPlayerView)
+        player.play()
     }
 
     LaunchedEffect(Unit) {
@@ -135,6 +148,11 @@ fun VideoPlayer(
     }
 
     LaunchedEffect(mediaItems, player) {
+        val mediaSession = MediaSessionCompat(context, context.packageName)
+        val mediaSessionConnector = MediaSessionConnector(mediaSession)
+        mediaSessionConnector.setPlayer(player)
+        mediaSession.isActive = true
+
         val exoPlayerMediaItems = mediaItems.map {
             val uri = it.toUri(context)
 
@@ -193,6 +211,7 @@ fun VideoPlayer(
         player = player,
         usePlayerController = usePlayerController,
         handleLifecycle = handleLifecycle,
+        enablePip = enablePip,
     )
 
     if (isFullScreenModeEntered) {
@@ -217,6 +236,7 @@ fun VideoPlayer(
                 isFullScreenModeEntered = false
             },
             securePolicy = fullScreenSecurePolicy,
+            enablePip = enablePip,
             fullScreenPlayerView = {
                 fullScreenPlayerView = this
             },
@@ -231,9 +251,11 @@ internal fun VideoPlayerSurface(
     player: ExoPlayer,
     usePlayerController: Boolean,
     handleLifecycle: Boolean,
+    enablePip: Boolean,
     autoDispose: Boolean = true,
 ) {
     val lifecycleOwner = rememberUpdatedState(LocalLifecycleOwner.current)
+    val context = LocalContext.current
 
     DisposableEffect(
         AndroidView(
@@ -248,18 +270,41 @@ internal fun VideoPlayerSurface(
         ),
     ) {
         val observer = LifecycleEventObserver { _, event ->
-            if (handleLifecycle) {
-                when (event) {
-                    Lifecycle.Event.ON_PAUSE -> {
+            when (event) {
+                Lifecycle.Event.ON_PAUSE -> {
+                    if (handleLifecycle) {
                         player.pause()
                     }
 
-                    Lifecycle.Event.ON_RESUME -> {
+                    if (enablePip) {
+                        enterPIPMode(context, defaultPlayerView)
+                        player.play()
+                    }
+                }
+
+                Lifecycle.Event.ON_RESUME -> {
+                    if (handleLifecycle) {
                         player.play()
                     }
 
-                    else -> {}
+                    if (enablePip) {
+                        defaultPlayerView.useController = usePlayerController
+                    }
                 }
+
+                Lifecycle.Event.ON_STOP -> {
+                    if (enablePip) {
+                        if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) &&
+                            context.packageManager.hasSystemFeature(
+                                PackageManager.FEATURE_PICTURE_IN_PICTURE,
+                            )
+                        ) {
+                            context.findActivity().finishAndRemoveTask()
+                        }
+                    }
+                }
+
+                else -> {}
             }
         }
         val lifecycle = lifecycleOwner.value.lifecycle

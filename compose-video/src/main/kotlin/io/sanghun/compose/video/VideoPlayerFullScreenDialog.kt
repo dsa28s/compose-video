@@ -55,6 +55,7 @@ import io.sanghun.compose.video.util.setFullScreen
  * @param fullScreenPlayerView Callback to return all features to existing video player controller.
  * @param controllerConfig Player controller config. You can customize the Video Player Controller UI.
  * @param repeatMode Sets the content repeat mode.
+ * @param enablePip Enable PIP.
  * @param onDismissRequest Callback that occurs when modals are closed.
  * @param securePolicy Policy on setting [android.view.WindowManager.LayoutParams.FLAG_SECURE] on a full screen dialog window.
  */
@@ -66,6 +67,7 @@ internal fun VideoPlayerFullScreenDialog(
     fullScreenPlayerView: StyledPlayerView.() -> Unit,
     controllerConfig: VideoPlayerControllerConfig,
     repeatMode: RepeatMode,
+    enablePip: Boolean,
     onDismissRequest: () -> Unit,
     securePolicy: SecureFlagPolicy,
 ) {
@@ -126,6 +128,7 @@ internal fun VideoPlayerFullScreenDialog(
                 usePlayerController = true,
                 handleLifecycle = true,
                 autoDispose = false,
+                enablePip = enablePip,
                 modifier = Modifier
                     .align(Alignment.Center)
                     .fillMaxSize(),

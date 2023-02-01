@@ -41,6 +41,7 @@ VideoPlayer(
     handleLifecycle = true,
     autoPlay = true,
     usePlayerController = true,
+    enablePip = true,
     controllerConfig = VideoPlayerControllerConfig(
         showSpeedAndPitchOverlay = false,
         showSubtitleButton = false,
@@ -87,10 +88,10 @@ VideoPlayer(
 - [x] SubTitle
 - [ ] Chromecast
 - [ ] Buffering config
-- [ ] PIP (Picture In Picture)
+- [x] PIP (Picture In Picture)
 - [x] DRM
 - [ ] Custom Headers
-- [ ] Background Play
+- [x] Background Play
 - [ ] Rate
 - [ ] Resize Mode
 
