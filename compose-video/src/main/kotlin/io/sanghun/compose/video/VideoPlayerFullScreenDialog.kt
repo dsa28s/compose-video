@@ -20,16 +20,16 @@ import android.widget.ImageButton
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import androidx.compose.ui.window.DialogWindowProvider
 import androidx.compose.ui.window.SecureFlagPolicy
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.ui.StyledPlayerView
@@ -79,15 +79,18 @@ internal fun VideoPlayerFullScreenDialog(
             dismissOnClickOutside = false,
             usePlatformDefaultWidth = false,
             securePolicy = securePolicy,
-            decorFitsSystemWindows = true,
+            decorFitsSystemWindows = false,
         ),
     ) {
+        val view = LocalView.current
         LaunchedEffect(Unit) {
             StyledPlayerView.switchTargetView(player, currentPlayerView, fullScreenPlayerView)
 
             val currentActivity = context.findActivity()
             currentActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
             currentActivity.setFullScreen(true)
+
+            (view.parent as DialogWindowProvider).window.setFullScreen(true)
         }
 
         LaunchedEffect(controllerConfig) {

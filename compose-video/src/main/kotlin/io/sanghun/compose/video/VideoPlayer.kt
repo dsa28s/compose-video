@@ -16,6 +16,7 @@
 package io.sanghun.compose.video
 
 import android.content.pm.ActivityInfo
+import android.graphics.Color
 import android.widget.ImageButton
 import androidx.annotation.FloatRange
 import androidx.compose.runtime.Composable
@@ -35,6 +36,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.ui.AspectRatioFrameLayout.*
 import com.google.android.exoplayer2.ui.StyledPlayerView
 import com.google.android.exoplayer2.util.RepeatModeUtil.REPEAT_TOGGLE_MODE_ALL
 import com.google.android.exoplayer2.util.RepeatModeUtil.REPEAT_TOGGLE_MODE_NONE
@@ -230,6 +232,8 @@ internal fun VideoPlayerSurface(
             factory = {
                 defaultPlayerView.apply {
                     useController = usePlayerController
+                    resizeMode = RESIZE_MODE_FIT
+                    setBackgroundColor(Color.BLACK)
                 }
             },
         ),
