@@ -27,7 +27,7 @@ implementation("io.sanghun:compose-video:1.0.0")
 
 | ![compose-video-player.png](https://github.com/dsa28s/compose-video/raw/main/artwork/compose-video-player.png) | ![fullscreen.gif](https://github.com/dsa28s/compose-video/raw/main/artwork/fullscreen.gif) | ![pip.gif](https://github.com/dsa28s/compose-video/raw/main/artwork/pip.gif) |
 |:--:|:--:|:--:|
-| *VideoPlayer* | *Full Screen* | *PIP* |
+| <div style="width:33%">VideoPlayer component</div> | <div style="width:33%">Full Screen</div> | <div style="width:33%">PIP</div> |
 
 ### Usage
 
