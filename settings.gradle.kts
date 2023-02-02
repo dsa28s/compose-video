@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 rootProject.name = "compose-video"
 include(":sample")
 include(":compose-video")
+include(":compose-video-baselineprof")
