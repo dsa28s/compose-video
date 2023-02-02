@@ -39,8 +39,8 @@ import io.sanghun.compose.video.RepeatMode
 import io.sanghun.compose.video.VideoPlayer
 import io.sanghun.compose.video.cache.VideoPlayerCacheConfig
 import io.sanghun.compose.video.controller.VideoPlayerControllerConfig
-import io.sanghun.compose.video.toRepeatMode
 import io.sanghun.compose.video.sample.ui.theme.ComposeVideoSampleTheme
+import io.sanghun.compose.video.toRepeatMode
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
