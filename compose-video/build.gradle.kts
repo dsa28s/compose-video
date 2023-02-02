@@ -5,6 +5,12 @@ apply(from = "${rootDir}/scripts/publish-module.gradle")
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id("me.tylerbwong.gradle.metalava") version "0.3.2"
+}
+
+metalava {
+    filename.set("api/current.api")
+    reportLintsAsErrors.set(true)
 }
 
 android {

@@ -22,6 +22,9 @@ import com.google.android.exoplayer2.upstream.cache.LeastRecentlyUsedCacheEvicto
 import com.google.android.exoplayer2.upstream.cache.SimpleCache
 import java.io.File
 
+/**
+ * Manage video player cache.
+ */
 internal object VideoPlayerCacheManager {
 
     private lateinit var cacheInstance: Cache

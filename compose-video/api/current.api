@@ -1,0 +1,192 @@
+// Signature format: 4.0
+package io.sanghun.compose.video {
+
+  @androidx.compose.runtime.Stable public enum RepeatMode {
+    method public static io.sanghun.compose.video.RepeatMode valueOf(String name) throws java.lang.IllegalArgumentException;
+    method public static io.sanghun.compose.video.RepeatMode[] values();
+    enum_constant public static final io.sanghun.compose.video.RepeatMode ALL;
+    enum_constant public static final io.sanghun.compose.video.RepeatMode NONE;
+    enum_constant public static final io.sanghun.compose.video.RepeatMode ONE;
+  }
+
+  public final class RepeatModeKt {
+    method public static io.sanghun.compose.video.RepeatMode toRepeatMode(int);
+  }
+
+  public final class VideoPlayerFullScreenDialogKt {
+  }
+
+  public final class VideoPlayerKt {
+    method @androidx.compose.runtime.Composable public static void VideoPlayer(optional androidx.compose.ui.Modifier modifier, java.util.List<? extends io.sanghun.compose.video.uri.VideoPlayerMediaItem> mediaItems, optional boolean handleLifecycle, optional boolean autoPlay, optional boolean usePlayerController, optional io.sanghun.compose.video.controller.VideoPlayerControllerConfig controllerConfig, optional long seekBeforeMilliSeconds, optional long seekAfterMilliSeconds, optional io.sanghun.compose.video.RepeatMode repeatMode, optional @FloatRange(from=0.0, to=1.0) float volume, optional kotlin.jvm.functions.Function1<? super java.lang.Long,kotlin.Unit> onCurrentTimeChanged, optional androidx.compose.ui.window.SecureFlagPolicy fullScreenSecurePolicy, optional kotlin.jvm.functions.Function0<kotlin.Unit> onFullScreenEnter, optional kotlin.jvm.functions.Function0<kotlin.Unit> onFullScreenExit, optional boolean enablePip, optional io.sanghun.compose.video.cache.VideoPlayerCacheConfig cacheConfig, optional kotlin.jvm.functions.Function1<? super com.google.android.exoplayer2.ExoPlayer,kotlin.Unit> playerInstance);
+  }
+
+}
+
+package io.sanghun.compose.video.cache {
+
+  @androidx.compose.runtime.Immutable public final class VideoPlayerCacheConfig {
+    ctor public VideoPlayerCacheConfig(boolean enableCache, long maxCacheSize);
+    method public boolean component1();
+    method public long component2();
+    method public io.sanghun.compose.video.cache.VideoPlayerCacheConfig copy(boolean enableCache, long maxCacheSize);
+    method public boolean getEnableCache();
+    method public long getMaxCacheSize();
+    property public final boolean enableCache;
+    property public final long maxCacheSize;
+    field public static final io.sanghun.compose.video.cache.VideoPlayerCacheConfig.Companion Companion;
+  }
+
+  public static final class VideoPlayerCacheConfig.Companion {
+    method public io.sanghun.compose.video.cache.VideoPlayerCacheConfig getDefault();
+    property public final io.sanghun.compose.video.cache.VideoPlayerCacheConfig Default;
+  }
+
+}
+
+package io.sanghun.compose.video.controller {
+
+  @androidx.compose.runtime.Immutable public final class VideoPlayerControllerConfig {
+    ctor public VideoPlayerControllerConfig(boolean showSpeedAndPitchOverlay, boolean showSubtitleButton, boolean showCurrentTimeAndTotalTime, boolean showBufferingProgress, boolean showForwardIncrementButton, boolean showBackwardIncrementButton, boolean showBackTrackButton, boolean showNextTrackButton, boolean showRepeatModeButton, boolean showFullScreenButton, int controllerShowTimeMilliSeconds, boolean controllerAutoShow);
+    method public boolean component1();
+    method public boolean component10();
+    method public int component11();
+    method public boolean component12();
+    method public boolean component2();
+    method public boolean component3();
+    method public boolean component4();
+    method public boolean component5();
+    method public boolean component6();
+    method public boolean component7();
+    method public boolean component8();
+    method public boolean component9();
+    method public io.sanghun.compose.video.controller.VideoPlayerControllerConfig copy(boolean showSpeedAndPitchOverlay, boolean showSubtitleButton, boolean showCurrentTimeAndTotalTime, boolean showBufferingProgress, boolean showForwardIncrementButton, boolean showBackwardIncrementButton, boolean showBackTrackButton, boolean showNextTrackButton, boolean showRepeatModeButton, boolean showFullScreenButton, int controllerShowTimeMilliSeconds, boolean controllerAutoShow);
+    method public boolean getControllerAutoShow();
+    method public int getControllerShowTimeMilliSeconds();
+    method public boolean getShowBackTrackButton();
+    method public boolean getShowBackwardIncrementButton();
+    method public boolean getShowBufferingProgress();
+    method public boolean getShowCurrentTimeAndTotalTime();
+    method public boolean getShowForwardIncrementButton();
+    method public boolean getShowFullScreenButton();
+    method public boolean getShowNextTrackButton();
+    method public boolean getShowRepeatModeButton();
+    method public boolean getShowSpeedAndPitchOverlay();
+    method public boolean getShowSubtitleButton();
+    property public final boolean controllerAutoShow;
+    property public final int controllerShowTimeMilliSeconds;
+    property public final boolean showBackTrackButton;
+    property public final boolean showBackwardIncrementButton;
+    property public final boolean showBufferingProgress;
+    property public final boolean showCurrentTimeAndTotalTime;
+    property public final boolean showForwardIncrementButton;
+    property public final boolean showFullScreenButton;
+    property public final boolean showNextTrackButton;
+    property public final boolean showRepeatModeButton;
+    property public final boolean showSpeedAndPitchOverlay;
+    property public final boolean showSubtitleButton;
+    field public static final io.sanghun.compose.video.controller.VideoPlayerControllerConfig.Companion Companion;
+  }
+
+  public static final class VideoPlayerControllerConfig.Companion {
+    method public io.sanghun.compose.video.controller.VideoPlayerControllerConfig getDefault();
+    property public final io.sanghun.compose.video.controller.VideoPlayerControllerConfig Default;
+  }
+
+  public final class VideoPlayerControllerConfigKt {
+  }
+
+}
+
+package io.sanghun.compose.video.pip {
+
+  public final class PictureInPictureKt {
+  }
+
+}
+
+package io.sanghun.compose.video.uri {
+
+  public interface BaseVideoPlayerMediaItem {
+    method public com.google.android.exoplayer2.MediaMetadata getMediaMetadata();
+    method public String getMimeType();
+    property public abstract com.google.android.exoplayer2.MediaMetadata mediaMetadata;
+    property public abstract String mimeType;
+  }
+
+  public sealed interface VideoPlayerMediaItem extends io.sanghun.compose.video.uri.BaseVideoPlayerMediaItem {
+  }
+
+  public static final class VideoPlayerMediaItem.AssetFileMediaItem implements io.sanghun.compose.video.uri.VideoPlayerMediaItem {
+    ctor public VideoPlayerMediaItem.AssetFileMediaItem(String assetPath, optional com.google.android.exoplayer2.MediaMetadata mediaMetadata, optional String mimeType);
+    method public String component1();
+    method public com.google.android.exoplayer2.MediaMetadata component2();
+    method public String component3();
+    method public io.sanghun.compose.video.uri.VideoPlayerMediaItem.AssetFileMediaItem copy(String assetPath, com.google.android.exoplayer2.MediaMetadata mediaMetadata, String mimeType);
+    method public String getAssetPath();
+    method public com.google.android.exoplayer2.MediaMetadata getMediaMetadata();
+    method public String getMimeType();
+    property public final String assetPath;
+    property public com.google.android.exoplayer2.MediaMetadata mediaMetadata;
+    property public String mimeType;
+  }
+
+  public static final class VideoPlayerMediaItem.NetworkMediaItem implements io.sanghun.compose.video.uri.VideoPlayerMediaItem {
+    ctor public VideoPlayerMediaItem.NetworkMediaItem(String url, optional com.google.android.exoplayer2.MediaMetadata mediaMetadata, optional String mimeType, optional com.google.android.exoplayer2.MediaItem.DrmConfiguration? drmConfiguration);
+    method public String component1();
+    method public com.google.android.exoplayer2.MediaMetadata component2();
+    method public String component3();
+    method public com.google.android.exoplayer2.MediaItem.DrmConfiguration? component4();
+    method public io.sanghun.compose.video.uri.VideoPlayerMediaItem.NetworkMediaItem copy(String url, com.google.android.exoplayer2.MediaMetadata mediaMetadata, String mimeType, com.google.android.exoplayer2.MediaItem.DrmConfiguration? drmConfiguration);
+    method public com.google.android.exoplayer2.MediaItem.DrmConfiguration? getDrmConfiguration();
+    method public com.google.android.exoplayer2.MediaMetadata getMediaMetadata();
+    method public String getMimeType();
+    method public String getUrl();
+    property public final com.google.android.exoplayer2.MediaItem.DrmConfiguration? drmConfiguration;
+    property public com.google.android.exoplayer2.MediaMetadata mediaMetadata;
+    property public String mimeType;
+    property public final String url;
+  }
+
+  public static final class VideoPlayerMediaItem.RawResourceMediaItem implements io.sanghun.compose.video.uri.VideoPlayerMediaItem {
+    ctor public VideoPlayerMediaItem.RawResourceMediaItem(@RawRes int resourceId, optional com.google.android.exoplayer2.MediaMetadata mediaMetadata, optional String mimeType);
+    method public int component1();
+    method public com.google.android.exoplayer2.MediaMetadata component2();
+    method public String component3();
+    method public io.sanghun.compose.video.uri.VideoPlayerMediaItem.RawResourceMediaItem copy(@RawRes int resourceId, com.google.android.exoplayer2.MediaMetadata mediaMetadata, String mimeType);
+    method public com.google.android.exoplayer2.MediaMetadata getMediaMetadata();
+    method public String getMimeType();
+    method public int getResourceId();
+    property public com.google.android.exoplayer2.MediaMetadata mediaMetadata;
+    property public String mimeType;
+    property public final int resourceId;
+  }
+
+  public static final class VideoPlayerMediaItem.StorageMediaItem implements io.sanghun.compose.video.uri.VideoPlayerMediaItem {
+    ctor public VideoPlayerMediaItem.StorageMediaItem(android.net.Uri storageUri, optional com.google.android.exoplayer2.MediaMetadata mediaMetadata, optional String mimeType);
+    method public android.net.Uri component1();
+    method public com.google.android.exoplayer2.MediaMetadata component2();
+    method public String component3();
+    method public io.sanghun.compose.video.uri.VideoPlayerMediaItem.StorageMediaItem copy(android.net.Uri storageUri, com.google.android.exoplayer2.MediaMetadata mediaMetadata, String mimeType);
+    method public com.google.android.exoplayer2.MediaMetadata getMediaMetadata();
+    method public String getMimeType();
+    method public android.net.Uri getStorageUri();
+    property public com.google.android.exoplayer2.MediaMetadata mediaMetadata;
+    property public String mimeType;
+    property public final android.net.Uri storageUri;
+  }
+
+  public final class VideoPlayerMediaItemConverterKt {
+  }
+
+}
+
+package io.sanghun.compose.video.util {
+
+  public final class ContextUtilKt {
+  }
+
+  public final class WindowUtilKt {
+  }
+
+}
+
