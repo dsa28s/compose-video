@@ -14,13 +14,13 @@ The easiest way to get started using VideoPlayer component is to add it as a gra
 of your app module.
 
 ```gradle
-implementation 'io.sanghun:compose-video:1.0.0'
+implementation 'io.sanghun:compose-video:1.0.1'
 ```
 
 or if your project using `build.gradle.kts`
 
 ```kotlin
-implementation("io.sanghun:compose-video:1.0.0")
+implementation("io.sanghun:compose-video:1.0.1")
 ```
 
 ### Preview 📸
