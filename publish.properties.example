@@ -1,0 +1,8 @@
+// Copy the properties below to a local.properties in your environment.
+
+signing.keyId= // GPG Signing public key (enter only eight character from the back)
+signing.password= // GPG signing password
+signing.secretKeyRingFile= // gpg file path (absolute)
+ossrhUsername= // SonarType id
+ossrhPassword= // SonarType password
+sonatypeStagingProfileId= // SonarType Profile Id ex) 12345ab6cd7e8
