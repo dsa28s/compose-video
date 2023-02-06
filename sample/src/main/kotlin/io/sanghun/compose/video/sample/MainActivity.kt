@@ -37,7 +37,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.google.android.exoplayer2.analytics.AnalyticsListener
 import io.sanghun.compose.video.RepeatMode
 import io.sanghun.compose.video.VideoPlayer
-import io.sanghun.compose.video.cache.VideoPlayerCacheConfig
+import io.sanghun.compose.video.cache.VideoPlayerCacheManager
 import io.sanghun.compose.video.controller.VideoPlayerControllerConfig
 import io.sanghun.compose.video.sample.ui.theme.ComposeVideoSampleTheme
 import io.sanghun.compose.video.toRepeatMode
@@ -45,6 +45,9 @@ import io.sanghun.compose.video.toRepeatMode
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        VideoPlayerCacheManager.initialize(this, 1024 * 1024 * 1024)    // 1GB
+
         setContent {
             ComposeVideoSampleTheme {
                 Surface(
@@ -75,7 +78,6 @@ class MainActivity : ComponentActivity() {
                                 showFullScreenButton = true,
                             ),
                             repeatMode = repeatMode,
-                            cacheConfig = VideoPlayerCacheConfig(enableCache = true, maxCacheSize = 1024 * 1024 * 1024),
                             onCurrentTimeChanged = {
                                 Log.e("CurrentTime", it.toString())
                             },

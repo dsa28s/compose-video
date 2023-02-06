@@ -25,13 +25,22 @@ import java.io.File
 /**
  * Manage video player cache.
  */
-internal object VideoPlayerCacheManager {
+object VideoPlayerCacheManager {
 
     private lateinit var cacheInstance: Cache
 
-    fun initializeOrGetInstance(context: Context, maxCacheBytes: Long): Cache {
+    /**
+     * Set the cache for video player.
+     * It can only be set once in the app, and it is shared and used by multiple video players.
+     *
+     * @param context Current activity context.
+     * @param maxCacheBytes Sets the maximum cache capacity in bytes. If the cache builds up as much as the set capacity, it is deleted from the oldest cache.
+     *
+     * @throws IllegalStateException Occurs when method is called multiple times.
+     */
+    fun initialize(context: Context, maxCacheBytes: Long) {
         if (::cacheInstance.isInitialized) {
-            return cacheInstance
+            throw IllegalStateException("You can only set it up once in the app.")
         }
 
         cacheInstance = SimpleCache(
@@ -39,7 +48,15 @@ internal object VideoPlayerCacheManager {
             LeastRecentlyUsedCacheEvictor(maxCacheBytes),
             StandaloneDatabaseProvider(context),
         )
-
-        return cacheInstance
     }
+
+    /**
+     * Gets the ExoPlayer cache instance. If null, the cache to be disabled.
+     */
+    internal fun getCache(): Cache? =
+        if (::cacheInstance.isInitialized) {
+            cacheInstance
+        } else {
+            null
+        }
 }

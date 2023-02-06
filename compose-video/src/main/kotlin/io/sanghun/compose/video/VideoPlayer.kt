@@ -50,7 +50,6 @@ import com.google.android.exoplayer2.upstream.cache.CacheDataSource
 import com.google.android.exoplayer2.util.RepeatModeUtil.REPEAT_TOGGLE_MODE_ALL
 import com.google.android.exoplayer2.util.RepeatModeUtil.REPEAT_TOGGLE_MODE_NONE
 import com.google.android.exoplayer2.util.RepeatModeUtil.REPEAT_TOGGLE_MODE_ONE
-import io.sanghun.compose.video.cache.VideoPlayerCacheConfig
 import io.sanghun.compose.video.cache.VideoPlayerCacheManager
 import io.sanghun.compose.video.controller.VideoPlayerControllerConfig
 import io.sanghun.compose.video.controller.applyToExoPlayerView
@@ -92,7 +91,6 @@ import kotlinx.coroutines.delay
  * @param onFullScreenEnter A callback that occurs when the player is full screen. (The [VideoPlayerControllerConfig.showFullScreenButton] must be true to trigger a callback.)
  * @param onFullScreenExit A callback that occurs when the full screen is turned off. (The [VideoPlayerControllerConfig.showFullScreenButton] must be true to trigger a callback.)
  * @param enablePip Enable PIP (Picture-in-Picture). [handleLifecycle] must be false.
- * @param cacheConfig Config for video cache. Read-only props (Changes in values do not take effect.)
  * @param playerInstance Return exoplayer instance. This instance allows you to add [com.google.android.exoplayer2.analytics.AnalyticsListener] to receive various events from the player.
  */
 @Composable
@@ -112,7 +110,6 @@ fun VideoPlayer(
     onFullScreenEnter: () -> Unit = {},
     onFullScreenExit: () -> Unit = {},
     enablePip: Boolean = false,
-    cacheConfig: VideoPlayerCacheConfig = VideoPlayerCacheConfig.Default,
     playerInstance: ExoPlayer.() -> Unit = {},
 ) {
     val context = LocalContext.current
@@ -125,9 +122,10 @@ fun VideoPlayer(
             .setSeekBackIncrementMs(seekBeforeMilliSeconds)
             .setSeekForwardIncrementMs(seekAfterMilliSeconds)
             .apply {
-                if (cacheConfig.enableCache) {
+                val cache = VideoPlayerCacheManager.getCache()
+                if (cache != null) {
                     val cacheDataSourceFactory = CacheDataSource.Factory()
-                        .setCache(VideoPlayerCacheManager.initializeOrGetInstance(context, cacheConfig.maxCacheSize))
+                        .setCache(cache)
                         .setUpstreamDataSourceFactory(DefaultDataSource.Factory(context, httpDataSourceFactory))
                     setMediaSourceFactory(DefaultMediaSourceFactory(cacheDataSourceFactory))
                 }

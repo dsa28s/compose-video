@@ -14,7 +14,7 @@ The easiest way to get started using VideoPlayer component is to add it as a gra
 of your app module.
 
 ```gradle
-implementation 'io.sanghun:compose-video:1.0.1'
+implementation 'io.sanghun:compose-video:1.0.2'
 implementation 'com.google.android.exoplayer:exoplayer:2.18.2' // ExoPlayer dependency
 implementation 'com.google.android.exoplayer:extension-mediasession:2.18.2' // MediaSession Extension dependency
 ```
@@ -22,7 +22,7 @@ implementation 'com.google.android.exoplayer:extension-mediasession:2.18.2' // M
 or if your project using `build.gradle.kts`
 
 ```kotlin
-implementation("io.sanghun:compose-video:1.0.1")
+implementation("io.sanghun:compose-video:1.0.2")
 implementation("com.google.android.exoplayer:exoplayer:2.18.2") // ExoPlayer dependency
 implementation("com.google.android.exoplayer:extension-mediasession:2.18.2") // MediaSession Extension dependency
 ```
@@ -89,6 +89,15 @@ VideoPlayer(
         .fillMaxSize()
         .align(Alignment.Center),
 )
+```
+
+### Enable cache
+
+By default, the LRU cache is used. To set up a cache for video player common use, call the method below only once when the app starts.
+If the method call multiple times, an `IllegalStateException` occurs.
+
+```kotlin
+VideoPlayerCacheManager.initialize(context, 1024 * 1024 * 1024)    // 1GB
 ```
 
 ### Features
