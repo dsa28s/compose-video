@@ -311,7 +311,13 @@ internal fun VideoPlayerSurface(
                 }
 
                 Lifecycle.Event.ON_STOP -> {
-                    if (enablePip) {
+                    val isPipMode = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        context.findActivity().isInPictureInPictureMode
+                    } else {
+                        false
+                    }
+
+                    if (enablePip && isPipMode) {
                         if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) &&
                             context.packageManager.hasSystemFeature(
                                 PackageManager.FEATURE_PICTURE_IN_PICTURE,
