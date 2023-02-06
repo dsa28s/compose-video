@@ -46,7 +46,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        VideoPlayerCacheManager.initialize(this, 1024 * 1024 * 1024)    // 1GB
+        VideoPlayerCacheManager.initialize(this, 1024 * 1024 * 1024) // 1GB
 
         setContent {
             ComposeVideoSampleTheme {
