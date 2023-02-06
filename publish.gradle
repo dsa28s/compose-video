@@ -1,6 +1,6 @@
 ext {
     PUBLISH_GROUP_ID = 'io.sanghun'
-    PUBLISH_VERSION = '1.0.1'
+    PUBLISH_VERSION = '1.0.2'
     PUBLISH_ARTIFACT_ID = 'compose-video'
     PUBLISH_DESCRIPTION = 'Video UI Component for Jetpack Compose (Powered by ExoPlayer)'
     PUBLISH_URL = 'https://github.com/dsa28s/compose-video'

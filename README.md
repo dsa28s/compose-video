@@ -93,8 +93,8 @@ VideoPlayer(
 
 ### Enable cache
 
-By default, the LRU cache is used. To set up a cache for video player common use, call the method below only once when the app starts.
-If the method call multiple times, an `IllegalStateException` occurs.
+By default, the LRU cache is used. To set up a cache for video player common use, call the method below only once when
+the app starts.
 
 ```kotlin
 VideoPlayerCacheManager.initialize(context, 1024 * 1024 * 1024)    // 1GB

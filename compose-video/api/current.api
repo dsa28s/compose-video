@@ -17,28 +17,16 @@ package io.sanghun.compose.video {
   }
 
   public final class VideoPlayerKt {
-    method @androidx.compose.runtime.Composable public static void VideoPlayer(optional androidx.compose.ui.Modifier modifier, java.util.List<? extends io.sanghun.compose.video.uri.VideoPlayerMediaItem> mediaItems, optional boolean handleLifecycle, optional boolean autoPlay, optional boolean usePlayerController, optional io.sanghun.compose.video.controller.VideoPlayerControllerConfig controllerConfig, optional long seekBeforeMilliSeconds, optional long seekAfterMilliSeconds, optional io.sanghun.compose.video.RepeatMode repeatMode, optional @FloatRange(from=0.0, to=1.0) float volume, optional kotlin.jvm.functions.Function1<? super java.lang.Long,kotlin.Unit> onCurrentTimeChanged, optional androidx.compose.ui.window.SecureFlagPolicy fullScreenSecurePolicy, optional kotlin.jvm.functions.Function0<kotlin.Unit> onFullScreenEnter, optional kotlin.jvm.functions.Function0<kotlin.Unit> onFullScreenExit, optional boolean enablePip, optional io.sanghun.compose.video.cache.VideoPlayerCacheConfig cacheConfig, optional kotlin.jvm.functions.Function1<? super com.google.android.exoplayer2.ExoPlayer,kotlin.Unit> playerInstance);
+    method @androidx.compose.runtime.Composable public static void VideoPlayer(optional androidx.compose.ui.Modifier modifier, java.util.List<? extends io.sanghun.compose.video.uri.VideoPlayerMediaItem> mediaItems, optional boolean handleLifecycle, optional boolean autoPlay, optional boolean usePlayerController, optional io.sanghun.compose.video.controller.VideoPlayerControllerConfig controllerConfig, optional long seekBeforeMilliSeconds, optional long seekAfterMilliSeconds, optional io.sanghun.compose.video.RepeatMode repeatMode, optional @FloatRange(from=0.0, to=1.0) float volume, optional kotlin.jvm.functions.Function1<? super java.lang.Long,kotlin.Unit> onCurrentTimeChanged, optional androidx.compose.ui.window.SecureFlagPolicy fullScreenSecurePolicy, optional kotlin.jvm.functions.Function0<kotlin.Unit> onFullScreenEnter, optional kotlin.jvm.functions.Function0<kotlin.Unit> onFullScreenExit, optional boolean enablePip, optional kotlin.jvm.functions.Function1<? super com.google.android.exoplayer2.ExoPlayer,kotlin.Unit> playerInstance);
   }
 
 }
 
 package io.sanghun.compose.video.cache {
 
-  @androidx.compose.runtime.Immutable public final class VideoPlayerCacheConfig {
-    ctor public VideoPlayerCacheConfig(boolean enableCache, long maxCacheSize);
-    method public boolean component1();
-    method public long component2();
-    method public io.sanghun.compose.video.cache.VideoPlayerCacheConfig copy(boolean enableCache, long maxCacheSize);
-    method public boolean getEnableCache();
-    method public long getMaxCacheSize();
-    property public final boolean enableCache;
-    property public final long maxCacheSize;
-    field public static final io.sanghun.compose.video.cache.VideoPlayerCacheConfig.Companion Companion;
-  }
-
-  public static final class VideoPlayerCacheConfig.Companion {
-    method public io.sanghun.compose.video.cache.VideoPlayerCacheConfig getDefault();
-    property public final io.sanghun.compose.video.cache.VideoPlayerCacheConfig Default;
+  public final class VideoPlayerCacheManager {
+    method public void initialize(android.content.Context context, long maxCacheBytes);
+    field public static final io.sanghun.compose.video.cache.VideoPlayerCacheManager INSTANCE;
   }
 
 }

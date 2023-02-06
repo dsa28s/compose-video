@@ -35,12 +35,10 @@ object VideoPlayerCacheManager {
      *
      * @param context Current activity context.
      * @param maxCacheBytes Sets the maximum cache capacity in bytes. If the cache builds up as much as the set capacity, it is deleted from the oldest cache.
-     *
-     * @throws IllegalStateException Occurs when method is called multiple times.
      */
     fun initialize(context: Context, maxCacheBytes: Long) {
         if (::cacheInstance.isInitialized) {
-            throw IllegalStateException("You can only set it up once in the app.")
+            return
         }
 
         cacheInstance = SimpleCache(
