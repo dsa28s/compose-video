@@ -16,9 +16,10 @@
 package io.sanghun.compose.video
 
 import android.content.pm.ActivityInfo
-import android.content.pm.PackageManager
 import android.graphics.Color
-import android.os.Build
+import android.os.Handler
+import android.os.Looper
+import android.support.v4.media.MediaDescriptionCompat
 import android.support.v4.media.session.MediaSessionCompat
 import android.widget.ImageButton
 import androidx.activity.compose.BackHandler
@@ -38,9 +39,14 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.compose.ui.window.SecureFlagPolicy
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
+import com.google.android.exoplayer2.C
+import com.google.android.exoplayer2.C.AUDIO_CONTENT_TYPE_MOVIE
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.Player
+import com.google.android.exoplayer2.audio.AudioAttributes
 import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector
+import com.google.android.exoplayer2.ext.mediasession.TimelineQueueNavigator
 import com.google.android.exoplayer2.source.DefaultMediaSourceFactory
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout.RESIZE_MODE_FIT
 import com.google.android.exoplayer2.ui.StyledPlayerView
@@ -59,6 +65,7 @@ import io.sanghun.compose.video.uri.toUri
 import io.sanghun.compose.video.util.findActivity
 import io.sanghun.compose.video.util.setFullScreen
 import kotlinx.coroutines.delay
+import java.util.UUID
 
 /**
  * [VideoPlayer] is UI component that can play video in Jetpack Compose. It works based on ExoPlayer.
@@ -90,7 +97,9 @@ import kotlinx.coroutines.delay
  * @param fullScreenSecurePolicy Windows security settings to apply when full screen. Default is off. (For example, avoid screenshots that are not DRM-applied.)
  * @param onFullScreenEnter A callback that occurs when the player is full screen. (The [VideoPlayerControllerConfig.showFullScreenButton] must be true to trigger a callback.)
  * @param onFullScreenExit A callback that occurs when the full screen is turned off. (The [VideoPlayerControllerConfig.showFullScreenButton] must be true to trigger a callback.)
- * @param enablePip Enable PIP (Picture-in-Picture). [handleLifecycle] must be false.
+ * @param enablePip Enable PIP (Picture-in-Picture).
+ * @param enablePipWhenBackPressed With [enablePip] is `true`, set whether to enable PIP mode even when you press Back. Default is false.
+ * @param handleAudioFocus Set whether to handle the video playback control automatically when it is playing in PIP mode and media is played in another app. Default is true.
  * @param playerInstance Return exoplayer instance. This instance allows you to add [com.google.android.exoplayer2.analytics.AnalyticsListener] to receive various events from the player.
  */
 @Composable
@@ -110,6 +119,8 @@ fun VideoPlayer(
     onFullScreenEnter: () -> Unit = {},
     onFullScreenExit: () -> Unit = {},
     enablePip: Boolean = false,
+    enablePipWhenBackPressed: Boolean = false,
+    handleAudioFocus: Boolean = true,
     playerInstance: ExoPlayer.() -> Unit = {},
 ) {
     val context = LocalContext.current
@@ -121,6 +132,13 @@ fun VideoPlayer(
         ExoPlayer.Builder(context)
             .setSeekBackIncrementMs(seekBeforeMilliSeconds)
             .setSeekForwardIncrementMs(seekAfterMilliSeconds)
+            .setAudioAttributes(
+                AudioAttributes.Builder()
+                    .setContentType(AUDIO_CONTENT_TYPE_MOVIE)
+                    .setUsage(C.USAGE_MEDIA)
+                    .build(),
+                handleAudioFocus,
+            )
             .apply {
                 val cache = VideoPlayerCacheManager.getCache()
                 if (cache != null) {
@@ -138,7 +156,7 @@ fun VideoPlayer(
         StyledPlayerView(context)
     }
 
-    BackHandler(enablePip) {
+    BackHandler(enablePip && enablePipWhenBackPressed) {
         enterPIPMode(context, defaultPlayerView)
         player.play()
     }
@@ -164,9 +182,22 @@ fun VideoPlayer(
     }
 
     LaunchedEffect(mediaItems, player) {
-        val mediaSession = MediaSessionCompat(context, context.packageName)
+        val mediaSession = MediaSessionCompat(
+            context,
+            "VideoPlayerMediaSession_${UUID.randomUUID().toString().lowercase().split("-").first()}",
+        )
         val mediaSessionConnector = MediaSessionConnector(mediaSession)
         mediaSessionConnector.setPlayer(player)
+        mediaSessionConnector.setQueueNavigator(
+            object : TimelineQueueNavigator(mediaSession) {
+                override fun getMediaDescription(player: Player, windowIndex: Int): MediaDescriptionCompat {
+                    return MediaDescriptionCompat.Builder()
+                        .setTitle(player.mediaMetadata.title)
+                        .setDescription(player.mediaMetadata.description)
+                        .build()
+                }
+            },
+        )
         mediaSession.isActive = true
 
         val exoPlayerMediaItems = mediaItems.map {
@@ -268,6 +299,7 @@ internal fun VideoPlayerSurface(
     usePlayerController: Boolean,
     handleLifecycle: Boolean,
     enablePip: Boolean,
+    onPipEntered: () -> Unit = {},
     autoDispose: Boolean = true,
 ) {
     val lifecycleOwner = rememberUpdatedState(LocalLifecycleOwner.current)
@@ -293,8 +325,11 @@ internal fun VideoPlayerSurface(
                     }
 
                     if (enablePip) {
-                        enterPIPMode(context, defaultPlayerView)
-                        player.play()
+                        Handler(Looper.getMainLooper()).post {
+                            enterPIPMode(context, defaultPlayerView)
+                            player.play()
+                            onPipEntered()
+                        }
                     }
                 }
 
@@ -309,20 +344,8 @@ internal fun VideoPlayerSurface(
                 }
 
                 Lifecycle.Event.ON_STOP -> {
-                    val isPipMode = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                        context.findActivity().isInPictureInPictureMode
-                    } else {
-                        false
-                    }
-
-                    if (enablePip && isPipMode) {
-                        if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) &&
-                            context.packageManager.hasSystemFeature(
-                                PackageManager.FEATURE_PICTURE_IN_PICTURE,
-                            )
-                        ) {
-                            context.findActivity().finishAndRemoveTask()
-                        }
+                    if (handleLifecycle) {
+                        player.stop()
                     }
                 }
 
