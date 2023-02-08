@@ -64,9 +64,10 @@ class MainActivity : ComponentActivity() {
 
                         VideoPlayer(
                             mediaItems = samplePlayList,
-                            handleLifecycle = false,
+                            handleLifecycle = true,
                             autoPlay = true,
                             usePlayerController = true,
+                            enablePipWhenBackPressed = true,
                             enablePip = true,
                             controllerConfig = VideoPlayerControllerConfig.Default.copy(
                                 showSubtitleButton = true,

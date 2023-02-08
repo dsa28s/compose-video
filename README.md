@@ -14,7 +14,7 @@ The easiest way to get started using VideoPlayer component is to add it as a gra
 of your app module.
 
 ```gradle
-implementation 'io.sanghun:compose-video:1.0.2'
+implementation 'io.sanghun:compose-video:1.1.0'
 implementation 'com.google.android.exoplayer:exoplayer:2.18.2' // ExoPlayer dependency
 implementation 'com.google.android.exoplayer:extension-mediasession:2.18.2' // MediaSession Extension dependency
 ```
@@ -22,7 +22,7 @@ implementation 'com.google.android.exoplayer:extension-mediasession:2.18.2' // M
 or if your project using `build.gradle.kts`
 
 ```kotlin
-implementation("io.sanghun:compose-video:1.0.2")
+implementation("io.sanghun:compose-video:1.1.0")
 implementation("com.google.android.exoplayer:exoplayer:2.18.2") // ExoPlayer dependency
 implementation("com.google.android.exoplayer:extension-mediasession:2.18.2") // MediaSession Extension dependency
 ```
@@ -60,6 +60,7 @@ VideoPlayer(
     autoPlay = true,
     usePlayerController = true,
     enablePip = true,
+    handleAudioFocus = true,
     controllerConfig = VideoPlayerControllerConfig(
         showSpeedAndPitchOverlay = false,
         showSubtitleButton = false,
@@ -106,6 +107,7 @@ VideoPlayerCacheManager.initialize(context, 1024 * 1024 * 1024)    // 1GB
 - [x] Network video play (ex. HLS, DASH)
 - [x] Video Player Controller (Default)
 - [ ] Video Player Custom Controller (using Jetpack Compose)
+- [x] Audio Focus
 - [x] Full Screen (With rotate)
 - [x] Repeat
 - [x] Volume Control
