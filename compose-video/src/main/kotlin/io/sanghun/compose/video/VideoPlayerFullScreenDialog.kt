@@ -126,9 +126,10 @@ internal fun VideoPlayerFullScreenDialog(
                 defaultPlayerView = fullScreenPlayerView,
                 player = player,
                 usePlayerController = true,
-                handleLifecycle = true,
+                handleLifecycle = !enablePip,
                 autoDispose = false,
                 enablePip = enablePip,
+                onPipEntered = { onDismissRequest() },
                 modifier = Modifier
                     .align(Alignment.Center)
                     .fillMaxSize(),
