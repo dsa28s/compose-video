@@ -36,6 +36,12 @@ internal fun enterPIPMode(context: Context, defaultPlayerView: StyledPlayerView)
         defaultPlayerView.useController = false
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val params = PictureInPictureParams.Builder()
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                params
+                    .setTitle("Video Player")
+            }
+
             context.findActivity().enterPictureInPictureMode(params.build())
         } else {
             context.findActivity().enterPictureInPictureMode()
