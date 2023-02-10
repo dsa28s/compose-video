@@ -1,3 +1,5 @@
+import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
+
 apply(from = "${rootDir}/publish.gradle")
 apply(from = "${rootDir}/scripts/publish-root.gradle")
 apply(from = "${rootDir}/scripts/publish-module.gradle")
@@ -6,6 +8,7 @@ plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
     id("me.tylerbwong.gradle.metalava") version "0.3.2"
+    id("org.jetbrains.dokka")
 }
 
 metalava {
@@ -44,6 +47,12 @@ android {
     }
     composeOptions {
         kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
+    }
+}
+
+afterEvaluate {
+    tasks.named("dokkaHtmlPartial") {
+
     }
 }
 
