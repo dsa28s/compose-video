@@ -1,0 +1,1 @@
+sourceset_dependencies='{":compose-video:dokkaHtml/androidTestRelease":[],":compose-video:dokkaHtml/debug":[],":compose-video:dokkaHtml/main":[],":compose-video:dokkaHtml/release":[],":compose-video:dokkaHtml/testFixtures":[],":compose-video:dokkaHtml/testFixturesDebug":[],":compose-video:dokkaHtml/testFixturesRelease":[]}'

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>VideoPlayerControllerConfig</title>
+    <link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">
+    <script>var pathToRoot = "../../../";</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+    if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    } else {
+        const savedDarkMode = JSON.parse(storage)
+        if(savedDarkMode === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    }
+    </script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/jetbrains-mono.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/clipboard.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/symbol-parameters-wrapper_deferred.js" defer="defer"></script>
+</head>
+<body>
+<div class="navigation-wrapper" id="navigation-wrapper">
+    <div id="leftToggler"><span class="icon-toggler"></span></div>
+    <div class="library-name">
+            <a href="../../../index.html">
+                    <span>compose-video</span>
+            </a>
+    </div>
+    <div>
+1.1.0    </div>
+    <div class="pull-right d-flex">
+        <button id="theme-toggle-button"><span id="theme-toggle"></span></button>
+        <div id="searchBar"></div>
+    </div>
+</div>
+<div id="container">
+    <div id="leftColumn">
+        <div id="sideMenu"></div>
+    </div>
+    <div id="main">
+<div class="main-content" id="content" pageIds="compose-video::io.sanghun.compose.video.controller/VideoPlayerControllerConfig///PointingToDeclaration//1761888032">
+  <div class="breadcrumbs"><a href="../../../index.html">compose-video</a><span class="delimiter">/</span><a href="../index.html">io.sanghun.compose.video.controller</a><span class="delimiter">/</span><span class="current">VideoPlayerControllerConfig</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Video</span><wbr></wbr><span>Player</span><wbr></wbr><span>Controller</span><wbr></wbr><span><span>Config</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":compose-video:dokkaHtml/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/compose/runtime/Immutable.html"><span class="token annotation builtin">Immutable</span></a></div></div><span class="token keyword">data </span><span class="token keyword">class </span><a href="index.html">VideoPlayerControllerConfig</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>showSpeedAndPitchOverlay<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>showSubtitleButton<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>showCurrentTimeAndTotalTime<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>showBufferingProgress<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>showForwardIncrementButton<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>showBackwardIncrementButton<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>showBackTrackButton<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>showNextTrackButton<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>showRepeatModeButton<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>showFullScreenButton<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>controllerShowTimeMilliSeconds<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>controllerAutoShow<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span></div><p class="paragraph">Sets the detailed properties of the <a href="../../io.sanghun.compose.video/-video-player.html">io.sanghun.compose.video.VideoPlayer</a> Controller.</p></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Types">Types</button><button class="section-tab" data-togglable="Constructors">Constructors</button><button class="section-tab" data-togglable="Properties">Properties</button><button class="section-tab" data-togglable="Parameters">Parameters</button></div>
+    <div class="tabs-section-body">
+      <h4 class="">Parameters</h4>
+      <div data-togglable="Parameters">
+        <div class="platform-hinted WithExtraAttributes" data-platform-hinted="data-platform-hinted" data-togglable="Parameters"><div class="content sourceset-dependent-content" data-active="" data-togglable=":compose-video:dokkaHtml/release"><div data-togglable="Parameters"><div class="table" data-togglable="Parameters"><div class="table-row" data-filterable-current=":compose-video:dokkaHtml/release" data-filterable-set=":compose-video:dokkaHtml/release"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><u><span>show</span><wbr></wbr><span>Speed</span><wbr></wbr><span>And</span><wbr></wbr><span>Pitch</span><wbr></wbr><span><span>Overlay</span></span></u></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">Visible speed, audio track select button.</p></div></div></div></div></div><div class="table-row" data-filterable-current=":compose-video:dokkaHtml/release" data-filterable-set=":compose-video:dokkaHtml/release"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><u><span>show</span><wbr></wbr><span>Subtitle</span><wbr></wbr><span><span>Button</span></span></u></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">Visible subtitle (CC) button.</p></div></div></div></div></div><div class="table-row" data-filterable-current=":compose-video:dokkaHtml/release" data-filterable-set=":compose-video:dokkaHtml/release"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><u><span>show</span><wbr></wbr><span>Current</span><wbr></wbr><span>Time</span><wbr></wbr><span>And</span><wbr></wbr><span>Total</span><wbr></wbr><span><span>Time</span></span></u></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">Visible currentTime, totalTime text.</p></div></div></div></div></div><div class="table-row" data-filterable-current=":compose-video:dokkaHtml/release" data-filterable-set=":compose-video:dokkaHtml/release"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><u><span>show</span><wbr></wbr><span>Buffering</span><wbr></wbr><span><span>Progress</span></span></u></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">Visible buffering progress.</p></div></div></div></div></div><div class="table-row" data-filterable-current=":compose-video:dokkaHtml/release" data-filterable-set=":compose-video:dokkaHtml/release"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><u><span>show</span><wbr></wbr><span>Forward</span><wbr></wbr><span>Increment</span><wbr></wbr><span><span>Button</span></span></u></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">Show forward increment button.</p></div></div></div></div></div><div class="table-row" data-filterable-current=":compose-video:dokkaHtml/release" data-filterable-set=":compose-video:dokkaHtml/release"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><u><span>show</span><wbr></wbr><span>Backward</span><wbr></wbr><span>Increment</span><wbr></wbr><span><span>Button</span></span></u></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">Show backward increment button.</p></div></div></div></div></div><div class="table-row" data-filterable-current=":compose-video:dokkaHtml/release" data-filterable-set=":compose-video:dokkaHtml/release"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><u><span>show</span><wbr></wbr><span>Back</span><wbr></wbr><span>Track</span><wbr></wbr><span><span>Button</span></span></u></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">Show back track button.</p></div></div></div></div></div><div class="table-row" data-filterable-current=":compose-video:dokkaHtml/release" data-filterable-set=":compose-video:dokkaHtml/release"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><u><span>show</span><wbr></wbr><span>Next</span><wbr></wbr><span>Track</span><wbr></wbr><span><span>Button</span></span></u></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">Show next track button.</p></div></div></div></div></div><div class="table-row" data-filterable-current=":compose-video:dokkaHtml/release" data-filterable-set=":compose-video:dokkaHtml/release"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><u><span>show</span><wbr></wbr><span>Repeat</span><wbr></wbr><span>Mode</span><wbr></wbr><span><span>Button</span></span></u></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">Show repeat mode toggle button.</p></div></div></div></div></div><div class="table-row" data-filterable-current=":compose-video:dokkaHtml/release" data-filterable-set=":compose-video:dokkaHtml/release"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><u><span>controller</span><wbr></wbr><span>Show</span><wbr></wbr><span>Time</span><wbr></wbr><span>Milli</span><wbr></wbr><span><span>Seconds</span></span></u></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">Sets the playback controls timeout. The playback controls are automatically hidden after this duration of time has elapsed without user input and with playback or buffering in progress. (The timeout in milliseconds. A non-positive value will cause the controller to remain visible indefinitely.)</p></div></div></div></div></div><div class="table-row" data-filterable-current=":compose-video:dokkaHtml/release" data-filterable-set=":compose-video:dokkaHtml/release"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><u><span>controller</span><wbr></wbr><span>Auto</span><wbr></wbr><span><span>Show</span></span></u></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">Sets whether the playback controls are automatically shown when playback starts, pauses, ends, or fails. If set to false, the playback controls can be manually operated with {@link #showController()} and {@link #hideController()}. (Whether the playback controls are allowed to show automatically.)</p></div></div></div></div></div><div class="table-row" data-filterable-current=":compose-video:dokkaHtml/release" data-filterable-set=":compose-video:dokkaHtml/release"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><u><span>show</span><wbr></wbr><span>Full</span><wbr></wbr><span>Screen</span><wbr></wbr><span><span>Button</span></span></u></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">Show full screen button.</p></div></div></div></div></div></div></div></div></div>
+      </div>
+      <h2 class="tabbedcontent">Constructors</h2>
+      <div class="table" data-togglable="Constructors"><a data-name="913551302%2FConstructors%2F1761888032" anchor-label="VideoPlayerControllerConfig" id="913551302%2FConstructors%2F1761888032" data-filterable-set=":compose-video:dokkaHtml/release"></a>
+        <div class="table-row" data-filterable-current=":compose-video:dokkaHtml/release" data-filterable-set=":compose-video:dokkaHtml/release">
+          <div class="main-subrow keyValue TabbedContent">
+            <div class=""><span class="inline-flex">
+                <div><a href="-video-player-controller-config.html"><span>Video</span><wbr></wbr><span>Player</span><wbr></wbr><span>Controller</span><wbr></wbr><span><span>Config</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="913551302%2FConstructors%2F1761888032"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":compose-video:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="-video-player-controller-config.html"><span class="token function">VideoPlayerControllerConfig</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">showSpeedAndPitchOverlay<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter ">showSubtitleButton<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter ">showCurrentTimeAndTotalTime<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter ">showBufferingProgress<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter ">showForwardIncrementButton<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter ">showBackwardIncrementButton<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter ">showBackTrackButton<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter ">showNextTrackButton<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter ">showRepeatModeButton<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter ">showFullScreenButton<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter ">controllerShowTimeMilliSeconds<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">controllerAutoShow<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h2 class="">Types</h2>
+      <div class="table" data-togglable="Types"><a data-name="1807116577%2FClasslikes%2F1761888032" anchor-label="Companion" id="1807116577%2FClasslikes%2F1761888032" data-filterable-set=":compose-video:dokkaHtml/release"></a>
+        <div class="table-row" data-filterable-current=":compose-video:dokkaHtml/release" data-filterable-set=":compose-video:dokkaHtml/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="-companion/index.html"><span><span>Companion</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1807116577%2FClasslikes%2F1761888032"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":compose-video:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">object </span><a href="-companion/index.html">Companion</a></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h2 class="">Properties</h2>
+      <div class="table" data-togglable="Properties"><a data-name="165318712%2FProperties%2F1761888032" anchor-label="controllerAutoShow" id="165318712%2FProperties%2F1761888032" data-filterable-set=":compose-video:dokkaHtml/release"></a>
+        <div class="table-row" data-filterable-current=":compose-video:dokkaHtml/release" data-filterable-set=":compose-video:dokkaHtml/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="controller-auto-show.html"><span>controller</span><wbr></wbr><span>Auto</span><wbr></wbr><span><span>Show</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="165318712%2FProperties%2F1761888032"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":compose-video:dokkaHtml/release"><a data-name="165318712%2FProperties%2F1761888032" anchor-label="controllerAutoShow" id="165318712%2FProperties%2F1761888032" data-filterable-set=":compose-video:dokkaHtml/release"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="controller-auto-show.html">controllerAutoShow</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="1437032072%2FProperties%2F1761888032" anchor-label="controllerShowTimeMilliSeconds" id="1437032072%2FProperties%2F1761888032" data-filterable-set=":compose-video:dokkaHtml/release"></a>
+        <div class="table-row" data-filterable-current=":compose-video:dokkaHtml/release" data-filterable-set=":compose-video:dokkaHtml/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="controller-show-time-milli-seconds.html"><span>controller</span><wbr></wbr><span>Show</span><wbr></wbr><span>Time</span><wbr></wbr><span>Milli</span><wbr></wbr><span><span>Seconds</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1437032072%2FProperties%2F1761888032"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":compose-video:dokkaHtml/release"><a data-name="1437032072%2FProperties%2F1761888032" anchor-label="controllerShowTimeMilliSeconds" id="1437032072%2FProperties%2F1761888032" data-filterable-set=":compose-video:dokkaHtml/release"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="controller-show-time-milli-seconds.html">controllerShowTimeMilliSeconds</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-707561087%2FProperties%2F1761888032" anchor-label="showBackTrackButton" id="-707561087%2FProperties%2F1761888032" data-filterable-set=":compose-video:dokkaHtml/release"></a>
+        <div class="table-row" data-filterable-current=":compose-video:dokkaHtml/release" data-filterable-set=":compose-video:dokkaHtml/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="show-back-track-button.html"><span>show</span><wbr></wbr><span>Back</span><wbr></wbr><span>Track</span><wbr></wbr><span><span>Button</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-707561087%2FProperties%2F1761888032"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":compose-video:dokkaHtml/release"><a data-name="-707561087%2FProperties%2F1761888032" anchor-label="showBackTrackButton" id="-707561087%2FProperties%2F1761888032" data-filterable-set=":compose-video:dokkaHtml/release"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="show-back-track-button.html">showBackTrackButton</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-966459303%2FProperties%2F1761888032" anchor-label="showBackwardIncrementButton" id="-966459303%2FProperties%2F1761888032" data-filterable-set=":compose-video:dokkaHtml/release"></a>
+        <div class="table-row" data-filterable-current=":compose-video:dokkaHtml/release" data-filterable-set=":compose-video:dokkaHtml/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="show-backward-increment-button.html"><span>show</span><wbr></wbr><span>Backward</span><wbr></wbr><span>Increment</span><wbr></wbr><span><span>Button</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-966459303%2FProperties%2F1761888032"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":compose-video:dokkaHtml/release"><a data-name="-966459303%2FProperties%2F1761888032" anchor-label="showBackwardIncrementButton" id="-966459303%2FProperties%2F1761888032" data-filterable-set=":compose-video:dokkaHtml/release"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="show-backward-increment-button.html">showBackwardIncrementButton</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-622790104%2FProperties%2F1761888032" anchor-label="showBufferingProgress" id="-622790104%2FProperties%2F1761888032" data-filterable-set=":compose-video:dokkaHtml/release"></a>
+        <div class="table-row" data-filterable-current=":compose-video:dokkaHtml/release" data-filterable-set=":compose-video:dokkaHtml/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="show-buffering-progress.html"><span>show</span><wbr></wbr><span>Buffering</span><wbr></wbr><span><span>Progress</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-622790104%2FProperties%2F1761888032"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":compose-video:dokkaHtml/release"><a data-name="-622790104%2FProperties%2F1761888032" anchor-label="showBufferingProgress" id="-622790104%2FProperties%2F1761888032" data-filterable-set=":compose-video:dokkaHtml/release"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="show-buffering-progress.html">showBufferingProgress</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-132821865%2FProperties%2F1761888032" anchor-label="showCurrentTimeAndTotalTime" id="-132821865%2FProperties%2F1761888032" data-filterable-set=":compose-video:dokkaHtml/release"></a>
+        <div class="table-row" data-filterable-current=":compose-video:dokkaHtml/release" data-filterable-set=":compose-video:dokkaHtml/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="show-current-time-and-total-time.html"><span>show</span><wbr></wbr><span>Current</span><wbr></wbr><span>Time</span><wbr></wbr><span>And</span><wbr></wbr><span>Total</span><wbr></wbr><span><span>Time</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-132821865%2FProperties%2F1761888032"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":compose-video:dokkaHtml/release"><a data-name="-132821865%2FProperties%2F1761888032" anchor-label="showCurrentTimeAndTotalTime" id="-132821865%2FProperties%2F1761888032" data-filterable-set=":compose-video:dokkaHtml/release"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="show-current-time-and-total-time.html">showCurrentTimeAndTotalTime</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1671158265%2FProperties%2F1761888032" anchor-label="showForwardIncrementButton" id="-1671158265%2FProperties%2F1761888032" data-filterable-set=":compose-video:dokkaHtml/release"></a>
+        <div class="table-row" data-filterable-current=":compose-video:dokkaHtml/release" data-filterable-set=":compose-video:dokkaHtml/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="show-forward-increment-button.html"><span>show</span><wbr></wbr><span>Forward</span><wbr></wbr><span>Increment</span><wbr></wbr><span><span>Button</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1671158265%2FProperties%2F1761888032"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":compose-video:dokkaHtml/release"><a data-name="-1671158265%2FProperties%2F1761888032" anchor-label="showForwardIncrementButton" id="-1671158265%2FProperties%2F1761888032" data-filterable-set=":compose-video:dokkaHtml/release"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="show-forward-increment-button.html">showForwardIncrementButton</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="1344453302%2FProperties%2F1761888032" anchor-label="showFullScreenButton" id="1344453302%2FProperties%2F1761888032" data-filterable-set=":compose-video:dokkaHtml/release"></a>
+        <div class="table-row" data-filterable-current=":compose-video:dokkaHtml/release" data-filterable-set=":compose-video:dokkaHtml/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="show-full-screen-button.html"><span>show</span><wbr></wbr><span>Full</span><wbr></wbr><span>Screen</span><wbr></wbr><span><span>Button</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1344453302%2FProperties%2F1761888032"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":compose-video:dokkaHtml/release"><a data-name="1344453302%2FProperties%2F1761888032" anchor-label="showFullScreenButton" id="1344453302%2FProperties%2F1761888032" data-filterable-set=":compose-video:dokkaHtml/release"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="show-full-screen-button.html">showFullScreenButton</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1142167155%2FProperties%2F1761888032" anchor-label="showNextTrackButton" id="-1142167155%2FProperties%2F1761888032" data-filterable-set=":compose-video:dokkaHtml/release"></a>
+        <div class="table-row" data-filterable-current=":compose-video:dokkaHtml/release" data-filterable-set=":compose-video:dokkaHtml/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="show-next-track-button.html"><span>show</span><wbr></wbr><span>Next</span><wbr></wbr><span>Track</span><wbr></wbr><span><span>Button</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1142167155%2FProperties%2F1761888032"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":compose-video:dokkaHtml/release"><a data-name="-1142167155%2FProperties%2F1761888032" anchor-label="showNextTrackButton" id="-1142167155%2FProperties%2F1761888032" data-filterable-set=":compose-video:dokkaHtml/release"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="show-next-track-button.html">showNextTrackButton</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-95974317%2FProperties%2F1761888032" anchor-label="showRepeatModeButton" id="-95974317%2FProperties%2F1761888032" data-filterable-set=":compose-video:dokkaHtml/release"></a>
+        <div class="table-row" data-filterable-current=":compose-video:dokkaHtml/release" data-filterable-set=":compose-video:dokkaHtml/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="show-repeat-mode-button.html"><span>show</span><wbr></wbr><span>Repeat</span><wbr></wbr><span>Mode</span><wbr></wbr><span><span>Button</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-95974317%2FProperties%2F1761888032"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":compose-video:dokkaHtml/release"><a data-name="-95974317%2FProperties%2F1761888032" anchor-label="showRepeatModeButton" id="-95974317%2FProperties%2F1761888032" data-filterable-set=":compose-video:dokkaHtml/release"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="show-repeat-mode-button.html">showRepeatModeButton</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1121096477%2FProperties%2F1761888032" anchor-label="showSpeedAndPitchOverlay" id="-1121096477%2FProperties%2F1761888032" data-filterable-set=":compose-video:dokkaHtml/release"></a>
+        <div class="table-row" data-filterable-current=":compose-video:dokkaHtml/release" data-filterable-set=":compose-video:dokkaHtml/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="show-speed-and-pitch-overlay.html"><span>show</span><wbr></wbr><span>Speed</span><wbr></wbr><span>And</span><wbr></wbr><span>Pitch</span><wbr></wbr><span><span>Overlay</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1121096477%2FProperties%2F1761888032"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":compose-video:dokkaHtml/release"><a data-name="-1121096477%2FProperties%2F1761888032" anchor-label="showSpeedAndPitchOverlay" id="-1121096477%2FProperties%2F1761888032" data-filterable-set=":compose-video:dokkaHtml/release"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="show-speed-and-pitch-overlay.html">showSpeedAndPitchOverlay</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1152833447%2FProperties%2F1761888032" anchor-label="showSubtitleButton" id="-1152833447%2FProperties%2F1761888032" data-filterable-set=":compose-video:dokkaHtml/release"></a>
+        <div class="table-row" data-filterable-current=":compose-video:dokkaHtml/release" data-filterable-set=":compose-video:dokkaHtml/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="show-subtitle-button.html"><span>show</span><wbr></wbr><span>Subtitle</span><wbr></wbr><span><span>Button</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1152833447%2FProperties%2F1761888032"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":compose-video:dokkaHtml/release"><a data-name="-1152833447%2FProperties%2F1761888032" anchor-label="showSubtitleButton" id="-1152833447%2FProperties%2F1761888032" data-filterable-set=":compose-video:dokkaHtml/release"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="show-subtitle-button.html">showSubtitleButton</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      <div class="footer">
+        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2023 Copyright</span><span
+                class="pull-right"><span>Generated by </span><a
+                href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
+      </div>
+    </div>
+</div>
+</body>
+</html>

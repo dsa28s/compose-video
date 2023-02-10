@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>VideoPlayerMediaItem</title>
+    <link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">
+    <script>var pathToRoot = "../../../";</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+    if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    } else {
+        const savedDarkMode = JSON.parse(storage)
+        if(savedDarkMode === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    }
+    </script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/jetbrains-mono.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/clipboard.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/symbol-parameters-wrapper_deferred.js" defer="defer"></script>
+</head>
+<body>
+<div class="navigation-wrapper" id="navigation-wrapper">
+    <div id="leftToggler"><span class="icon-toggler"></span></div>
+    <div class="library-name">
+            <a href="../../../index.html">
+                    <span>compose-video</span>
+            </a>
+    </div>
+    <div>
+1.1.0    </div>
+    <div class="pull-right d-flex">
+        <button id="theme-toggle-button"><span id="theme-toggle"></span></button>
+        <div id="searchBar"></div>
+    </div>
+</div>
+<div id="container">
+    <div id="leftColumn">
+        <div id="sideMenu"></div>
+    </div>
+    <div id="main">
+<div class="main-content" id="content" pageIds="compose-video::io.sanghun.compose.video.uri/VideoPlayerMediaItem///PointingToDeclaration//1761888032">
+  <div class="breadcrumbs"><a href="../../../index.html">compose-video</a><span class="delimiter">/</span><a href="../index.html">io.sanghun.compose.video.uri</a><span class="delimiter">/</span><span class="current">VideoPlayerMediaItem</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Video</span><wbr></wbr><span>Player</span><wbr></wbr><span>Media</span><wbr></wbr><span><span>Item</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":compose-video:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">interface </span><a href="index.html">VideoPlayerMediaItem</a> : <a href="../-base-video-player-media-item/index.html">BaseVideoPlayerMediaItem</a></div><p class="paragraph">Representation of a media item for <a href="../../io.sanghun.compose.video/-video-player.html">io.sanghun.compose.video.VideoPlayer</a>.</p></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Types">Types</button><button class="section-tab" data-togglable="Properties">Properties</button><button class="section-tab" data-togglable="See also">See also</button><button class="section-tab" data-togglable="Inheritors">Inheritors</button></div>
+    <div class="tabs-section-body">
+      <h4 class="">See also</h4>
+      <div data-togglable="See also">
+        <div class="platform-hinted WithExtraAttributes" data-platform-hinted="data-platform-hinted" data-togglable="See also"><div class="content sourceset-dependent-content" data-active="" data-togglable=":compose-video:dokkaHtml/release"><div data-togglable="See also"><div class="table" data-togglable="See also"><div class="table-row" data-filterable-current=":compose-video:dokkaHtml/release" data-filterable-set=":compose-video:dokkaHtml/release"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><a href="-raw-resource-media-item/index.html"><span>Video</span><wbr></wbr><span>Player</span><wbr></wbr><span>Media</span><wbr></wbr><span>Item.</span><wbr></wbr><span>Raw</span><wbr></wbr><span>Resource</span><wbr></wbr><span>Media</span><wbr></wbr><span><span>Item</span></span></a></div></span></div><div></div></div></div><div class="table-row" data-filterable-current=":compose-video:dokkaHtml/release" data-filterable-set=":compose-video:dokkaHtml/release"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><a href="-asset-file-media-item/index.html"><span>Video</span><wbr></wbr><span>Player</span><wbr></wbr><span>Media</span><wbr></wbr><span>Item.</span><wbr></wbr><span>Asset</span><wbr></wbr><span>File</span><wbr></wbr><span>Media</span><wbr></wbr><span><span>Item</span></span></a></div></span></div><div></div></div></div><div class="table-row" data-filterable-current=":compose-video:dokkaHtml/release" data-filterable-set=":compose-video:dokkaHtml/release"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><a href="-storage-media-item/index.html"><span>Video</span><wbr></wbr><span>Player</span><wbr></wbr><span>Media</span><wbr></wbr><span>Item.</span><wbr></wbr><span>Storage</span><wbr></wbr><span>Media</span><wbr></wbr><span><span>Item</span></span></a></div></span></div><div></div></div></div><div class="table-row" data-filterable-current=":compose-video:dokkaHtml/release" data-filterable-set=":compose-video:dokkaHtml/release"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><a href="-network-media-item/index.html"><span>Video</span><wbr></wbr><span>Player</span><wbr></wbr><span>Media</span><wbr></wbr><span>Item.</span><wbr></wbr><span>Network</span><wbr></wbr><span>Media</span><wbr></wbr><span><span>Item</span></span></a></div></span></div><div></div></div></div></div></div></div></div>
+      </div>
+      <h2 class="">Types</h2>
+      <div class="table" data-togglable="Types"><a data-name="-1654471871%2FClasslikes%2F1761888032" anchor-label="AssetFileMediaItem" id="-1654471871%2FClasslikes%2F1761888032" data-filterable-set=":compose-video:dokkaHtml/release"></a>
+        <div class="table-row" data-filterable-current=":compose-video:dokkaHtml/release" data-filterable-set=":compose-video:dokkaHtml/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="-asset-file-media-item/index.html"><span>Asset</span><wbr></wbr><span>File</span><wbr></wbr><span>Media</span><wbr></wbr><span><span>Item</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1654471871%2FClasslikes%2F1761888032"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":compose-video:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="-asset-file-media-item/index.html">AssetFileMediaItem</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>assetPath<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>mediaMetadata<span class="token operator">: </span><span data-unresolved-link="com.google.android.exoplayer2/MediaMetadata///PointingToDeclaration/">MediaMetadata</span><span class="token operator"> = </span>MediaMetadata.EMPTY<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>mimeType<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator"> = </span><span class="token string">&quot;&quot;</span></span></span><span class="token punctuation">)</span> : <a href="index.html">VideoPlayerMediaItem</a></div><div class="brief "><p class="paragraph">A media item in the assets folder.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-668515549%2FClasslikes%2F1761888032" anchor-label="NetworkMediaItem" id="-668515549%2FClasslikes%2F1761888032" data-filterable-set=":compose-video:dokkaHtml/release"></a>
+        <div class="table-row" data-filterable-current=":compose-video:dokkaHtml/release" data-filterable-set=":compose-video:dokkaHtml/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="-network-media-item/index.html"><span>Network</span><wbr></wbr><span>Media</span><wbr></wbr><span><span>Item</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-668515549%2FClasslikes%2F1761888032"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":compose-video:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="-network-media-item/index.html">NetworkMediaItem</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>url<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>mediaMetadata<span class="token operator">: </span><span data-unresolved-link="com.google.android.exoplayer2/MediaMetadata///PointingToDeclaration/">MediaMetadata</span><span class="token operator"> = </span>MediaMetadata.EMPTY<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>mimeType<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator"> = </span><span class="token string">&quot;&quot;</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>drmConfiguration<span class="token operator">: </span><span data-unresolved-link="com.google.android.exoplayer2/MediaItem.DrmConfiguration///PointingToDeclaration/">MediaItem.DrmConfiguration</span><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span> : <a href="index.html">VideoPlayerMediaItem</a></div><div class="brief "><p class="paragraph">A media item in the internet</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1771277877%2FClasslikes%2F1761888032" anchor-label="RawResourceMediaItem" id="-1771277877%2FClasslikes%2F1761888032" data-filterable-set=":compose-video:dokkaHtml/release"></a>
+        <div class="table-row" data-filterable-current=":compose-video:dokkaHtml/release" data-filterable-set=":compose-video:dokkaHtml/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="-raw-resource-media-item/index.html"><span>Raw</span><wbr></wbr><span>Resource</span><wbr></wbr><span>Media</span><wbr></wbr><span><span>Item</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1771277877%2FClasslikes%2F1761888032"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":compose-video:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="-raw-resource-media-item/index.html">RawResourceMediaItem</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/RawRes.html"><span class="token annotation builtin">RawRes</span></a> </span><span class="token keyword">val </span>resourceId<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>mediaMetadata<span class="token operator">: </span><span data-unresolved-link="com.google.android.exoplayer2/MediaMetadata///PointingToDeclaration/">MediaMetadata</span><span class="token operator"> = </span>MediaMetadata.EMPTY<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>mimeType<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator"> = </span><span class="token string">&quot;&quot;</span></span></span><span class="token punctuation">)</span> : <a href="index.html">VideoPlayerMediaItem</a></div><div class="brief "><p class="paragraph">A media item in the raw resource.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="1668143152%2FClasslikes%2F1761888032" anchor-label="StorageMediaItem" id="1668143152%2FClasslikes%2F1761888032" data-filterable-set=":compose-video:dokkaHtml/release"></a>
+        <div class="table-row" data-filterable-current=":compose-video:dokkaHtml/release" data-filterable-set=":compose-video:dokkaHtml/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="-storage-media-item/index.html"><span>Storage</span><wbr></wbr><span>Media</span><wbr></wbr><span><span>Item</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1668143152%2FClasslikes%2F1761888032"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":compose-video:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="-storage-media-item/index.html">StorageMediaItem</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>storageUri<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/net/Uri.html">Uri</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>mediaMetadata<span class="token operator">: </span><span data-unresolved-link="com.google.android.exoplayer2/MediaMetadata///PointingToDeclaration/">MediaMetadata</span><span class="token operator"> = </span>MediaMetadata.EMPTY<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>mimeType<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator"> = </span><span class="token string">&quot;&quot;</span></span></span><span class="token punctuation">)</span> : <a href="index.html">VideoPlayerMediaItem</a></div><div class="brief "><p class="paragraph">A media item in the device internal / external storage.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h2 class="">Properties</h2>
+      <div class="table" data-togglable="Properties"><a data-name="1362363135%2FProperties%2F1761888032" anchor-label="mediaMetadata" id="1362363135%2FProperties%2F1761888032" data-filterable-set=":compose-video:dokkaHtml/release"></a>
+        <div class="table-row" data-filterable-current=":compose-video:dokkaHtml/release" data-filterable-set=":compose-video:dokkaHtml/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="../-base-video-player-media-item/media-metadata.html"><span>media</span><wbr></wbr><span><span>Metadata</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1362363135%2FProperties%2F1761888032"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":compose-video:dokkaHtml/release"><a data-name="1362363135%2FProperties%2F1761888032" anchor-label="mediaMetadata" id="1362363135%2FProperties%2F1761888032" data-filterable-set=":compose-video:dokkaHtml/release"></a><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword"></span><span class="token keyword">val </span><a href="../-base-video-player-media-item/media-metadata.html">mediaMetadata</a><span class="token operator">: </span><span data-unresolved-link="com.google.android.exoplayer2/MediaMetadata///PointingToDeclaration/">MediaMetadata</span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="407076282%2FProperties%2F1761888032" anchor-label="mimeType" id="407076282%2FProperties%2F1761888032" data-filterable-set=":compose-video:dokkaHtml/release"></a>
+        <div class="table-row" data-filterable-current=":compose-video:dokkaHtml/release" data-filterable-set=":compose-video:dokkaHtml/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="../-base-video-player-media-item/mime-type.html"><span>mime</span><wbr></wbr><span><span>Type</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="407076282%2FProperties%2F1761888032"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":compose-video:dokkaHtml/release"><a data-name="407076282%2FProperties%2F1761888032" anchor-label="mimeType" id="407076282%2FProperties%2F1761888032" data-filterable-set=":compose-video:dokkaHtml/release"></a><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword"></span><span class="token keyword">val </span><a href="../-base-video-player-media-item/mime-type.html">mimeType</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h2 class="">Inheritors</h2>
+      <div class="table" data-togglable="Inheritors"><a data-name="-1771277877%2FInheritors%2F1761888032" anchor-label="RawResourceMediaItem" id="-1771277877%2FInheritors%2F1761888032" data-filterable-set=":compose-video:dokkaHtml/release"></a>
+        <div class="table-row" data-filterable-current=":compose-video:dokkaHtml/release" data-filterable-set=":compose-video:dokkaHtml/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="-raw-resource-media-item/index.html">RawResourceMediaItem</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1771277877%2FInheritors%2F1761888032"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div></div>
+          </div>
+        </div>
+<a data-name="-1654471871%2FInheritors%2F1761888032" anchor-label="AssetFileMediaItem" id="-1654471871%2FInheritors%2F1761888032" data-filterable-set=":compose-video:dokkaHtml/release"></a>
+        <div class="table-row" data-filterable-current=":compose-video:dokkaHtml/release" data-filterable-set=":compose-video:dokkaHtml/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="-asset-file-media-item/index.html">AssetFileMediaItem</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1654471871%2FInheritors%2F1761888032"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div></div>
+          </div>
+        </div>
+<a data-name="1668143152%2FInheritors%2F1761888032" anchor-label="StorageMediaItem" id="1668143152%2FInheritors%2F1761888032" data-filterable-set=":compose-video:dokkaHtml/release"></a>
+        <div class="table-row" data-filterable-current=":compose-video:dokkaHtml/release" data-filterable-set=":compose-video:dokkaHtml/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="-storage-media-item/index.html">StorageMediaItem</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1668143152%2FInheritors%2F1761888032"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div></div>
+          </div>
+        </div>
+<a data-name="-668515549%2FInheritors%2F1761888032" anchor-label="NetworkMediaItem" id="-668515549%2FInheritors%2F1761888032" data-filterable-set=":compose-video:dokkaHtml/release"></a>
+        <div class="table-row" data-filterable-current=":compose-video:dokkaHtml/release" data-filterable-set=":compose-video:dokkaHtml/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="-network-media-item/index.html">NetworkMediaItem</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-668515549%2FInheritors%2F1761888032"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      <div class="footer">
+        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2023 Copyright</span><span
+                class="pull-right"><span>Generated by </span><a
+                href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
+      </div>
+    </div>
+</div>
+</body>
+</html>
