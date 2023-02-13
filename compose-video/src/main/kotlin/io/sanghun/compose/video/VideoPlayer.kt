@@ -17,6 +17,7 @@ package io.sanghun.compose.video
 
 import android.content.pm.ActivityInfo
 import android.graphics.Color
+import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import android.support.v4.media.MediaDescriptionCompat
@@ -64,8 +65,8 @@ import io.sanghun.compose.video.uri.VideoPlayerMediaItem
 import io.sanghun.compose.video.uri.toUri
 import io.sanghun.compose.video.util.findActivity
 import io.sanghun.compose.video.util.setFullScreen
+import java.util.*
 import kotlinx.coroutines.delay
-import java.util.UUID
 
 /**
  * [VideoPlayer] is UI component that can play video in Jetpack Compose. It works based on ExoPlayer.
@@ -324,7 +325,7 @@ internal fun VideoPlayerSurface(
                         player.pause()
                     }
 
-                    if (enablePip) {
+                    if (enablePip && player.playWhenReady) {
                         Handler(Looper.getMainLooper()).post {
                             enterPIPMode(context, defaultPlayerView)
                             player.play()
@@ -338,13 +339,19 @@ internal fun VideoPlayerSurface(
                         player.play()
                     }
 
-                    if (enablePip) {
+                    if (enablePip && player.playWhenReady) {
                         defaultPlayerView.useController = usePlayerController
                     }
                 }
 
                 Lifecycle.Event.ON_STOP -> {
-                    if (handleLifecycle) {
+                    val isPipMode = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        context.findActivity().isInPictureInPictureMode
+                    } else {
+                        false
+                    }
+
+                    if (handleLifecycle || (enablePip && isPipMode)) {
                         player.stop()
                     }
                 }
