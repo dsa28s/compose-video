@@ -64,7 +64,7 @@ class MainActivity : ComponentActivity() {
 
                         VideoPlayer(
                             mediaItems = samplePlayList,
-                            handleLifecycle = true,
+                            handleLifecycle = false,
                             autoPlay = true,
                             usePlayerController = true,
                             enablePipWhenBackPressed = true,

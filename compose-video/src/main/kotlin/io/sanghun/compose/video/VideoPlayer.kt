@@ -15,9 +15,9 @@
  */
 package io.sanghun.compose.video
 
+import android.annotation.SuppressLint
 import android.content.pm.ActivityInfo
 import android.graphics.Color
-import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import android.support.v4.media.MediaDescriptionCompat
@@ -61,6 +61,7 @@ import io.sanghun.compose.video.cache.VideoPlayerCacheManager
 import io.sanghun.compose.video.controller.VideoPlayerControllerConfig
 import io.sanghun.compose.video.controller.applyToExoPlayerView
 import io.sanghun.compose.video.pip.enterPIPMode
+import io.sanghun.compose.video.pip.isActivityStatePipMode
 import io.sanghun.compose.video.uri.VideoPlayerMediaItem
 import io.sanghun.compose.video.uri.toUri
 import io.sanghun.compose.video.util.findActivity
@@ -103,6 +104,7 @@ import kotlinx.coroutines.delay
  * @param handleAudioFocus Set whether to handle the video playback control automatically when it is playing in PIP mode and media is played in another app. Default is true.
  * @param playerInstance Return exoplayer instance. This instance allows you to add [com.google.android.exoplayer2.analytics.AnalyticsListener] to receive various events from the player.
  */
+@SuppressLint("SourceLockedOrientationActivity")
 @Composable
 fun VideoPlayer(
     modifier: Modifier = Modifier,
@@ -306,6 +308,8 @@ internal fun VideoPlayerSurface(
     val lifecycleOwner = rememberUpdatedState(LocalLifecycleOwner.current)
     val context = LocalContext.current
 
+    var isPendingPipMode by remember { mutableStateOf(false) }
+
     DisposableEffect(
         AndroidView(
             modifier = modifier,
@@ -326,10 +330,15 @@ internal fun VideoPlayerSurface(
                     }
 
                     if (enablePip && player.playWhenReady) {
+                        isPendingPipMode = true
+
                         Handler(Looper.getMainLooper()).post {
                             enterPIPMode(context, defaultPlayerView)
-                            player.play()
                             onPipEntered()
+
+                            Handler(Looper.getMainLooper()).postDelayed({
+                                isPendingPipMode = false
+                            }, 500)
                         }
                     }
                 }
@@ -345,13 +354,9 @@ internal fun VideoPlayerSurface(
                 }
 
                 Lifecycle.Event.ON_STOP -> {
-                    val isPipMode = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                        context.findActivity().isInPictureInPictureMode
-                    } else {
-                        false
-                    }
+                    val isPipMode = context.isActivityStatePipMode()
 
-                    if (handleLifecycle || (enablePip && isPipMode)) {
+                    if (handleLifecycle || (enablePip && isPipMode && !isPendingPipMode)) {
                         player.stop()
                     }
                 }
