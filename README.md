@@ -14,7 +14,7 @@ The easiest way to get started using VideoPlayer component is to add it as a gra
 of your app module.
 
 ```gradle
-implementation 'io.sanghun:compose-video:1.1.0'
+implementation 'io.sanghun:compose-video:1.1.1'
 implementation 'com.google.android.exoplayer:exoplayer:2.18.2' // ExoPlayer dependency
 implementation 'com.google.android.exoplayer:extension-mediasession:2.18.2' // MediaSession Extension dependency
 ```
@@ -22,7 +22,7 @@ implementation 'com.google.android.exoplayer:extension-mediasession:2.18.2' // M
 or if your project using `build.gradle.kts`
 
 ```kotlin
-implementation("io.sanghun:compose-video:1.1.0")
+implementation("io.sanghun:compose-video:1.1.1")
 implementation("com.google.android.exoplayer:exoplayer:2.18.2") // ExoPlayer dependency
 implementation("com.google.android.exoplayer:extension-mediasession:2.18.2") // MediaSession Extension dependency
 ```
