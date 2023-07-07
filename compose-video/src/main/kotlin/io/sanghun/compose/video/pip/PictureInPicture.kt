@@ -20,7 +20,7 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
 import android.util.Rational
-import com.google.android.exoplayer2.ui.StyledPlayerView
+import androidx.media3.ui.PlayerView
 import io.sanghun.compose.video.util.findActivity
 
 /**
@@ -30,7 +30,7 @@ import io.sanghun.compose.video.util.findActivity
  * @param defaultPlayerView Current video player controller.
  */
 @Suppress("DEPRECATION")
-internal fun enterPIPMode(context: Context, defaultPlayerView: StyledPlayerView) {
+internal fun enterPIPMode(context: Context, defaultPlayerView: PlayerView) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N &&
         context.packageManager.hasSystemFeature(PackageManager.FEATURE_PICTURE_IN_PICTURE)
     ) {
@@ -51,7 +51,6 @@ internal fun enterPIPMode(context: Context, defaultPlayerView: StyledPlayerView)
         }
     }
 }
-
 
 /**
  * Check that the current activity is in PIP mode.

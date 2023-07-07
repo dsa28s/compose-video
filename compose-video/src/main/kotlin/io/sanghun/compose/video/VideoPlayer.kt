@@ -20,8 +20,6 @@ import android.content.pm.ActivityInfo
 import android.graphics.Color
 import android.os.Handler
 import android.os.Looper
-import android.support.v4.media.MediaDescriptionCompat
-import android.support.v4.media.session.MediaSessionCompat
 import android.widget.ImageButton
 import androidx.activity.compose.BackHandler
 import androidx.annotation.FloatRange
@@ -40,23 +38,22 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.compose.ui.window.SecureFlagPolicy
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
-import com.google.android.exoplayer2.C
-import com.google.android.exoplayer2.C.AUDIO_CONTENT_TYPE_MOVIE
-import com.google.android.exoplayer2.ExoPlayer
-import com.google.android.exoplayer2.MediaItem
-import com.google.android.exoplayer2.Player
-import com.google.android.exoplayer2.audio.AudioAttributes
-import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector
-import com.google.android.exoplayer2.ext.mediasession.TimelineQueueNavigator
-import com.google.android.exoplayer2.source.DefaultMediaSourceFactory
-import com.google.android.exoplayer2.ui.AspectRatioFrameLayout.RESIZE_MODE_FIT
-import com.google.android.exoplayer2.ui.StyledPlayerView
-import com.google.android.exoplayer2.upstream.DefaultDataSource
-import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
-import com.google.android.exoplayer2.upstream.cache.CacheDataSource
-import com.google.android.exoplayer2.util.RepeatModeUtil.REPEAT_TOGGLE_MODE_ALL
-import com.google.android.exoplayer2.util.RepeatModeUtil.REPEAT_TOGGLE_MODE_NONE
-import com.google.android.exoplayer2.util.RepeatModeUtil.REPEAT_TOGGLE_MODE_ONE
+import androidx.media3.common.AudioAttributes
+import androidx.media3.common.C
+import androidx.media3.common.C.AUDIO_CONTENT_TYPE_MOVIE
+import androidx.media3.common.ForwardingPlayer
+import androidx.media3.common.MediaItem
+import androidx.media3.common.util.RepeatModeUtil.REPEAT_TOGGLE_MODE_ALL
+import androidx.media3.common.util.RepeatModeUtil.REPEAT_TOGGLE_MODE_NONE
+import androidx.media3.common.util.RepeatModeUtil.REPEAT_TOGGLE_MODE_ONE
+import androidx.media3.datasource.DefaultDataSource
+import androidx.media3.datasource.DefaultHttpDataSource
+import androidx.media3.datasource.cache.CacheDataSource
+import androidx.media3.exoplayer.ExoPlayer
+import androidx.media3.exoplayer.source.DefaultMediaSourceFactory
+import androidx.media3.session.MediaSession
+import androidx.media3.ui.AspectRatioFrameLayout.RESIZE_MODE_FIT
+import androidx.media3.ui.PlayerView
 import io.sanghun.compose.video.cache.VideoPlayerCacheManager
 import io.sanghun.compose.video.controller.VideoPlayerControllerConfig
 import io.sanghun.compose.video.controller.applyToExoPlayerView
@@ -66,8 +63,8 @@ import io.sanghun.compose.video.uri.VideoPlayerMediaItem
 import io.sanghun.compose.video.uri.toUri
 import io.sanghun.compose.video.util.findActivity
 import io.sanghun.compose.video.util.setFullScreen
-import java.util.*
 import kotlinx.coroutines.delay
+import java.util.*
 
 /**
  * [VideoPlayer] is UI component that can play video in Jetpack Compose. It works based on ExoPlayer.
@@ -102,9 +99,9 @@ import kotlinx.coroutines.delay
  * @param enablePip Enable PIP (Picture-in-Picture).
  * @param enablePipWhenBackPressed With [enablePip] is `true`, set whether to enable PIP mode even when you press Back. Default is false.
  * @param handleAudioFocus Set whether to handle the video playback control automatically when it is playing in PIP mode and media is played in another app. Default is true.
- * @param playerInstance Return exoplayer instance. This instance allows you to add [com.google.android.exoplayer2.analytics.AnalyticsListener] to receive various events from the player.
+ * @param playerInstance Return exoplayer instance. This instance allows you to add [androidx.media3.exoplayer.analytics.AnalyticsListener] to receive various events from the player.
  */
-@SuppressLint("SourceLockedOrientationActivity")
+@SuppressLint("SourceLockedOrientationActivity", "UnsafeOptInUsageError")
 @Composable
 fun VideoPlayer(
     modifier: Modifier = Modifier,
@@ -156,7 +153,7 @@ fun VideoPlayer(
     }
 
     val defaultPlayerView = remember {
-        StyledPlayerView(context)
+        PlayerView(context)
     }
 
     BackHandler(enablePip && enablePipWhenBackPressed) {
@@ -185,24 +182,7 @@ fun VideoPlayer(
     }
 
     LaunchedEffect(mediaItems, player) {
-        val mediaSession = MediaSessionCompat(
-            context,
-            "VideoPlayerMediaSession_${UUID.randomUUID().toString().lowercase().split("-").first()}",
-        )
-        val mediaSessionConnector = MediaSessionConnector(mediaSession)
-        mediaSessionConnector.setPlayer(player)
-        mediaSessionConnector.setQueueNavigator(
-            object : TimelineQueueNavigator(mediaSession) {
-                override fun getMediaDescription(player: Player, windowIndex: Int): MediaDescriptionCompat {
-                    return MediaDescriptionCompat.Builder()
-                        .setTitle(player.mediaMetadata.title)
-                        .setDescription(player.mediaMetadata.description)
-                        .build()
-                }
-            },
-        )
-        mediaSession.isActive = true
-
+        MediaSession.Builder(context, ForwardingPlayer(player)).build()
         val exoPlayerMediaItems = mediaItems.map {
             val uri = it.toUri(context)
 
@@ -265,7 +245,7 @@ fun VideoPlayer(
     )
 
     if (isFullScreenModeEntered) {
-        var fullScreenPlayerView by remember { mutableStateOf<StyledPlayerView?>(null) }
+        var fullScreenPlayerView by remember { mutableStateOf<PlayerView?>(null) }
 
         VideoPlayerFullScreenDialog(
             player = player,
@@ -274,8 +254,8 @@ fun VideoPlayer(
             repeatMode = repeatMode,
             onDismissRequest = {
                 fullScreenPlayerView?.let {
-                    StyledPlayerView.switchTargetView(player, it, defaultPlayerView)
-                    defaultPlayerView.findViewById<ImageButton>(com.google.android.exoplayer2.ui.R.id.exo_fullscreen)
+                    PlayerView.switchTargetView(player, it, defaultPlayerView)
+                    defaultPlayerView.findViewById<ImageButton>(androidx.media3.ui.R.id.exo_fullscreen)
                         .performClick()
                     val currentActivity = context.findActivity()
                     currentActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
@@ -294,10 +274,11 @@ fun VideoPlayer(
     }
 }
 
+@SuppressLint("UnsafeOptInUsageError")
 @Composable
 internal fun VideoPlayerSurface(
     modifier: Modifier = Modifier,
-    defaultPlayerView: StyledPlayerView,
+    defaultPlayerView: PlayerView,
     player: ExoPlayer,
     usePlayerController: Boolean,
     handleLifecycle: Boolean,

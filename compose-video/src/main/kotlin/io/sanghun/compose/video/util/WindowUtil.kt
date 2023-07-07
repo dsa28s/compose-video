@@ -23,7 +23,6 @@ import android.view.Window
 /**
  * Bring the activity to the full screen.
  */
-@Suppress("Deprecation")
 internal fun Activity.setFullScreen(fullscreen: Boolean) {
     window.setFullScreen(fullscreen)
 }

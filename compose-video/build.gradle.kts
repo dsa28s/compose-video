@@ -59,8 +59,9 @@ afterEvaluate {
 dependencies {
     implementation(libs.androidx.core)
     implementation(libs.androidx.activity)
+    implementation(libs.androidx.media)
     implementation(libs.bundles.compose)
-    implementation(libs.bundles.exoplayer)
+    implementation(libs.bundles.media3)
     implementation(libs.material2)
 
     debugImplementation(libs.bundles.compose.debugOnly)

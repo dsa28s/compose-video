@@ -17,8 +17,8 @@ package io.sanghun.compose.video.uri
 
 import android.net.Uri
 import androidx.annotation.RawRes
-import com.google.android.exoplayer2.MediaItem.DrmConfiguration
-import com.google.android.exoplayer2.MediaMetadata
+import androidx.media3.common.MediaItem.DrmConfiguration
+import androidx.media3.common.MediaMetadata
 import io.sanghun.compose.video.uri.VideoPlayerMediaItem.AssetFileMediaItem
 import io.sanghun.compose.video.uri.VideoPlayerMediaItem.NetworkMediaItem
 import io.sanghun.compose.video.uri.VideoPlayerMediaItem.RawResourceMediaItem
@@ -54,7 +54,7 @@ sealed interface VideoPlayerMediaItem : BaseVideoPlayerMediaItem {
     /**
      * A media item in the assets folder.
      * @param assetPath asset media file path (e.g If there is a test.mp4 file in the assets folder, test.mp4 becomes the assetPath.)
-     * @throws com.google.android.exoplayer2.upstream.AssetDataSource.AssetDataSourceException asset file is not exist or load failed.
+     * @throws androidx.media3.datasource.AssetDataSource.AssetDataSourceException asset file is not exist or load failed.
      * @param mediaMetadata Media Metadata. Default is empty.
      * @param mimeType Media mime type.
      */
@@ -69,7 +69,7 @@ sealed interface VideoPlayerMediaItem : BaseVideoPlayerMediaItem {
      * @param storageUri storage file uri
      * @param mediaMetadata Media Metadata. Default is empty.
      * @param mimeType Media mime type.
-     * @throws com.google.android.exoplayer2.upstream.FileDataSource.FileDataSourceException
+     * @throws androidx.media3.datasource.FileDataSource.FileDataSourceException
      */
     data class StorageMediaItem(
         val storageUri: Uri,

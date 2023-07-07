@@ -16,8 +16,7 @@
 package io.sanghun.compose.video
 
 import androidx.compose.runtime.Stable
-import com.google.android.exoplayer2.Player
-import java.lang.IllegalStateException
+import androidx.media3.common.Player
 
 /**
  * VideoPlayer repeat mode.

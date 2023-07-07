@@ -15,11 +15,12 @@
  */
 package io.sanghun.compose.video.cache
 
+import android.annotation.SuppressLint
 import android.content.Context
-import com.google.android.exoplayer2.database.StandaloneDatabaseProvider
-import com.google.android.exoplayer2.upstream.cache.Cache
-import com.google.android.exoplayer2.upstream.cache.LeastRecentlyUsedCacheEvictor
-import com.google.android.exoplayer2.upstream.cache.SimpleCache
+import androidx.media3.database.StandaloneDatabaseProvider
+import androidx.media3.datasource.cache.Cache
+import androidx.media3.datasource.cache.LeastRecentlyUsedCacheEvictor
+import androidx.media3.datasource.cache.SimpleCache
 import java.io.File
 
 /**
@@ -36,6 +37,7 @@ object VideoPlayerCacheManager {
      * @param context Current activity context.
      * @param maxCacheBytes Sets the maximum cache capacity in bytes. If the cache builds up as much as the set capacity, it is deleted from the oldest cache.
      */
+    @SuppressLint("UnsafeOptInUsageError")
     fun initialize(context: Context, maxCacheBytes: Long) {
         if (::cacheInstance.isInitialized) {
             return

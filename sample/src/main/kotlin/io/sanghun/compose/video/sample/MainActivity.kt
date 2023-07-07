@@ -15,6 +15,7 @@
  */
 package io.sanghun.compose.video.sample
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -34,7 +35,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
-import com.google.android.exoplayer2.analytics.AnalyticsListener
+import androidx.media3.exoplayer.analytics.AnalyticsListener
 import io.sanghun.compose.video.RepeatMode
 import io.sanghun.compose.video.VideoPlayer
 import io.sanghun.compose.video.cache.VideoPlayerCacheManager
@@ -85,6 +86,7 @@ class MainActivity : ComponentActivity() {
                             playerInstance = {
                                 Log.e("VOLUME", volume.toString())
                                 addAnalyticsListener(object : AnalyticsListener {
+                                    @SuppressLint("UnsafeOptInUsageError")
                                     override fun onRepeatModeChanged(
                                         eventTime: AnalyticsListener.EventTime,
                                         rMode: Int,
@@ -98,6 +100,7 @@ class MainActivity : ComponentActivity() {
                                             .show()
                                     }
 
+                                    @SuppressLint("UnsafeOptInUsageError")
                                     override fun onPlayWhenReadyChanged(
                                         eventTime: AnalyticsListener.EventTime,
                                         playWhenReady: Boolean,
@@ -111,6 +114,7 @@ class MainActivity : ComponentActivity() {
                                             .show()
                                     }
 
+                                    @SuppressLint("UnsafeOptInUsageError")
                                     override fun onVolumeChanged(
                                         eventTime: AnalyticsListener.EventTime,
                                         volume: Float,
