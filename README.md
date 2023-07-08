@@ -3,7 +3,7 @@
 ## `VideoPlayer` Component for Jetpack Compose
 
 This library is a video player component available in Android Jetpack Compose. <br />
-Based on Google [ExoPlayer](https://github.com/google/ExoPlayer).
+Based on [androidx.media3]((https://github.com/google/ExoPlayer)) Package.
 
 In addition to the basic functions of Exoplayer, it supports full screen, PIP, ChromeCast, and more.
 All formats supported by ExoPlayer are playable, and DRM content is also supported.
@@ -14,17 +14,25 @@ The easiest way to get started using VideoPlayer component is to add it as a gra
 of your app module.
 
 ```gradle
-implementation 'io.sanghun:compose-video:1.1.1'
-implementation 'com.google.android.exoplayer:exoplayer:2.18.2' // ExoPlayer dependency
-implementation 'com.google.android.exoplayer:extension-mediasession:2.18.2' // MediaSession Extension dependency
+implementation 'io.sanghun:compose-video:1.2.0'
+implementation 'androidx.media3:media3-exoplayer:1.1.0' // [Required] androidx.media3 ExoPlayer dependency
+implementation 'androidx.media3:media3-session:1.1.0' // [Required] MediaSession Extension dependency
+implementation 'androidx.media3:media3-ui:1.1.0' // [Required] Base Player UI
+
+implementation 'androidx.media3:media3-exoplayer-dash:1.1.0' // [Optional] If your media item is DASH
+implementation 'androidx.media3:media3-exoplayer-hls:1.1.0' // [Optional] If your media item is HLS (m3u8..)
 ```
 
 or if your project using `build.gradle.kts`
 
 ```kotlin
-implementation("io.sanghun:compose-video:1.1.1")
-implementation("com.google.android.exoplayer:exoplayer:2.18.2") // ExoPlayer dependency
-implementation("com.google.android.exoplayer:extension-mediasession:2.18.2") // MediaSession Extension dependency
+implementation("io.sanghun:compose-video:1.2.0")
+implementation("androidx.media3:media3-exoplayer:1.1.0") // [Required] androidx.media3 ExoPlayer dependency
+implementation("androidx.media3:media3-session:1.1.0") // [Required] MediaSession Extension dependency
+implementation("androidx.media3:media3-ui:1.1.0") // [Required] Base Player UI
+
+implementation("androidx.media3:media3-exoplayer-dash:1.1.0") // [Optional] If your media item is DASH
+implementation("androidx.media3:media3-exoplayer-hls:1.1.0") // [Optional] If your media item is HLS (m3u8..)
 ```
 
 ### Preview 📸
@@ -103,6 +111,8 @@ VideoPlayerCacheManager.initialize(context, 1024 * 1024 * 1024)    // 1GB
 
 ### Features
 
+- [x] Migrate Google ExoPlayer -> androidx.media3 Package
+  - Now Google ExoPlayer included in androidx.media3 package
 - [x] Local video play (ex. assets, storage)
 - [x] Network video play (ex. HLS, DASH)
 - [x] Video Player Controller (Default)
