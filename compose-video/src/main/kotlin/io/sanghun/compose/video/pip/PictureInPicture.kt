@@ -19,7 +19,8 @@ import android.app.PictureInPictureParams
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
-import com.google.android.exoplayer2.ui.StyledPlayerView
+import android.util.Rational
+import androidx.media3.ui.PlayerView
 import io.sanghun.compose.video.util.findActivity
 
 /**
@@ -29,7 +30,7 @@ import io.sanghun.compose.video.util.findActivity
  * @param defaultPlayerView Current video player controller.
  */
 @Suppress("DEPRECATION")
-internal fun enterPIPMode(context: Context, defaultPlayerView: StyledPlayerView) {
+internal fun enterPIPMode(context: Context, defaultPlayerView: PlayerView) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N &&
         context.packageManager.hasSystemFeature(PackageManager.FEATURE_PICTURE_IN_PICTURE)
     ) {
@@ -40,11 +41,28 @@ internal fun enterPIPMode(context: Context, defaultPlayerView: StyledPlayerView)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 params
                     .setTitle("Video Player")
+                    .setAspectRatio(Rational(16, 9))
+                    .setSeamlessResizeEnabled(true)
             }
 
             context.findActivity().enterPictureInPictureMode(params.build())
         } else {
             context.findActivity().enterPictureInPictureMode()
         }
+    }
+}
+
+/**
+ * Check that the current activity is in PIP mode.
+ *
+ * @return `true` if the activity is in pip mode. (PIP mode is not supported in the version below Android N, so `false` is returned unconditionally.)
+ */
+internal fun Context.isActivityStatePipMode(): Boolean {
+    val currentActivity = findActivity()
+
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+        currentActivity.isInPictureInPictureMode
+    } else {
+        false
     }
 }

@@ -15,10 +15,10 @@
  */
 package io.sanghun.compose.video.sample
 
-import com.google.android.exoplayer2.C
-import com.google.android.exoplayer2.MediaItem
-import com.google.android.exoplayer2.MediaMetadata
-import com.google.android.exoplayer2.util.MimeTypes
+import androidx.media3.common.C
+import androidx.media3.common.MediaItem
+import androidx.media3.common.MediaMetadata
+import androidx.media3.common.MimeTypes
 import io.sanghun.compose.video.uri.VideoPlayerMediaItem
 
 const val MIME_TYPE_DASH = MimeTypes.APPLICATION_MPD

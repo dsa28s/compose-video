@@ -17,7 +17,7 @@ package io.sanghun.compose.video {
   }
 
   public final class VideoPlayerKt {
-    method @androidx.compose.runtime.Composable public static void VideoPlayer(optional androidx.compose.ui.Modifier modifier, java.util.List<? extends io.sanghun.compose.video.uri.VideoPlayerMediaItem> mediaItems, optional boolean handleLifecycle, optional boolean autoPlay, optional boolean usePlayerController, optional io.sanghun.compose.video.controller.VideoPlayerControllerConfig controllerConfig, optional long seekBeforeMilliSeconds, optional long seekAfterMilliSeconds, optional io.sanghun.compose.video.RepeatMode repeatMode, optional @FloatRange(from=0.0, to=1.0) float volume, optional kotlin.jvm.functions.Function1<? super java.lang.Long,kotlin.Unit> onCurrentTimeChanged, optional androidx.compose.ui.window.SecureFlagPolicy fullScreenSecurePolicy, optional kotlin.jvm.functions.Function0<kotlin.Unit> onFullScreenEnter, optional kotlin.jvm.functions.Function0<kotlin.Unit> onFullScreenExit, optional boolean enablePip, optional boolean enablePipWhenBackPressed, optional boolean handleAudioFocus, optional kotlin.jvm.functions.Function1<? super com.google.android.exoplayer2.ExoPlayer,kotlin.Unit> playerInstance);
+    method @androidx.compose.runtime.Composable public static void VideoPlayer(optional androidx.compose.ui.Modifier modifier, java.util.List<? extends io.sanghun.compose.video.uri.VideoPlayerMediaItem> mediaItems, optional boolean handleLifecycle, optional boolean autoPlay, optional boolean usePlayerController, optional io.sanghun.compose.video.controller.VideoPlayerControllerConfig controllerConfig, optional long seekBeforeMilliSeconds, optional long seekAfterMilliSeconds, optional io.sanghun.compose.video.RepeatMode repeatMode, optional @FloatRange(from=0.0, to=1.0) float volume, optional kotlin.jvm.functions.Function1<? super java.lang.Long,kotlin.Unit> onCurrentTimeChanged, optional androidx.compose.ui.window.SecureFlagPolicy fullScreenSecurePolicy, optional kotlin.jvm.functions.Function0<kotlin.Unit> onFullScreenEnter, optional kotlin.jvm.functions.Function0<kotlin.Unit> onFullScreenExit, optional boolean enablePip, optional boolean enablePipWhenBackPressed, optional boolean handleAudioFocus, optional kotlin.jvm.functions.Function1<? super androidx.media3.exoplayer.ExoPlayer,kotlin.Unit> playerInstance);
   }
 
 }
@@ -95,9 +95,9 @@ package io.sanghun.compose.video.pip {
 package io.sanghun.compose.video.uri {
 
   public interface BaseVideoPlayerMediaItem {
-    method public com.google.android.exoplayer2.MediaMetadata getMediaMetadata();
+    method public androidx.media3.common.MediaMetadata getMediaMetadata();
     method public String getMimeType();
-    property public abstract com.google.android.exoplayer2.MediaMetadata mediaMetadata;
+    property public abstract androidx.media3.common.MediaMetadata mediaMetadata;
     property public abstract String mimeType;
   }
 
@@ -105,60 +105,60 @@ package io.sanghun.compose.video.uri {
   }
 
   public static final class VideoPlayerMediaItem.AssetFileMediaItem implements io.sanghun.compose.video.uri.VideoPlayerMediaItem {
-    ctor public VideoPlayerMediaItem.AssetFileMediaItem(String assetPath, optional com.google.android.exoplayer2.MediaMetadata mediaMetadata, optional String mimeType);
+    ctor public VideoPlayerMediaItem.AssetFileMediaItem(String assetPath, optional androidx.media3.common.MediaMetadata mediaMetadata, optional String mimeType);
     method public String component1();
-    method public com.google.android.exoplayer2.MediaMetadata component2();
+    method public androidx.media3.common.MediaMetadata component2();
     method public String component3();
-    method public io.sanghun.compose.video.uri.VideoPlayerMediaItem.AssetFileMediaItem copy(String assetPath, com.google.android.exoplayer2.MediaMetadata mediaMetadata, String mimeType);
+    method public io.sanghun.compose.video.uri.VideoPlayerMediaItem.AssetFileMediaItem copy(String assetPath, androidx.media3.common.MediaMetadata mediaMetadata, String mimeType);
     method public String getAssetPath();
-    method public com.google.android.exoplayer2.MediaMetadata getMediaMetadata();
+    method public androidx.media3.common.MediaMetadata getMediaMetadata();
     method public String getMimeType();
     property public final String assetPath;
-    property public com.google.android.exoplayer2.MediaMetadata mediaMetadata;
+    property public androidx.media3.common.MediaMetadata mediaMetadata;
     property public String mimeType;
   }
 
   public static final class VideoPlayerMediaItem.NetworkMediaItem implements io.sanghun.compose.video.uri.VideoPlayerMediaItem {
-    ctor public VideoPlayerMediaItem.NetworkMediaItem(String url, optional com.google.android.exoplayer2.MediaMetadata mediaMetadata, optional String mimeType, optional com.google.android.exoplayer2.MediaItem.DrmConfiguration? drmConfiguration);
+    ctor public VideoPlayerMediaItem.NetworkMediaItem(String url, optional androidx.media3.common.MediaMetadata mediaMetadata, optional String mimeType, optional androidx.media3.common.MediaItem.DrmConfiguration? drmConfiguration);
     method public String component1();
-    method public com.google.android.exoplayer2.MediaMetadata component2();
+    method public androidx.media3.common.MediaMetadata component2();
     method public String component3();
-    method public com.google.android.exoplayer2.MediaItem.DrmConfiguration? component4();
-    method public io.sanghun.compose.video.uri.VideoPlayerMediaItem.NetworkMediaItem copy(String url, com.google.android.exoplayer2.MediaMetadata mediaMetadata, String mimeType, com.google.android.exoplayer2.MediaItem.DrmConfiguration? drmConfiguration);
-    method public com.google.android.exoplayer2.MediaItem.DrmConfiguration? getDrmConfiguration();
-    method public com.google.android.exoplayer2.MediaMetadata getMediaMetadata();
+    method public androidx.media3.common.MediaItem.DrmConfiguration? component4();
+    method public io.sanghun.compose.video.uri.VideoPlayerMediaItem.NetworkMediaItem copy(String url, androidx.media3.common.MediaMetadata mediaMetadata, String mimeType, androidx.media3.common.MediaItem.DrmConfiguration? drmConfiguration);
+    method public androidx.media3.common.MediaItem.DrmConfiguration? getDrmConfiguration();
+    method public androidx.media3.common.MediaMetadata getMediaMetadata();
     method public String getMimeType();
     method public String getUrl();
-    property public final com.google.android.exoplayer2.MediaItem.DrmConfiguration? drmConfiguration;
-    property public com.google.android.exoplayer2.MediaMetadata mediaMetadata;
+    property public final androidx.media3.common.MediaItem.DrmConfiguration? drmConfiguration;
+    property public androidx.media3.common.MediaMetadata mediaMetadata;
     property public String mimeType;
     property public final String url;
   }
 
   public static final class VideoPlayerMediaItem.RawResourceMediaItem implements io.sanghun.compose.video.uri.VideoPlayerMediaItem {
-    ctor public VideoPlayerMediaItem.RawResourceMediaItem(@RawRes int resourceId, optional com.google.android.exoplayer2.MediaMetadata mediaMetadata, optional String mimeType);
+    ctor public VideoPlayerMediaItem.RawResourceMediaItem(@RawRes int resourceId, optional androidx.media3.common.MediaMetadata mediaMetadata, optional String mimeType);
     method public int component1();
-    method public com.google.android.exoplayer2.MediaMetadata component2();
+    method public androidx.media3.common.MediaMetadata component2();
     method public String component3();
-    method public io.sanghun.compose.video.uri.VideoPlayerMediaItem.RawResourceMediaItem copy(@RawRes int resourceId, com.google.android.exoplayer2.MediaMetadata mediaMetadata, String mimeType);
-    method public com.google.android.exoplayer2.MediaMetadata getMediaMetadata();
+    method public io.sanghun.compose.video.uri.VideoPlayerMediaItem.RawResourceMediaItem copy(@RawRes int resourceId, androidx.media3.common.MediaMetadata mediaMetadata, String mimeType);
+    method public androidx.media3.common.MediaMetadata getMediaMetadata();
     method public String getMimeType();
     method public int getResourceId();
-    property public com.google.android.exoplayer2.MediaMetadata mediaMetadata;
+    property public androidx.media3.common.MediaMetadata mediaMetadata;
     property public String mimeType;
     property public final int resourceId;
   }
 
   public static final class VideoPlayerMediaItem.StorageMediaItem implements io.sanghun.compose.video.uri.VideoPlayerMediaItem {
-    ctor public VideoPlayerMediaItem.StorageMediaItem(android.net.Uri storageUri, optional com.google.android.exoplayer2.MediaMetadata mediaMetadata, optional String mimeType);
+    ctor public VideoPlayerMediaItem.StorageMediaItem(android.net.Uri storageUri, optional androidx.media3.common.MediaMetadata mediaMetadata, optional String mimeType);
     method public android.net.Uri component1();
-    method public com.google.android.exoplayer2.MediaMetadata component2();
+    method public androidx.media3.common.MediaMetadata component2();
     method public String component3();
-    method public io.sanghun.compose.video.uri.VideoPlayerMediaItem.StorageMediaItem copy(android.net.Uri storageUri, com.google.android.exoplayer2.MediaMetadata mediaMetadata, String mimeType);
-    method public com.google.android.exoplayer2.MediaMetadata getMediaMetadata();
+    method public io.sanghun.compose.video.uri.VideoPlayerMediaItem.StorageMediaItem copy(android.net.Uri storageUri, androidx.media3.common.MediaMetadata mediaMetadata, String mimeType);
+    method public androidx.media3.common.MediaMetadata getMediaMetadata();
     method public String getMimeType();
     method public android.net.Uri getStorageUri();
-    property public com.google.android.exoplayer2.MediaMetadata mediaMetadata;
+    property public androidx.media3.common.MediaMetadata mediaMetadata;
     property public String mimeType;
     property public final android.net.Uri storageUri;
   }

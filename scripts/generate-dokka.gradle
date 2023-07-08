@@ -1,0 +1,30 @@
+afterEvaluate {
+    if (tasks.findByName('dokkaHtmlPartial') == null) {
+        // If dokka isn't enabled on this module, skip
+        return
+    }
+
+    tasks.named('dokkaHtmlPartial') {
+        dokkaSourceSets.configureEach {
+            reportUndocumented.set(true)
+            skipEmptyPackages.set(true)
+            skipDeprecated.set(true)
+            jdkVersion.set(11)
+            noAndroidSdkLink.set(false)
+            samples.from(rootProject.file("sample/src/main/kotlin/"))
+            externalDocumentationLink {
+                url.set(new URL("https://developer.android.com/reference/"))
+                packageListUrl.set(new URL("https://developer.android.com/reference/androidx/package-list"))
+            }
+            externalDocumentationLink {
+                url.set(new URL("https://developer.android.com/reference/kotlin/"))
+                packageListUrl.set(new URL("https://developer.android.com/reference/kotlin/androidx/package-list"))
+            }
+            sourceLink {
+                localDirectory.set(project.file("src/main/kotlin"))
+                remoteUrl.set(new URL("https://github.com/dsa28s/compose-video/blob/main/${project.name}/src/main/kotlin"))
+                remoteLineSuffix.set("#L")
+            }
+        }
+    }
+}

@@ -15,10 +15,11 @@
  */
 package io.sanghun.compose.video.controller
 
+import android.annotation.SuppressLint
 import android.view.View
 import androidx.compose.runtime.Immutable
 import androidx.core.view.isVisible
-import com.google.android.exoplayer2.ui.StyledPlayerView
+import androidx.media3.ui.PlayerView
 
 /**
  * Sets the detailed properties of the [io.sanghun.compose.video.VideoPlayer] Controller.
@@ -81,26 +82,27 @@ data class VideoPlayerControllerConfig(
 /**
  * Apply the [VideoPlayerControllerConfig] to the ExoPlayer StyledViewPlayer.
  *
- * @param playerView [StyledPlayerView] to which you want to apply settings.
+ * @param playerView [PlayerView] to which you want to apply settings.
  * @param onFullScreenStatusChanged Callback that occurs when the full screen status changes.
  */
+@SuppressLint("UnsafeOptInUsageError")
 internal fun VideoPlayerControllerConfig.applyToExoPlayerView(
-    playerView: StyledPlayerView,
+    playerView: PlayerView,
     onFullScreenStatusChanged: (Boolean) -> Unit,
 ) {
     val controllerView = playerView.rootView
 
-    controllerView.findViewById<View>(com.google.android.exoplayer2.R.id.exo_settings).isVisible =
+    controllerView.findViewById<View>(androidx.media3.ui.R.id.exo_settings).isVisible =
         showSpeedAndPitchOverlay
     playerView.setShowSubtitleButton(showSubtitleButton)
-    controllerView.findViewById<View>(com.google.android.exoplayer2.R.id.exo_time).isVisible =
+    controllerView.findViewById<View>(androidx.media3.ui.R.id.exo_time).isVisible =
         showCurrentTimeAndTotalTime
     playerView.setShowBuffering(
-        if (!showBufferingProgress) StyledPlayerView.SHOW_BUFFERING_NEVER else StyledPlayerView.SHOW_BUFFERING_ALWAYS,
+        if (!showBufferingProgress) PlayerView.SHOW_BUFFERING_NEVER else PlayerView.SHOW_BUFFERING_ALWAYS,
     )
-    controllerView.findViewById<View>(com.google.android.exoplayer2.R.id.exo_ffwd_with_amount).isVisible =
+    controllerView.findViewById<View>(androidx.media3.ui.R.id.exo_ffwd_with_amount).isVisible =
         showForwardIncrementButton
-    controllerView.findViewById<View>(com.google.android.exoplayer2.R.id.exo_rew_with_amount).isVisible =
+    controllerView.findViewById<View>(androidx.media3.ui.R.id.exo_rew_with_amount).isVisible =
         showBackwardIncrementButton
     playerView.setShowNextButton(showNextTrackButton)
     playerView.setShowPreviousButton(showBackTrackButton)

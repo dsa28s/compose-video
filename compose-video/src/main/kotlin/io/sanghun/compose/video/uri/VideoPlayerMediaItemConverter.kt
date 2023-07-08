@@ -15,13 +15,14 @@
  */
 package io.sanghun.compose.video.uri
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.net.Uri
-import com.google.android.exoplayer2.upstream.AssetDataSource
-import com.google.android.exoplayer2.upstream.DataSpec
-import com.google.android.exoplayer2.upstream.FileDataSource
-import com.google.android.exoplayer2.upstream.FileDataSource.FileDataSourceException
-import com.google.android.exoplayer2.upstream.RawResourceDataSource
+import androidx.media3.datasource.AssetDataSource
+import androidx.media3.datasource.DataSpec
+import androidx.media3.datasource.FileDataSource
+import androidx.media3.datasource.FileDataSource.FileDataSourceException
+import androidx.media3.datasource.RawResourceDataSource
 
 /**
  * Converts [VideoPlayerMediaItem] to [android.net.Uri].
@@ -29,6 +30,7 @@ import com.google.android.exoplayer2.upstream.RawResourceDataSource
  * @param context Pass application context or activity context. Use this context to load asset file using [android.content.res.AssetManager].
  * @return [android.net.Uri]
  */
+@SuppressLint("UnsafeOptInUsageError")
 internal fun VideoPlayerMediaItem.toUri(
     context: Context,
 ): Uri = when (this) {

@@ -71,10 +71,13 @@ dependencies {
 
     implementation(libs.bundles.androidx)
     implementation(libs.bundles.compose)
-    implementation(libs.bundles.exoplayer)
+    implementation(libs.bundles.media3)
     implementation(libs.material3)
     testImplementation(libs.junit)
     debugImplementation(libs.bundles.compose.debugOnly)
+
+    implementation(libs.media3.dash)
+    implementation(libs.media3.hls)
 
     androidTestImplementation(libs.bundles.androidTest)
 }
