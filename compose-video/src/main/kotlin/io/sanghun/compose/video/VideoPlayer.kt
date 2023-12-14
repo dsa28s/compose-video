@@ -113,6 +113,7 @@ fun VideoPlayer(
     seekBeforeMilliSeconds: Long = 10000L,
     seekAfterMilliSeconds: Long = 10000L,
     repeatMode: RepeatMode = RepeatMode.NONE,
+    resizeMode: ResizeMode = ResizeMode.FIT,
     @FloatRange(from = 0.0, to = 1.0) volume: Float = 1f,
     onCurrentTimeChanged: (Long) -> Unit = {},
     fullScreenSecurePolicy: SecureFlagPolicy = SecureFlagPolicy.Inherit,
@@ -247,6 +248,7 @@ fun VideoPlayer(
         usePlayerController = usePlayerController,
         handleLifecycle = handleLifecycle,
         enablePip = enablePip,
+        surfaceResizeMode = resizeMode
     )
 
     if (isFullScreenModeEntered) {
@@ -257,6 +259,7 @@ fun VideoPlayer(
             currentPlayerView = defaultPlayerView,
             controllerConfig = controllerConfig,
             repeatMode = repeatMode,
+            resizeMode = resizeMode,
             onDismissRequest = {
                 fullScreenPlayerView?.let {
                     PlayerView.switchTargetView(player, it, defaultPlayerView)
@@ -288,6 +291,7 @@ internal fun VideoPlayerSurface(
     usePlayerController: Boolean,
     handleLifecycle: Boolean,
     enablePip: Boolean,
+    surfaceResizeMode: ResizeMode,
     onPipEntered: () -> Unit = {},
     autoDispose: Boolean = true,
 ) {
@@ -302,7 +306,7 @@ internal fun VideoPlayerSurface(
             factory = {
                 defaultPlayerView.apply {
                     useController = usePlayerController
-                    resizeMode = RESIZE_MODE_FIT
+                    resizeMode = surfaceResizeMode.toPlayerViewRepeatMode()
                     setBackgroundColor(Color.BLACK)
                 }
             },
