@@ -52,7 +52,6 @@ import androidx.media3.datasource.cache.CacheDataSource
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.source.DefaultMediaSourceFactory
 import androidx.media3.session.MediaSession
-import androidx.media3.ui.AspectRatioFrameLayout.RESIZE_MODE_FIT
 import androidx.media3.ui.PlayerView
 import io.sanghun.compose.video.cache.VideoPlayerCacheManager
 import io.sanghun.compose.video.controller.VideoPlayerControllerConfig
@@ -306,7 +305,7 @@ internal fun VideoPlayerSurface(
             factory = {
                 defaultPlayerView.apply {
                     useController = usePlayerController
-                    resizeMode = surfaceResizeMode.toPlayerViewRepeatMode()
+                    resizeMode = surfaceResizeMode.toPlayerViewResizeMode()
                     setBackgroundColor(Color.BLACK)
                 }
             },

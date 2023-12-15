@@ -60,7 +60,7 @@ enum class ResizeMode(rawValue: String) {
  * or [AspectRatioFrameLayout.RESIZE_MODE_ZOOM]
  */
 @OptIn(UnstableApi::class)
-internal fun ResizeMode.toPlayerViewRepeatMode(): Int =
+internal fun ResizeMode.toPlayerViewResizeMode(): Int =
     when (this) {
         ResizeMode.FIT -> AspectRatioFrameLayout.RESIZE_MODE_FIT
         ResizeMode.FIXED_WIDTH -> AspectRatioFrameLayout.RESIZE_MODE_FIXED_WIDTH
