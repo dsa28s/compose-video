@@ -37,6 +37,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.media3.exoplayer.analytics.AnalyticsListener
 import io.sanghun.compose.video.RepeatMode
+import io.sanghun.compose.video.ResizeMode
 import io.sanghun.compose.video.VideoPlayer
 import io.sanghun.compose.video.cache.VideoPlayerCacheManager
 import io.sanghun.compose.video.controller.VideoPlayerControllerConfig
@@ -80,6 +81,7 @@ class MainActivity : ComponentActivity() {
                                 showFullScreenButton = true,
                             ),
                             repeatMode = repeatMode,
+                            resizeMode = ResizeMode.FIT,
                             onCurrentTimeChanged = {
                                 Log.e("CurrentTime", it.toString())
                             },

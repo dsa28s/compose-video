@@ -67,6 +67,7 @@ internal fun VideoPlayerFullScreenDialog(
     fullScreenPlayerView: PlayerView.() -> Unit,
     controllerConfig: VideoPlayerControllerConfig,
     repeatMode: RepeatMode,
+    resizeMode: ResizeMode,
     enablePip: Boolean,
     onDismissRequest: () -> Unit,
     securePolicy: SecureFlagPolicy,
@@ -129,6 +130,7 @@ internal fun VideoPlayerFullScreenDialog(
                 handleLifecycle = !enablePip,
                 autoDispose = false,
                 enablePip = enablePip,
+                surfaceResizeMode = resizeMode,
                 onPipEntered = { onDismissRequest() },
                 modifier = Modifier
                     .align(Alignment.Center)
