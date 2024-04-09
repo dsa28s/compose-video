@@ -119,6 +119,7 @@ fun VideoPlayer(
     onFullScreenEnter: () -> Unit = {},
     onFullScreenExit: () -> Unit = {},
     enablePip: Boolean = false,
+    defaultFullScreeen: Boolean = false,
     enablePipWhenBackPressed: Boolean = false,
     handleAudioFocus: Boolean = true,
     playerInstance: ExoPlayer.() -> Unit = {},
@@ -213,7 +214,7 @@ fun VideoPlayer(
         }
     }
 
-    var isFullScreenModeEntered by remember { mutableStateOf(false) }
+    var isFullScreenModeEntered by remember { mutableStateOf(defaultFullScreeen) }
 
     LaunchedEffect(controllerConfig) {
         controllerConfig.applyToExoPlayerView(defaultPlayerView) {
