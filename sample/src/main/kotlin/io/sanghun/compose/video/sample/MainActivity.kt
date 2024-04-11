@@ -71,6 +71,7 @@ class MainActivity : ComponentActivity() {
                             usePlayerController = true,
                             enablePipWhenBackPressed = true,
                             enablePip = true,
+                            defaultFullScreeen = true,
                             controllerConfig = VideoPlayerControllerConfig.Default.copy(
                                 showSubtitleButton = true,
                                 showNextTrackButton = true,
