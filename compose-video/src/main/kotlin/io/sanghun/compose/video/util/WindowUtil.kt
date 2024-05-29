@@ -17,7 +17,6 @@ package io.sanghun.compose.video.util
 
 import android.app.Activity
 import android.view.View
-import android.view.View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
 import android.view.Window
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
@@ -38,7 +37,7 @@ internal fun Window.setFullScreen(fullscreen: Boolean) {
     if (fullscreen) {
         this.hideSystemBars()
     } else {
-        this.showSystemUI()
+        this.showSystemBars()
     }
 }
 
@@ -55,7 +54,7 @@ private fun Window.hideSystemBars() {
     }
 }
 
-private fun Window.showSystemUI() {
+private fun Window.showSystemBars() {
     WindowCompat.setDecorFitsSystemWindows(this, true)
     WindowCompat.getInsetsController(this, this.decorView).show(WindowInsetsCompat.Type.systemBars())
 }
