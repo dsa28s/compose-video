@@ -17,13 +17,19 @@ package io.sanghun.compose.video
 
 import android.annotation.SuppressLint
 import android.content.pm.ActivityInfo
+import android.view.Window
+import android.view.WindowManager
 import android.widget.ImageButton
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -77,6 +83,9 @@ internal fun VideoPlayerFullScreenDialog(
         PlayerView(context)
             .also(fullScreenPlayerView)
     }
+    var fullScreenModeEntered by remember {
+        mutableStateOf(false)
+    }
 
     Dialog(
         onDismissRequest = onDismissRequest,
@@ -88,14 +97,31 @@ internal fun VideoPlayerFullScreenDialog(
         ),
     ) {
         val view = LocalView.current
+
         LaunchedEffect(Unit) {
             PlayerView.switchTargetView(player, currentPlayerView, internalFullScreenPlayerView)
 
             val currentActivity = context.findActivity()
             currentActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
-            currentActivity.setFullScreen(true)
+        }
 
-            (view.parent as DialogWindowProvider).window.setFullScreen(true)
+        val activityWindow = getActivityWindow()
+        val dialogWindow = getDialogWindow()
+
+        SideEffect {
+            if (activityWindow != null && dialogWindow != null && !fullScreenModeEntered) {
+                activityWindow.setFullScreen(true)
+                dialogWindow.setFullScreen(true)
+                dialogWindow
+                // dialogWindow has extra padding but activityWindow doesn't;
+                // copy the attributes from activity to dialog
+                WindowManager.LayoutParams().apply {
+                    copyFrom(activityWindow.attributes)
+                    type = dialogWindow.attributes.type
+                    dialogWindow.attributes = this
+                }
+                fullScreenModeEntered = true
+            }
         }
 
         LaunchedEffect(controllerConfig) {
@@ -139,3 +165,10 @@ internal fun VideoPlayerFullScreenDialog(
         }
     }
 }
+
+
+@Composable
+internal fun getDialogWindow(): Window? = (LocalView.current.parent as? DialogWindowProvider)?.window
+
+@Composable
+internal fun getActivityWindow(): Window? = LocalView.current.context.findActivity()?.window
