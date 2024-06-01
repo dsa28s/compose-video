@@ -83,7 +83,7 @@ internal fun VideoPlayerFullScreenDialog(
         PlayerView(context)
             .also(fullScreenPlayerView)
     }
-    var fullScreenModeEntered by remember {
+    var isFullScreenModeEntered by remember {
         mutableStateOf(false)
     }
 
@@ -96,7 +96,6 @@ internal fun VideoPlayerFullScreenDialog(
             decorFitsSystemWindows = false,
         ),
     ) {
-        val view = LocalView.current
 
         LaunchedEffect(Unit) {
             PlayerView.switchTargetView(player, currentPlayerView, internalFullScreenPlayerView)
@@ -109,10 +108,9 @@ internal fun VideoPlayerFullScreenDialog(
         val dialogWindow = getDialogWindow()
 
         SideEffect {
-            if (activityWindow != null && dialogWindow != null && !fullScreenModeEntered) {
+            if (activityWindow != null && dialogWindow != null && !isFullScreenModeEntered) {
                 activityWindow.setFullScreen(true)
                 dialogWindow.setFullScreen(true)
-                dialogWindow
                 // dialogWindow has extra padding but activityWindow doesn't;
                 // copy the attributes from activity to dialog
                 WindowManager.LayoutParams().apply {
@@ -120,7 +118,7 @@ internal fun VideoPlayerFullScreenDialog(
                     type = dialogWindow.attributes.type
                     dialogWindow.attributes = this
                 }
-                fullScreenModeEntered = true
+                isFullScreenModeEntered = true
             }
         }
 
@@ -171,4 +169,4 @@ internal fun VideoPlayerFullScreenDialog(
 internal fun getDialogWindow(): Window? = (LocalView.current.parent as? DialogWindowProvider)?.window
 
 @Composable
-internal fun getActivityWindow(): Window? = LocalView.current.context.findActivity()?.window
+internal fun getActivityWindow(): Window? = LocalView.current.context.findActivity().window
