@@ -62,8 +62,10 @@ import io.sanghun.compose.video.uri.VideoPlayerMediaItem
 import io.sanghun.compose.video.uri.toUri
 import io.sanghun.compose.video.util.findActivity
 import io.sanghun.compose.video.util.setFullScreen
+import kotlinx.coroutines.Dispatchers
 import java.util.*
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.withContext
 
 /**
  * [VideoPlayer] is UI component that can play video in Jetpack Compose. It works based on ExoPlayer.
@@ -192,21 +194,23 @@ fun VideoPlayer(
         mediaSession = MediaSession.Builder(context, ForwardingPlayer(player))
             .setId("VideoPlayerMediaSession_${UUID.randomUUID().toString().lowercase().split("-").first()}")
             .build()
-        val exoPlayerMediaItems = mediaItems.map {
-            val uri = it.toUri(context)
+        val exoPlayerMediaItems = withContext(Dispatchers.IO) {
+            mediaItems.map {
+                val uri = it.toUri(context)
 
-            MediaItem.Builder().apply {
-                setUri(uri)
-                setMediaMetadata(it.mediaMetadata)
-                setMimeType(it.mimeType)
-                setDrmConfiguration(
-                    if (it is VideoPlayerMediaItem.NetworkMediaItem) {
-                        it.drmConfiguration
-                    } else {
-                        null
-                    },
-                )
-            }.build()
+                MediaItem.Builder().apply {
+                    setUri(uri)
+                    setMediaMetadata(it.mediaMetadata)
+                    setMimeType(it.mimeType)
+                    setDrmConfiguration(
+                        if (it is VideoPlayerMediaItem.NetworkMediaItem) {
+                            it.drmConfiguration
+                        } else {
+                            null
+                        },
+                    )
+                }.build()
+            }
         }
 
         player.setMediaItems(exoPlayerMediaItems)
